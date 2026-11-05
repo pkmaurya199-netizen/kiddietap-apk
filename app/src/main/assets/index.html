@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>KiddieTap - Bolne Wala Kids Learning & Rhymes</title>
+  <title>KiddieTap - Bolne Wala Kids Learning, Rhymes & Sanskaar</title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(180deg, #FFF9C4 0%, #E1F5FE 100%);
-      --text-dark: #263238;
-      --primary-orange: #FF5722;
-      --primary-green: #4CAF50;
-      --primary-blue: #1E88E5;
-      --primary-yellow: #FFC107;
-      --primary-purple: #7E57C2;
+      --bg-gradient: linear-gradient(180deg, #FFF9C4 0%, #E0F7FA 100%);
+      --text-dark: #212121;
+      --orange: #FF5722;
+      --green: #4CAF50;
+      --blue: #1976D2;
+      --yellow: #FFB300;
+      --purple: #7B1FA2;
+      --pink: #E91E63;
     }
 
     * {
@@ -32,7 +33,7 @@
       flex-direction: column;
       overflow-x: hidden;
       color: var(--text-dark);
-      padding-bottom: 40px;
+      padding-bottom: 50px;
     }
 
     /* HEADER */
@@ -73,28 +74,49 @@
       font-weight: 800;
     }
 
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
     .btn-lock {
       background: #FFEBEE;
       border: 2px solid #FFCDD2;
       border-radius: 50px;
-      padding: 8px 16px;
-      font-size: 13px;
+      padding: 7px 14px;
+      font-size: 12px;
       font-weight: 900;
       color: #D32F2F;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 8px rgba(211, 47, 47, 0.15);
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(211, 47, 47, 0.15);
     }
-
     .btn-lock:active { transform: scale(0.92); }
+
+    /* AUDIO WAKEUP BANNER */
+    .audio-alert {
+      background: #4CAF50;
+      color: #FFF;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+      animation: pulse-bg 1.8s infinite;
+    }
 
     /* MAIN */
     main {
       flex: 1;
       padding: 14px;
-      max-width: 820px;
+      max-width: 840px;
       margin: 0 auto;
       width: 100%;
     }
@@ -148,9 +170,9 @@
     }
     .gp-card:active { transform: scale(0.95); }
 
-    .gp-morning { background: linear-gradient(135deg, #FFA000, #F57C00); }
+    .gp-gita    { background: linear-gradient(135deg, #FF6F00, #E65100); }
     .gp-aarti   { background: linear-gradient(135deg, #FF7043, #D84315); }
-    .gp-learning{ background: linear-gradient(135deg, #66BB6A, #2E7D32); }
+    .gp-rhymes  { background: linear-gradient(135deg, #43A047, #1B5E20); }
     .gp-bedtime { background: linear-gradient(135deg, #7E57C2, #4527A0); }
 
     .gp-card .icon { font-size: 44px; margin-bottom: 6px; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
@@ -201,7 +223,40 @@
       transform: scale(1.03);
     }
 
-    /* ITEMS GRID (AARTI / RHYMES) */
+    /* AUTO PLAY TOOLBAR */
+    .autoplay-bar {
+      background: #FFF;
+      border: 2px solid #FFD54F;
+      border-radius: 20px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .autoplay-bar span {
+      font-size: 14px;
+      font-weight: 900;
+      color: #37474F;
+    }
+    .btn-play-all {
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      color: #FFF;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.35);
+    }
+    .btn-play-all:active { transform: scale(0.92); }
+
+    /* ITEMS GRID (AARTI / GITA / RHYMES) */
     .items-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
@@ -221,7 +276,11 @@
       flex-direction: column;
       align-items: center;
     }
-    .item-card:active { transform: scale(0.93); border-color: #FFB74D; }
+    .item-card:active, .item-card.speaking {
+      transform: scale(0.93);
+      border-color: #FFB74D;
+      background: #FFFDE7;
+    }
 
     .item-card .icon-wrap {
       width: 62px;
@@ -254,14 +313,19 @@
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       border: 3px solid #FFF;
-      transition: transform 0.15s;
+      transition: all 0.15s;
     }
-    .abc-card:active { transform: scale(0.88); border-color: #42A5F5; }
+    .abc-card:active, .abc-card.speaking {
+      transform: scale(1.1);
+      border-color: #1E88E5;
+      background: #E3F2FD;
+      z-index: 5;
+    }
     .abc-card .letter { font-size: 32px; font-weight: 900; color: #E65100; line-height: 1; }
     .abc-card .emoji { font-size: 28px; margin: 4px 0; }
     .abc-card .word { font-size: 12px; font-weight: 900; color: #37474F; }
 
-    /* VARNAMALA (क-ख-ग) GRID */
+    /* VARNAMALA (अ से ज्ञ) GRID */
     .varnamala-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
@@ -276,33 +340,19 @@
       cursor: pointer;
       border: 3px solid #FFF;
       box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      transition: all 0.15s;
     }
-    .var-card:active { transform: scale(0.88); border-color: #66BB6A; }
+    .var-card:active, .var-card.speaking {
+      transform: scale(1.1);
+      border-color: #C2185B;
+      background: #FCE4EC;
+      z-index: 5;
+    }
     .var-card .akshar { font-size: 28px; font-weight: 900; color: #C2185B; }
     .var-card .v-emoji { font-size: 22px; margin: 2px 0; }
     .var-card .v-word { font-size: 11px; font-weight: 900; color: #455A64; }
 
     /* COUNTING 1 TO 100 GRID */
-    .counting-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      background: #FFF;
-      padding: 8px 14px;
-      border-radius: 20px;
-      border: 2px solid #FFE082;
-    }
-    .counting-toolbar button {
-      background: #4CAF50;
-      color: #FFF;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 900;
-      cursor: pointer;
-    }
     .counting-grid {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
@@ -325,7 +375,7 @@
     .count-cell:active, .count-cell.speaking {
       background: #FFD54F;
       color: #D84315;
-      transform: scale(1.15);
+      transform: scale(1.2);
       border-color: #FF8F00;
       z-index: 5;
     }
@@ -388,7 +438,6 @@
     .player-title { font-size: 20px; font-weight: 900; color: #D84315; margin-bottom: 2px; }
     .player-category { font-size: 12px; color: #78909C; font-weight: bold; margin-bottom: 12px; }
 
-    /* SING ALONG LYRICS CONTAINER */
     .player-lyrics {
       background: #FFF8E1;
       border-radius: 18px;
@@ -541,9 +590,16 @@
     @keyframes pulse-ring { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    @keyframes pulse-bg { 0%, 100% { background: #4CAF50; } 50% { background: #388E3C; } }
   </style>
 </head>
-<body>
+<body onclick="wakeUpAudioSystem()">
+
+  <!-- AUDIO ACTIVATION BANNER -->
+  <div class="audio-alert" id="audioAlert">
+    <span>🔊</span>
+    <span>आवाज़ चालू है — हर चीज़ पर टैप करके आवाज़ सुनो!</span>
+  </div>
 
   <!-- HEADER -->
   <header>
@@ -551,17 +607,19 @@
       <div class="brand-icon">🌟</div>
       <div>
         <div class="brand-title">KiddieTap</div>
-        <div class="brand-sub">बोलने वाला लर्निंग व बाल-गीत 🗣️</div>
+        <div class="brand-sub">बोलने वाला लर्निंग व संस्कार 🗣️</div>
       </div>
     </div>
-    <button class="btn-lock" onclick="enableChildLock()">
-      🔒 <span>Baby Lock</span>
-    </button>
+    <div class="header-actions">
+      <button class="btn-lock" onclick="enableChildLock()">
+        🔒 <span>Baby Lock</span>
+      </button>
+    </div>
   </header>
 
   <!-- MAIN -->
   <main>
-    <!-- GREETING BANNER -->
+    <!-- GREETING -->
     <div class="greeting-card">
       <div class="greeting-text">
         <h2 id="greetTitle">सुप्रभात, नन्हे दोस्त! ☀️</h2>
@@ -570,17 +628,17 @@
       <div class="greeting-icon" id="greetIcon">🦚</div>
     </div>
 
-    <!-- GRANDPARENT 1-TAP PLAY CARDS -->
+    <!-- GRANDPARENT 1-TAP CARDS -->
     <div class="section-title">
       <span>✨</span>
       <span>दादा-दादी 1-टैप प्ले (Grandparent Auto-Play):</span>
     </div>
 
     <div class="grandparent-grid">
-      <div class="gp-card gp-morning" onclick="playPlaylist('morning')">
-        <span class="icon">🌅</span>
-        <h3>प्रातः काल श्लोक</h3>
-        <p>कराग्रे वसते • गायत्री मंत्र</p>
+      <div class="gp-card gp-gita" onclick="playPlaylist('gita')">
+        <span class="icon">📖</span>
+        <h3>श्रीमद्भगवद्गीता श्लोक</h3>
+        <p>कर्मण्येवाधिकारस्ते • यदा यदा हि</p>
         <span class="tap-badge">▶ 1-Click Play</span>
       </div>
 
@@ -591,7 +649,7 @@
         <span class="tap-badge">▶ 1-Click Play</span>
       </div>
 
-      <div class="gp-card gp-learning" onclick="playPlaylist('rhymes')">
+      <div class="gp-card gp-rhymes" onclick="playPlaylist('rhymes')">
         <span class="icon">🎵</span>
         <h3>प्यारे बाल गीत</h3>
         <p>मछली जल की • लकड़ी की काठी</p>
@@ -601,18 +659,19 @@
       <div class="gp-card gp-bedtime" onclick="playPlaylist('bedtime')">
         <span class="icon">🌙</span>
         <h3>लोरी व मीठी नींद</h3>
-        <p>चंदा मामा • शांत संगीत</p>
+        <p>चंदा मामा • लल्ला लल्ला लोरी</p>
         <span class="tap-badge">▶ 1-Click Play</span>
       </div>
     </div>
 
     <!-- CATEGORY TABS -->
     <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab('rhymes_all', this)">🎵 गीत व आरती</button>
+      <button class="tab-btn active" onclick="switchTab('gita_aarti', this)">🪔 गीता व आरती</button>
       <button class="tab-btn" onclick="switchTab('abc26', this)">🔤 A to Z (पूरे 26)</button>
       <button class="tab-btn" onclick="switchTab('count100', this)">🔢 1 से 100 गिनती</button>
       <button class="tab-btn" onclick="switchTab('varnamala', this)">🍎 अ से ज्ञ वर्णमाला</button>
-      <button class="tab-btn" onclick="switchTab('animals', this)">🦁 जानवर व रंग</button>
+      <button class="tab-btn" onclick="switchTab('rhymes_all', this)">🎵 बाल-गीत व लोरियां</button>
+      <button class="tab-btn" onclick="switchTab('animals', this)">🦁 जानवर व आवाजें</button>
       <button class="tab-btn" onclick="switchTab('habits', this)">✨ अच्छी आदतें</button>
     </div>
 
@@ -673,8 +732,55 @@
   </div>
 
   <script>
-    // 1. MASTER RHYMES & AARTIS (WITH SPOKEN LINES)
-    const SONGS = [
+    // 1. MASTER GITA, AARTI, RHYMES & LULLABIES
+    const CONTENT_MASTER = [
+      // === BHAGAVAD GITA SHLOKAS ===
+      {
+        id: "gita_karmanye",
+        title: "कर्मण्येवाधिकारस्ते (गीता श्लोक)",
+        sub: "फल की चिंता मत करो, अच्छा काम करो",
+        cat: "gita",
+        icon: "📖",
+        lines: [
+          "कर्मण्येवाधिकारस्ते",
+          "मा फलेषु कदाचन",
+          "मा कर्मफलहेतुर्भूर्मा",
+          "ते सङ्गोऽस्त्वकर्मणि।",
+          "अर्थ: तुम्हारा अधिकार केवल कर्म करने पर है, फल पर कभी नहीं।"
+        ]
+      },
+      {
+        id: "gita_yada_yada",
+        title: "यदा यदा हि धर्मस्य (गीता श्लोक)",
+        sub: "भगवान श्रीकृष्ण का वचन",
+        cat: "gita",
+        icon: "🦚",
+        lines: [
+          "यदा यदा हि धर्मस्य",
+          "ग्लानिर्भवति भारत",
+          "अभ्युत्थानमधर्मस्य",
+          "तदात्मानं सृजाम्यहम्।",
+          "परित्राणाय साधूनां",
+          "विनाशाय च दुष्कृताम्",
+          "धर्मसंस्थापनार्थाय",
+          "सम्भवामि युगे युगे!"
+        ]
+      },
+      {
+        id: "gita_sarva_dharman",
+        title: "सर्वधर्मान्परित्यज्य (गीता श्लोक)",
+        sub: "मेरी शरण में आओ, मैं तुम्हारी रक्षा करूंगा",
+        cat: "gita",
+        icon: "🕉️",
+        lines: [
+          "सर्वधर्मान्परित्यज्य",
+          "मामेकं शरणं व्रज",
+          "अहं त्वां सर्वपापेभ्यो",
+          "मोक्षयिष्यामि मा शुचः।"
+        ]
+      },
+
+      // === AARTI & SANSKAAR ===
       {
         id: "aarti_ganesh",
         title: "श्री गणेश आरती",
@@ -732,6 +838,8 @@
           "प्रभाते करदर्शनम्।"
         ]
       },
+
+      // === BAL GEET (RHYMES) ===
       {
         id: "rhyme_machli",
         title: "मछली जल की रानी है",
@@ -742,7 +850,8 @@
           "मछली जल की रानी है",
           "जीवन उसका पानी है",
           "हाथ लगाओ तो डर जाएगी",
-          "बाहर निकालो तो मर जाएगी!"
+          "बाहर निकालो तो मर जाएगी!",
+          "पानी में डालो तो तैर जाएगी!"
         ]
       },
       {
@@ -767,20 +876,38 @@
           "तितली उड़ी, बस पे चढ़ी",
           "सीट ना मिली, तो रोने लगी",
           "ड्राइवर ने बोला, आजा मेरे पास",
-          "तितली बोली, ना बाबा ना!"
+          "तितली बोली, ना बाबा ना, मेरा घर है पास!"
         ]
       },
       {
-        id: "rhyme_chanda",
-        title: "चंदा मामा दूर के",
-        sub: "पुए पकाएं बूर के",
-        cat: "bedtime",
-        icon: "🌙",
+        id: "rhyme_bandar",
+        title: "बंदर मामा पहन पजामा",
+        sub: "दावत खाने आए",
+        cat: "rhymes",
+        icon: "🐵",
         lines: [
-          "चंदा मामा दूर के, पुए पकाएं बूर के",
-          "आप खाएं थाली में, मुन्ने को दें प्याली में",
-          "प्याली गई टूट, मुन्ना गया रूठ",
-          "लाएंगे नई प्यालियां, बजा बजा के तालियां!"
+          "बंदर मामा पहन पजामा",
+          "दावत खाने आए",
+          "ढीला कुर्ता, टोपी, जूता",
+          "पहन बहुत इतराए!",
+          "रसगुल्ले पर जी ललचाया",
+          "मुंह में रखा गरम-गरम",
+          "जीभ जल गई लपक के!",
+          "बोले मामा, हाय हाय!"
+        ]
+      },
+      {
+        id: "rhyme_hathi",
+        title: "एक मोटा हाथी",
+        sub: "झूम के चला",
+        cat: "rhymes",
+        icon: "🐘",
+        lines: [
+          "एक मोटा हाथी झूम के चला",
+          "मकड़ी के जाल में जाके वो फंसा",
+          "जाल को देखा देख के डरा",
+          "दूसरे हाथी को इशारे से बुलाया",
+          "इधर आ, इधर आ, इधर आ!"
         ]
       },
       {
@@ -824,10 +951,52 @@
           "The wheels on the bus go round and round",
           "All through the town!"
         ]
+      },
+
+      // === LULLABIES (LORI & BEDTIME) ===
+      {
+        id: "lori_chanda",
+        title: "चंदा मामा दूर के",
+        sub: "पुए पकाएं बूर के",
+        cat: "bedtime",
+        icon: "🌙",
+        lines: [
+          "चंदा मामा दूर के, पुए पकाएं बूर के",
+          "आप खाएं थाली में, मुन्ने को दें प्याली में",
+          "प्याली गई टूट, मुन्ना गया रूठ",
+          "लाएंगे नई प्यालियां, बजा बजा के तालियां!"
+        ]
+      },
+      {
+        id: "lori_lalla",
+        title: "लल्ला लल्ला लोरी",
+        sub: "दूध की कटोरी",
+        cat: "bedtime",
+        icon: "🥣",
+        lines: [
+          "लल्ला लल्ला लोरी, दूध की कटोरी",
+          "दूध में बताशा, मुन्नी करे तमाशा",
+          "मुन्नी मेरी प्यारी, नींद में है हारी",
+          "सो जा नन्ही रानी, सुन परियों की कहानी!"
+        ]
+      },
+      {
+        id: "lori_soja",
+        title: "सो जा मेरे राजदुलारे",
+        sub: "मीठे सपनों में खो जा",
+        cat: "bedtime",
+        icon: "✨",
+        lines: [
+          "सो जा मेरे राजदुलारे",
+          "आंखों के तारे, सो जा",
+          "आएंगी मीठी परियां",
+          "देंगी खुशियों की कलियां",
+          "सो जा मेरे प्यारे, सो जा!"
+        ]
       }
     ];
 
-    // 2. COMPLETE A TO Z (ALL 26 LETTERS)
+    // 2. COMPLETE A TO Z (ALL 26 LETTERS WITH PHONICS)
     const ALPHABET_26 = [
       { l: "A", w: "Apple", e: "🍎", p: "ए फॉर एप्पल" },
       { l: "B", w: "Ball", e: "⚽", p: "बी फॉर बॉल" },
@@ -857,7 +1026,7 @@
       { l: "Z", w: "Zebra", e: "🦓", p: "ज़ेड फॉर ज़ेबरा" }
     ];
 
-    // 3. COMPLETE HINDI VARNAMALA (स्वर व व्यंजन)
+    // 3. COMPLETE HINDI VARNAMALA (स्वर व व्यंजन: अ से ज्ञ तक)
     const VARNAMALA = [
       { a: "अ", w: "अनार", e: "🍎" }, { a: "आ", w: "आम", e: "🥭" }, { a: "इ", w: "इमली", e: "🪵" },
       { a: "ई", w: "ईख", e: "🎋" }, { a: "उ", w: "उल्लू", e: "🦉" }, { a: "ऊ", w: "ऊन", e: "🧶" },
@@ -872,31 +1041,32 @@
       { a: "फ", w: "फल", e: "🍎" }, { a: "ब", w: "बतख", e: "🦆" }, { a: "भ", w: "भालू", e: "🐻" },
       { a: "म", w: "मछली", e: "🐟" }, { a: "य", w: "यज्ञ", e: "🔥" }, { a: "र", w: "रथ", e: "🎪" },
       { a: "ल", w: "लट्टू", e: "🪀" }, { a: "व", w: "वक", e: "🦢" }, { a: "श", w: "शलजम", e: "🥬" },
-      { a: "स", w: "सेब", e: "🍏" }, { a: "ह", w: "हाथी", e: "🐘" }, { a: "क्ष", w: "क्षत्रिय", e: "⚔️" },
-      { a: "ज्ञ", w: "ज्ञानी", e: "📖" }
+      { a: "ष", w: "षट्कोण", e: "⬡" }, { a: "स", w: "सेब", e: "🍏" }, { a: "ह", w: "हाथी", e: "🐘" },
+      { a: "क्ष", w: "क्षत्रिय", e: "⚔️" }, { a: "त्र", w: "त्रिशूल", e: "🔱" }, { a: "ज्ञ", w: "ज्ञानी", e: "📖" }
     ];
 
-    // 4. ANIMALS & COLORS
-    const ANIMALS_COLORS = [
-      { t: "गाय (Cow)", s: "गाय बोले मूं मूं", e: "🐮" },
-      { t: "कुत्ता (Dog)", s: "कुत्ता बोले भौ भौ", e: "🐶" },
-      { t: "बिल्ली (Cat)", s: "बिल्ली बोली म्याऊं म्याऊं", e: "🐱" },
-      { t: "शेर (Lion)", s: "शेर बोले दहाड़! जंगल का राजा शेर!", e: "🦁" },
-      { t: "हाथी (Elephant)", s: "हाथी राजा बहुत बड़े, सूंड हिलाकर कहां चले", e: "🐘" },
-      { t: "बत्तख (Duck)", s: "बत्तख बोली क्वैक क्वैक", e: "🦆" },
-      { t: "लाल रंग (Red)", s: "लाल रंग जैसे सेब और टमाटर", e: "🍎" },
-      { t: "पीला रंग (Yellow)", s: "पीला रंग जैसे सूरज और केला", e: "🍌" },
-      { t: "हरा रंग (Green)", s: "हरा रंग जैसे तोता और घास", e: "🦜" },
-      { t: "नीला रंग (Blue)", s: "नीला रंग जैसे आसमान और समंदर", e: "🌊" }
+    // 4. ANIMALS WITH VOICES & REALISTIC SOUNDS
+    const ANIMALS = [
+      { t: "गाय (Cow)", s: "गाय बोले: मूं... मूं! गाय हमें मीठा दूध देती है!", e: "🐮", sound: 'cow' },
+      { t: "कुत्ता (Dog)", s: "कुत्ता बोले: भौं-भौं! कुत्ता घर की रखवाली करता है!", e: "🐶", sound: 'dog' },
+      { t: "बिल्ली (Cat)", s: "बिल्ली बोले: म्याऊं... म्याऊं! बिल्ली दूध पीती है!", e: "🐱", sound: 'cat' },
+      { t: "शेर (Lion)", s: "शेर बोला: दहाड़! जंगल का राजा है शेर!", e: "🦁", sound: 'lion' },
+      { t: "हाथी (Elephant)", s: "हाथी राजा बहुत बड़े! सूंड हिलाकर कहां चले!", e: "🐘", sound: 'elephant' },
+      { t: "बत्तख (Duck)", s: "बत्तख बोली: क्वैक... क्वैक! पानी में तैरती है बत्तख!", e: "🦆", sound: 'duck' },
+      { t: "मुर्गा (Rooster)", s: "मुर्गा बोला: कुकड़ू-कूं! सुबह हो गई, उठो बच्चों!", e: "🐓", sound: 'rooster' },
+      { t: "बकरी (Goat)", s: "बकरी बोली: मैं... मैं! घास खाती है प्यारी बकरी!", e: "🐐", sound: 'goat' },
+      { t: "बंदर (Monkey)", s: "बंदर मामा बोले: खों-खों! पेड़ पर कूदते हैं बंदर मामा!", e: "🐵", sound: 'monkey' }
     ];
 
-    // 5. GOOD HABITS
+    // 5. GOOD HABITS WITH CLEAR SPOKEN VOICEOVER
     const HABITS = [
-      { t: "ब्रश करो रोज", s: "सुबह उठकर ब्रश करो, दांत रहेंगे साफ और मजबूत!", e: "🪥" },
-      { t: "बड़ों को प्रणाम", s: "हाथ जोड़कर बोलो नमस्ते, मम्मी पापा को करो प्रणाम!", e: "🙏" },
-      { t: "हाथ धोना (Hand Wash)", s: "खाना खाने से पहले साबुन से हाथ धोएं!", e: "🧼" },
-      { t: "दूध पियो (Drink Milk)", s: "रोज एक गिलास दूध पीने से ताकत आती है!", e: "🥛" },
-      { t: "समय पर सोना (Sleep Early)", s: "रात को समय पर सोएं और सुबह जल्दी उठें!", e: "🛌" }
+      { t: "सुबह उठकर ब्रश करो", s: "सुबह उठकर और रात को सोने से पहले रोज ब्रश करें! इससे दांत चमकेंगे और कीड़ा नहीं लगेगा!", e: "🪥" },
+      { t: "बड़ों को प्रणाम व नमस्ते", s: "सुबह उठकर मम्मी, पापा और दादा-दादी को हाथ जोड़कर प्रणाम और नमस्ते करें! यह बहुत अच्छी आदत है!", e: "🙏" },
+      { t: "साबुन से हाथ धोएं", s: "खाना खाने से पहले और खेल के बाद साबुन से 20 सेकंड तक अच्छी तरह हाथ धोएं!", e: "🧼" },
+      { t: "रोज एक गिलास दूध पिएं", s: "रोज सुबह गरम दूध पिएं! दूध पीने से हड्डियां मजबूत होती हैं और शरीर में ताकत आती है!", e: "🥛" },
+      { t: "खिलौने संभाल कर रखें", s: "खेलने के बाद अपने खिलौने सही जगह पर रखें! कमरे को साफ-सुथरा रखना अच्छे बच्चों की निशानी है!", e: "🧸" },
+      { t: "समय पर सोएं व उठें", s: "रात को समय पर सो जाएं और सुबह जल्दी उठें! इससे दिमाग तेज होता है और मन खुश रहता है!", e: "🛌" },
+      { t: "हरी सब्जियां व फल खाएं", s: "सेब, केला, गाजर और हरी सब्जियां खूब खाएं! इससे आंखें और सेहत अच्छी रहती है!", e: "🥗" }
     ];
 
     // STATE
@@ -905,16 +1075,28 @@
     let isPlaying = false;
     let currentLineIndex = 0;
     let lineTimer = null;
-    let countingAutoTimer = null;
+    let autoRunnerTimer = null;
     let unlockTimer = null;
     let unlockProgressVal = 0;
     let audioCtx = null;
+    let audioAwakened = false;
 
     // AUDIO CONTEXT
     function getAudioContext() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       return audioCtx;
+    }
+
+    function wakeUpAudioSystem() {
+      if (!audioAwakened) {
+        audioAwakened = true;
+        getAudioContext();
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.resume();
+        }
+        document.getElementById('audioAlert').style.display = 'none';
+      }
     }
 
     function playTone(freq, dur = 0.35, type = 'sine', vol = 0.25) {
@@ -933,96 +1115,98 @@
       } catch(e){}
     }
 
-    // HIGH QUALITY TRIPLE-LAYER VOICE ENGINE (NATIVE TTS + STREAM + SPEECH SYNTH)
-    let currentTtsAudio = null;
+    function playAnimalSound(type) {
+      const ctx = getAudioContext();
+      if (type === 'cat') {
+        playTone(600, 0.4, 'sine', 0.2);
+        setTimeout(() => playTone(800, 0.3, 'sine', 0.15), 100);
+      } else if (type === 'cow') {
+        playTone(180, 0.8, 'sawtooth', 0.2);
+      } else if (type === 'dog') {
+        playTone(300, 0.15, 'triangle', 0.3);
+        setTimeout(() => playTone(260, 0.2, 'triangle', 0.25), 150);
+      } else if (type === 'lion') {
+        playTone(120, 0.9, 'sawtooth', 0.35);
+      } else {
+        playTone(523.25, 0.3, 'sine', 0.2);
+      }
+    }
 
+    // HIGH QUALITY VOICEOVER ENGINE
     function stopAllVoice() {
       if (window.AndroidTTS && window.AndroidTTS.stop) {
         window.AndroidTTS.stop();
       }
-      if (currentTtsAudio) {
-        currentTtsAudio.pause();
-        currentTtsAudio = null;
-      }
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
+      }
+      if (autoRunnerTimer) {
+        clearTimeout(autoRunnerTimer);
+        autoRunnerTimer = null;
       }
     }
 
     function speakKidVoice(text, lang = "hi-IN", callback = null) {
+      wakeUpAudioSystem();
       stopAllVoice();
+
       if (!text || text.trim() === '') {
         if (callback) callback();
         return;
       }
 
-      // Layer 1: Native Android TTS via Java bridge (100% offline, guaranteed)
+      // 1. Android Native TTS Interface (Inside APK)
       if (window.AndroidTTS && window.AndroidTTS.speak) {
         try {
           window.AndroidTTS.speak(text, lang);
           if (callback) {
             const wordCount = text.split(/\s+/).length;
-            const delay = Math.max(1400, wordCount * 500);
+            const delay = Math.max(1500, wordCount * 520);
             setTimeout(callback, delay);
           }
           return;
-        } catch(e) {
-          console.warn("AndroidTTS error, falling to Layer 2", e);
-        }
+        } catch(e){}
       }
 
-      // Layer 2: Online Audio Stream (crystal clear human voice)
-      const shortLang = (lang && lang.toLowerCase().startsWith('en')) ? 'en' : 'hi';
-      const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${shortLang}&client=tw-ob&q=${encodeURIComponent(text)}`;
-      
-      const audio = new Audio(ttsUrl);
-      currentTtsAudio = audio;
+      // 2. Web Speech API (Mobile Chrome & Edge)
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.resume();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = 0.85; // Toddler friendly slow rate
+        utter.pitch = 1.15; // Cheerful friendly pitch
 
-      let called = false;
-      const doCallback = () => {
-        if (!called) {
-          called = true;
-          if (callback) callback();
-        }
-      };
-
-      audio.onended = doCallback;
-      audio.onerror = () => {
-        // Layer 3: Web Speech API fallback
-        if ('speechSynthesis' in window) {
-          try {
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.rate = 0.85;
-            utter.pitch = 1.15;
-            utter.lang = lang;
-            utter.onend = doCallback;
-            utter.onerror = doCallback;
-            window.speechSynthesis.speak(utter);
-          } catch(e) {
-            doCallback();
-          }
+        // Select suitable voice
+        const voices = window.speechSynthesis.getVoices();
+        if (lang.startsWith('hi')) {
+          const hiVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('Hindi')) ||
+                          voices.find(v => v.lang.includes('en-IN'));
+          if (hiVoice) utter.voice = hiVoice;
+          utter.lang = "hi-IN";
         } else {
-          doCallback();
+          const enVoice = voices.find(v => v.lang.includes('en'));
+          if (enVoice) utter.voice = enVoice;
+          utter.lang = "en-US";
         }
-      };
 
-      audio.play().catch(() => {
-        // Fallback to Layer 3 if audio play blocked
-        if ('speechSynthesis' in window) {
-          try {
-            const utter = new SpeechSynthesisUtterance(text);
-            utter.rate = 0.85;
-            utter.lang = lang;
-            utter.onend = doCallback;
-            utter.onerror = doCallback;
-            window.speechSynthesis.speak(utter);
-          } catch(e) {
-            doCallback();
+        let finished = false;
+        const doEnd = () => {
+          if (!finished) {
+            finished = true;
+            if (callback) callback();
           }
-        } else {
-          doCallback();
-        }
-      });
+        };
+
+        utter.onend = doEnd;
+        utter.onerror = doEnd;
+
+        window.speechSynthesis.speak(utter);
+
+        // Safety timeout so auto-play never gets stuck
+        const wordCount = text.split(/\s+/).length;
+        setTimeout(doEnd, Math.max(2500, wordCount * 650));
+      } else {
+        if (callback) setTimeout(callback, 1500);
+      }
     }
 
     function ringBell() {
@@ -1044,14 +1228,19 @@
 
     // TABS SWITCHER
     function switchTab(tab, btn) {
+      stopAllVoice();
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
       const container = document.getElementById('dynamicContainer');
       container.innerHTML = '';
 
-      if (tab === 'rhymes_all') {
-        renderSongsGrid(SONGS);
+      if (tab === 'gita_aarti') {
+        const list = CONTENT_MASTER.filter(x => x.cat === 'gita' || x.cat === 'aarti');
+        renderSongsGrid(list);
+      } else if (tab === 'rhymes_all') {
+        const list = CONTENT_MASTER.filter(x => x.cat === 'rhymes' || x.cat === 'bedtime');
+        renderSongsGrid(list);
       } else if (tab === 'abc26') {
         renderAbcGrid();
       } else if (tab === 'count100') {
@@ -1059,13 +1248,13 @@
       } else if (tab === 'varnamala') {
         renderVarnamalaGrid();
       } else if (tab === 'animals') {
-        renderCustomCards(ANIMALS_COLORS);
+        renderAnimalsGrid();
       } else if (tab === 'habits') {
-        renderCustomCards(HABITS);
+        renderHabitsGrid();
       }
     }
 
-    // 1. RHYMES & AARTIS LIST
+    // 1. RHYMES / GITA / AARTI GRID
     function renderSongsGrid(list) {
       const container = document.getElementById('dynamicContainer');
       const grid = document.createElement('div');
@@ -1084,20 +1273,26 @@
       container.appendChild(grid);
     }
 
-    // 2. ABC (26 LETTERS)
+    // 2. COMPLETE A TO Z WITH "PLAY ALL"
     function renderAbcGrid() {
       const container = document.getElementById('dynamicContainer');
-      const intro = document.createElement('div');
-      intro.style = "text-align: center; margin-bottom: 12px; font-weight: 900; color: #1E88E5;";
-      intro.innerText = "👆 किसी भी अक्षर को छुओ, वो बोलकर बताएगा!";
-      container.appendChild(intro);
+      
+      const bar = document.createElement('div');
+      bar.className = 'autoplay-bar';
+      bar.innerHTML = `
+        <span>🔤 पूरे 26 लेटर्स (A to Z)</span>
+        <button class="btn-play-all" onclick="playAllAbc()">▶ पूरा A to Z एक साथ सुनो</button>
+      `;
+      container.appendChild(bar);
 
       const grid = document.createElement('div');
       grid.className = 'abc-grid';
-      ALPHABET_26.forEach(item => {
+      ALPHABET_26.forEach((item, idx) => {
         const card = document.createElement('div');
         card.className = 'abc-card';
+        card.id = `abc_card_${idx}`;
         card.onclick = () => {
+          stopAllVoice();
           playTone(523.25, 0.2, 'sine', 0.2);
           speakKidVoice(`${item.l} for ${item.w}! ${item.p}`, "en-US");
           showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
@@ -1112,17 +1307,40 @@
       container.appendChild(grid);
     }
 
-    // 3. COUNTING 1 TO 100
+    function playAllAbc() {
+      let idx = 0;
+      stopAllVoice();
+      function step() {
+        if (idx >= ALPHABET_26.length) {
+          document.querySelectorAll('.abc-card').forEach(c => c.classList.remove('speaking'));
+          return;
+        }
+        document.querySelectorAll('.abc-card').forEach(c => c.classList.remove('speaking'));
+        const active = document.getElementById(`abc_card_${idx}`);
+        if (active) {
+          active.classList.add('speaking');
+          active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        const item = ALPHABET_26[idx];
+        speakKidVoice(`${item.l} for ${item.w}!`, "en-US", () => {
+          idx++;
+          autoRunnerTimer = setTimeout(step, 300);
+        });
+      }
+      step();
+    }
+
+    // 3. COMPLETE 1 TO 100 COUNTING
     function renderCountingGrid() {
       const container = document.getElementById('dynamicContainer');
       
-      const toolbar = document.createElement('div');
-      toolbar.className = 'counting-toolbar';
-      toolbar.innerHTML = `
-        <span style="font-weight: 900; font-size: 13px; color: #D84315;">🔢 1 से 100 तक गिनती</span>
-        <button onclick="startAutoCount()">▶ 1 से 100 बोलो</button>
+      const bar = document.createElement('div');
+      bar.className = 'autoplay-bar';
+      bar.innerHTML = `
+        <span>🔢 पूरे 1 से 100 तक गिनती</span>
+        <button class="btn-play-all" onclick="startAutoCount()">▶ 1 से 100 गिनती सुनो</button>
       `;
-      container.appendChild(toolbar);
+      container.appendChild(bar);
 
       const grid = document.createElement('div');
       grid.className = 'counting-grid';
@@ -1132,7 +1350,8 @@
         cell.id = `count_cell_${i}`;
         cell.innerText = i;
         cell.onclick = () => {
-          playTone(440 + (i * 6), 0.15, 'sine', 0.2);
+          stopAllVoice();
+          playTone(440 + (i * 5), 0.15, 'sine', 0.2);
           speakKidVoice(String(i), "hi-IN");
           showSparkle(window.innerWidth / 2, window.innerHeight / 2, '🎈');
         };
@@ -1143,10 +1362,12 @@
 
     function startAutoCount() {
       let num = 1;
-      if (countingAutoTimer) clearInterval(countingAutoTimer);
-      
+      stopAllVoice();
       function step() {
-        if (num > 100) return;
+        if (num > 100) {
+          document.querySelectorAll('.count-cell').forEach(c => c.classList.remove('speaking'));
+          return;
+        }
         document.querySelectorAll('.count-cell').forEach(c => c.classList.remove('speaking'));
         const active = document.getElementById(`count_cell_${num}`);
         if (active) {
@@ -1155,26 +1376,32 @@
         }
         speakKidVoice(String(num), "hi-IN", () => {
           num++;
-          setTimeout(step, 200);
+          autoRunnerTimer = setTimeout(step, 200);
         });
       }
       step();
     }
 
-    // 4. HINDI VARNAMALA (अ से ज्ञ)
+    // 4. HINDI VARNAMALA (अ से ज्ञ) WITH "PLAY ALL"
     function renderVarnamalaGrid() {
       const container = document.getElementById('dynamicContainer');
-      const intro = document.createElement('div');
-      intro.style = "text-align: center; margin-bottom: 12px; font-weight: 900; color: #C2185B;";
-      intro.innerText = "👆 अक्षर छुओ — पूरा उच्चारण और शब्द सुनो!";
-      container.appendChild(intro);
+      
+      const bar = document.createElement('div');
+      bar.className = 'autoplay-bar';
+      bar.innerHTML = `
+        <span>🍎 अ से ज्ञ तक पूरी वर्णमाला</span>
+        <button class="btn-play-all" onclick="playAllVarnamala()">▶ पूरी वर्णमाला सुनो</button>
+      `;
+      container.appendChild(bar);
 
       const grid = document.createElement('div');
       grid.className = 'varnamala-grid';
-      VARNAMALA.forEach(item => {
+      VARNAMALA.forEach((item, idx) => {
         const card = document.createElement('div');
         card.className = 'var-card';
+        card.id = `var_card_${idx}`;
         card.onclick = () => {
+          stopAllVoice();
           playTone(392, 0.2, 'sine', 0.2);
           speakKidVoice(`${item.a} से ${item.w}!`, "hi-IN");
           showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
@@ -1189,23 +1416,81 @@
       container.appendChild(grid);
     }
 
-    // 5. CUSTOM CARDS (ANIMALS / HABITS)
-    function renderCustomCards(list) {
+    function playAllVarnamala() {
+      let idx = 0;
+      stopAllVoice();
+      function step() {
+        if (idx >= VARNAMALA.length) {
+          document.querySelectorAll('.var-card').forEach(c => c.classList.remove('speaking'));
+          return;
+        }
+        document.querySelectorAll('.var-card').forEach(c => c.classList.remove('speaking'));
+        const active = document.getElementById(`var_card_${idx}`);
+        if (active) {
+          active.classList.add('speaking');
+          active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        const item = VARNAMALA[idx];
+        speakKidVoice(`${item.a} से ${item.w}!`, "hi-IN", () => {
+          idx++;
+          autoRunnerTimer = setTimeout(step, 300);
+        });
+      }
+      step();
+    }
+
+    // 5. ANIMALS WITH VOICES
+    function renderAnimalsGrid() {
       const container = document.getElementById('dynamicContainer');
+      const intro = document.createElement('div');
+      intro.style = "text-align: center; margin-bottom: 12px; font-weight: 900; color: #43A047;";
+      intro.innerText = "🦁 जानवर पर टैप करो — उसकी आवाज़ और बातें सुनो!";
+      container.appendChild(intro);
+
       const grid = document.createElement('div');
       grid.className = 'items-grid';
-      list.forEach(item => {
+      ANIMALS.forEach(item => {
         const card = document.createElement('div');
         card.className = 'item-card';
         card.onclick = () => {
-          playTone(493.88, 0.25, 'sine', 0.2);
+          stopAllVoice();
+          playAnimalSound(item.sound);
           speakKidVoice(item.s, "hi-IN");
           showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
         };
         card.innerHTML = `
           <div class="icon-wrap">${item.e}</div>
           <h4>${item.t}</h4>
-          <span>टैप करके सुनो 🗣️</span>
+          <span>टैप करो और सुनो 🗣️</span>
+        `;
+        grid.appendChild(card);
+      });
+      container.appendChild(grid);
+    }
+
+    // 6. GOOD HABITS WITH VOICES
+    function renderHabitsGrid() {
+      const container = document.getElementById('dynamicContainer');
+      const intro = document.createElement('div');
+      intro.style = "text-align: center; margin-bottom: 12px; font-weight: 900; color: #7B1FA2;";
+      intro.innerText = "✨ अच्छी आदत पर टैप करो — सुनो और सीखो!";
+      container.appendChild(intro);
+
+      const grid = document.createElement('div');
+      grid.className = 'items-grid';
+      HABITS.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.onclick = () => {
+          stopAllVoice();
+          playTone(440, 0.25, 'sine', 0.2);
+          speakKidVoice(item.s, "hi-IN");
+          showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
+        };
+        card.innerHTML = `
+          <div class="icon-wrap">${item.e}</div>
+          <h4>${item.t}</h4>
+          <span>टैप करो और सुनो 🗣️</span>
         `;
         grid.appendChild(card);
       });
@@ -1222,9 +1507,8 @@
       document.getElementById('lockVisual').innerText = song.icon;
 
       const worshipDiv = document.getElementById('worshipControls');
-      worshipDiv.style.display = (song.cat === 'aarti') ? 'flex' : 'none';
+      worshipDiv.style.display = (song.cat === 'aarti' || song.cat === 'gita') ? 'flex' : 'none';
 
-      // Build lyrics lines
       const lyricsBox = document.getElementById('pLyrics');
       lyricsBox.innerHTML = '';
       song.lines.forEach((line, idx) => {
@@ -1247,13 +1531,11 @@
       if (!song || !isPlaying) return;
 
       if (currentLineIndex >= song.lines.length) {
-        // Song ended, play next in playlist
         currentLineIndex = 0;
         nextSong();
         return;
       }
 
-      // Highlight active line
       document.querySelectorAll('.lyrics-line').forEach(l => l.classList.remove('active'));
       const activeLineEl = document.getElementById(`line_${currentLineIndex}`);
       if (activeLineEl) {
@@ -1264,13 +1546,12 @@
       const text = song.lines[currentLineIndex];
       const lang = song.lang || "hi-IN";
 
-      // Soft melodic chord
-      playTone(392 + (currentLineIndex % 5) * 50, 0.4, 'triangle', 0.15);
+      playTone(392 + (currentLineIndex % 5) * 45, 0.35, 'triangle', 0.15);
 
       speakKidVoice(text, lang, () => {
         if (!isPlaying) return;
         currentLineIndex++;
-        lineTimer = setTimeout(playLineSpoken, 400);
+        lineTimer = setTimeout(playLineSpoken, 350);
       });
     }
 
@@ -1287,14 +1568,14 @@
     }
 
     function playPlaylist(mode) {
-      if (mode === 'morning') {
-        currentPlaylist = SONGS.filter(x => x.id === 'shloka_morning' || x.id === 'mantra_gayatri');
+      if (mode === 'gita') {
+        currentPlaylist = CONTENT_MASTER.filter(x => x.cat === 'gita');
       } else if (mode === 'aarti') {
-        currentPlaylist = SONGS.filter(x => x.cat === 'aarti');
+        currentPlaylist = CONTENT_MASTER.filter(x => x.cat === 'aarti');
       } else if (mode === 'rhymes') {
-        currentPlaylist = SONGS.filter(x => x.cat === 'rhymes');
+        currentPlaylist = CONTENT_MASTER.filter(x => x.cat === 'rhymes');
       } else if (mode === 'bedtime') {
-        currentPlaylist = SONGS.filter(x => x.cat === 'bedtime');
+        currentPlaylist = CONTENT_MASTER.filter(x => x.cat === 'bedtime');
       }
       currentIndex = 0;
       openPlayer(currentPlaylist[0]);
@@ -1332,11 +1613,12 @@
 
     // BABY LOCK
     function enableChildLock() {
-      if (!isPlaying && SONGS.length > 0) openPlayer(SONGS[0]);
+      if (!isPlaying && CONTENT_MASTER.length > 0) openPlayer(CONTENT_MASTER[0]);
       document.getElementById('lockScreen').style.display = 'flex';
     }
 
     function handleScreenTouch(e) {
+      wakeUpAudioSystem();
       const x = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth / 2;
       const y = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight / 2;
       
@@ -1387,7 +1669,15 @@
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
-      renderSongsGrid(SONGS);
+      const list = CONTENT_MASTER.filter(x => x.cat === 'gita' || x.cat === 'aarti');
+      renderSongsGrid(list);
+
+      // Preload voices
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {
+          window.speechSynthesis.getVoices();
+        };
+      }
     });
   </script>
 </body>
