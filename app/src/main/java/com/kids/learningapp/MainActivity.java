@@ -2,14 +2,19 @@ package com.kids.learningapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
     private WebView webView;
+    private TextToSpeech tts;
+    private boolean ttsReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,9 @@ public class MainActivity extends Activity {
 
         // Immersive sticky full screen
         hideSystemUI();
+
+        // Initialize Android Native Text To Speech engine
+        tts = new TextToSpeech(this, this);
 
         webView = new WebView(this);
         setContentView(webView);
@@ -33,8 +41,49 @@ public class MainActivity extends Activity {
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
 
+        // Expose Native Android TTS to JavaScript
+        webView.addJavascriptInterface(new Object() {
+            @JavascriptInterface
+            public void speak(String text, String lang) {
+                if (ttsReady && tts != null && text != null && !text.isEmpty()) {
+                    if ("hi".equalsIgnoreCase(lang) || "hi-IN".equalsIgnoreCase(lang)) {
+                        tts.setLanguage(new Locale("hi", "IN"));
+                    } else {
+                        tts.setLanguage(Locale.US);
+                    }
+                    tts.setSpeechRate(0.85f);
+                    tts.setPitch(1.15f);
+                    tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "tts_" + System.currentTimeMillis());
+                }
+            }
+
+            @JavascriptInterface
+            public void stop() {
+                if (ttsReady && tts != null) {
+                    tts.stop();
+                }
+            }
+        }, "AndroidTTS");
+
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("file:///android_asset/index.html");
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            ttsReady = true;
+            tts.setLanguage(new Locale("hi", "IN"));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -59,11 +108,9 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Prevent baby from accidentally exiting with a single back press
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
-            // Can be confirmed or kept locked
             super.onBackPressed();
         }
     }
