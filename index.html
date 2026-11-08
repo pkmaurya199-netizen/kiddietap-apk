@@ -966,6 +966,186 @@
       margin-top: 4px;
       letter-spacing: 0.3px;
     }
+
+    /* HEADER TOOL BUTTONS (LANG & DAY/NIGHT) */
+    .btn-header-tool {
+      background: #FFFFFF;
+      border: 2px solid #E0E0E0;
+      border-radius: 50px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #333333;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.15s, background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .btn-header-tool:active { transform: scale(0.92); }
+
+    /* DAY & NIGHT THEME ENGINE */
+    body {
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.night-mode {
+      --bg-gradient: linear-gradient(180deg, #090e1f 0%, #111a36 40%, #0d1527 100%);
+      background: var(--bg-gradient) !important;
+      color: #E2E8F0 !important;
+    }
+
+    body.night-mode header {
+      background: #111a36 !important;
+      border-bottom: 3px solid #233554 !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    body.night-mode .brand-title {
+      color: #FFD166 !important;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.45);
+    }
+
+    body.night-mode .brand-sub {
+      color: #64DFDF !important;
+    }
+
+    body.night-mode .btn-header-tool {
+      background: #1c2744 !important;
+      border-color: #384e77 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    }
+
+    body.night-mode .btn-lock {
+      background: #3b1b22 !important;
+      border-color: #742a2a !important;
+      color: #FF8A80 !important;
+    }
+
+    body.night-mode .audio-alert {
+      background: #1b5e20 !important;
+      color: #E8F5E9 !important;
+    }
+
+    body.night-mode .greeting-card {
+      background: linear-gradient(135deg, #162447, #1f4068) !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 2px #4fc3f7 !important;
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .greeting-text h2 {
+      color: #FFD166 !important;
+    }
+
+    body.night-mode .greeting-text p {
+      color: #CFD8DC !important;
+    }
+
+    body.night-mode .greeting-text span {
+      background: #1a3636 !important;
+      color: #81C784 !important;
+    }
+
+    body.night-mode .section-title {
+      color: #FFD166 !important;
+    }
+
+    body.night-mode .gp-card {
+      background: #152238 !important;
+      border: 2px solid #283e66 !important;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35) !important;
+    }
+
+    body.night-mode .gp-card h3 {
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .gp-card p {
+      color: #90A4AE !important;
+    }
+
+    body.night-mode .tabs-nav {
+      background: transparent;
+    }
+
+    body.night-mode .tab-btn {
+      background: #182642 !important;
+      border-color: #2c426d !important;
+      color: #ECEFF1 !important;
+    }
+
+    body.night-mode .tab-btn.active {
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53) !important;
+      color: #FFFFFF !important;
+      border-color: #FFD166 !important;
+      box-shadow: 0 0 14px rgba(255, 107, 107, 0.6) !important;
+    }
+
+    body.night-mode .autoplay-bar {
+      background: #152238 !important;
+      border-color: #2c426d !important;
+      color: #ECEFF1 !important;
+    }
+
+    body.night-mode .abc-card,
+    body.night-mode .var-card,
+    body.night-mode .count-cell {
+      background: #162238 !important;
+      border: 2px solid #283e66 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    }
+
+    body.night-mode .abc-card .letter,
+    body.night-mode .var-card .letter {
+      color: #FFD166 !important;
+    }
+
+    body.night-mode .abc-card .word,
+    body.night-mode .var-card .word {
+      color: #CFD8DC !important;
+    }
+
+    body.night-mode .item-card {
+      background: #162238 !important;
+      border: 2px solid #283e66 !important;
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .item-card h4 {
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .item-card span {
+      color: #90A4AE !important;
+    }
+
+    body.night-mode .floating-stop-bar {
+      background: #101c36 !important;
+      border-color: #2b4372 !important;
+      color: #FFFFFF !important;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 8px 10px;
+      }
+      .brand-title {
+        font-size: 19px;
+      }
+      .brand-sub {
+        font-size: 10px;
+      }
+      .header-actions {
+        gap: 5px;
+      }
+      .btn-header-tool, .btn-lock {
+        padding: 5px 9px;
+        font-size: 11px;
+      }
+    }
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -986,6 +1166,12 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="btn-header-tool" id="langToggleBtn" onclick="toggleLanguage()" title="भाषा बदलें (Change Language)">
+        <span id="langBtnIcon">🌐</span> <span id="langBtnText">English</span>
+      </button>
+      <button class="btn-header-tool" id="themeToggleBtn" onclick="toggleTheme()" title="दिन / रात मोड (Day / Night Mode)">
+        <span id="themeBtnIcon">🌙</span> <span id="themeBtnText">रात</span>
+      </button>
       <button class="btn-lock" onclick="enableChildLock()">
         🔒 <span>Baby Lock</span>
       </button>
@@ -1740,6 +1926,228 @@
     }
 
     
+    
+    // ==========================================
+    // MULTI-LANGUAGE (HINDI / ENGLISH) & DAY/NIGHT THEME ENGINE
+    // ==========================================
+    const I18N = {
+      hi: {
+        brandSub: "बोलने वाला लर्निंग व संस्कार 🗣️",
+        audioAlert: "🔊 यहाँ टैप करो — अपनी असली आवाज़ सुनो! 🎙️",
+        dayGreeting: "सुप्रभात, नन्हे दोस्त! ☀️",
+        nightGreeting: "शुभ रात्रि, नन्हे दोस्त! 🌙",
+        greetSub: "हर चीज़ पर टैप करो और सुनो आवाज़!",
+        humanVoiceBadge: "🎙️ अपनी असली इंसानी आवाज़ में सुनो (टैप करें)",
+        quickSectionTitle: "बच्चों के पसंदीदा 1-टैप प्ले:",
+        rhymesTitle: "प्यारे बाल गीत",
+        rhymesSub: "मछली जल की • लकड़ी की काठी",
+        bedtimeTitle: "लोरी व मीठी नींद",
+        bedtimeSub: "चंदा मामा • लल्ला लल्ला लोरी",
+        abcCardTitle: "A to Z पूरी वर्णमाला",
+        abcCardSub: "A for Apple • B for Ball",
+        varCardTitle: "अ से ज्ञ हिंदी वर्णमाला",
+        varCardSub: "अ से अनार • आ से आम",
+        tabAbc: "🔤 A to Z (पूरे 26)",
+        tabVar: "🍎 अ से ज्ञ वर्णमाला",
+        tabCount: "🔢 1 से 100 गिनती",
+        tabRhymes: "🎵 बाल-गीत व लोरियां",
+        tabAnimals: "🦁 जानवर व असली आवाजें",
+        tabHabits: "✨ अच्छी आदतें",
+        autoplayAbcTitle: "🔤 पूरी 26 वर्णमाला (A to Z)",
+        autoplayAbcBtn: "▶ पूरी A to Z एक साथ सुनो",
+        autoplayVarTitle: "🍎 अ से ज्ञ तक पूरी वर्णमाला",
+        autoplayVarBtn: "▶ पूरी वर्णमाला सुनो",
+        autoplayCountTitle: "🔢 पूरे 1 से 100 तक गिनती",
+        autoplayCountBtn: "▶ 1 से 100 लगातार गिनो",
+        stopAbcBtn: "⏹️ तुरंत रोको (STOP)",
+        stopCountBtn: "⏹️ गिनती रोको (STOP)",
+        stopVarBtn: "⏹️ वर्णमाला रोको (STOP)",
+        modalCloseTop: "✕ बंद करें (CLOSE)",
+        modalCloseBottom: "❌ बंद करें (Close & Go Back)",
+        modalReplayHint: "👆 कार्ड पर छूकर दोबारा सुनो 🔊",
+        countBadgePrefix: "👆 वस्तुओं को छूकर गिनो:",
+        numberPrefix: "नंबर",
+        totalPrefix: "कुल",
+        itemsSuffix: "वस्तुएं",
+        tapToCount: "छूकर गिनो 👆",
+        countingInProgress: "गिनती चालू है...",
+        animalsIntro: "🐾 जानवर पर टैप करो - उसकी असली आवाज़ सुनो!",
+        animalsTapText: "छूकर आवाज़ सुनो",
+        habitsIntro: "✨ रोज़ की अच्छी आदतें - बच्चों के लिए!",
+        habitsCardSub: "रोज़ की अच्छी आदतें",
+        themeDay: "दिन",
+        themeNight: "रात",
+        switchLangLabel: "English"
+      },
+      en: {
+        brandSub: "Talking Learning & Fun for Kids 🗣️",
+        audioAlert: "🔊 Tap here — Hear authentic voice! 🎙️",
+        dayGreeting: "Good Morning, Little Champ! ☀️",
+        nightGreeting: "Good Night, Sweet Dreams! 🌙",
+        greetSub: "Tap any item to hear its voice & sound!",
+        humanVoiceBadge: "🎙️ Authentic studio human voice (Tap to play)",
+        quickSectionTitle: "Children's Favorite 1-Tap Play:",
+        rhymesTitle: "Cute Rhymes & Songs",
+        rhymesSub: "Fish in Water • Wooden Horse",
+        bedtimeTitle: "Lullabies & Sweet Sleep",
+        bedtimeSub: "Moon Uncle • Lalla Lalla Lori",
+        abcCardTitle: "A to Z Full Alphabet",
+        abcCardSub: "A for Apple • B for Ball",
+        varCardTitle: "Hindi Alphabet (अ to ज्ञ)",
+        varCardSub: "A se Anar • Aa se Aam",
+        tabAbc: "🔤 A to Z (All 26)",
+        tabVar: "🍎 Hindi (अ to ज्ञ)",
+        tabCount: "🔢 1 to 100 Counting",
+        tabRhymes: "🎵 Rhymes & Lullabies",
+        tabAnimals: "🦁 Animals & Voices",
+        tabHabits: "✨ Good Daily Habits",
+        autoplayAbcTitle: "🔤 All 26 Letters (A to Z)",
+        autoplayAbcBtn: "▶ Play All A to Z Letters",
+        autoplayVarTitle: "🍎 Hindi Alphabet (अ to ज्ञ)",
+        autoplayVarBtn: "▶ Listen to Full Varnamala",
+        autoplayCountTitle: "🔢 Complete 1 to 100 Counting",
+        autoplayCountBtn: "▶ Count 1 to 100 Non-Stop",
+        stopAbcBtn: "⏹️ STOP A-Z",
+        stopCountBtn: "⏹️ STOP Counting",
+        stopVarBtn: "⏹️ STOP Varnamala",
+        modalCloseTop: "✕ Close",
+        modalCloseBottom: "❌ Close & Go Back",
+        modalReplayHint: "👆 Tap card to listen again 🔊",
+        countBadgePrefix: "👆 Tap objects to count:",
+        numberPrefix: "Number",
+        totalPrefix: "Total",
+        itemsSuffix: "objects",
+        tapToCount: "Tap to count 👆",
+        countingInProgress: "Counting in progress...",
+        animalsIntro: "🐾 Tap any animal - Listen to its real voice!",
+        animalsTapText: "Tap for sound",
+        habitsIntro: "✨ Healthy Daily Habits for Kids!",
+        habitsCardSub: "Healthy daily habit",
+        themeDay: "Day",
+        themeNight: "Night",
+        switchLangLabel: "हिंदी"
+      }
+    };
+
+    function getEnglishNumberWord(num) {
+      const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+      const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+      if (num === 100) return "One Hundred";
+      if (num < 20) return ones[num];
+      const t = Math.floor(num / 10);
+      const o = num % 10;
+      return o === 0 ? tens[t] : `${tens[t]}-${ones[o]}`;
+    }
+
+    let currentLang = localStorage.getItem('kiddietap_lang') || 'hi';
+    let currentTheme = localStorage.getItem('kiddietap_theme') || 'day';
+    let currentActiveTab = 'abc26';
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('kiddietap_theme', theme);
+      const themeBtnIcon = document.getElementById('themeBtnIcon');
+      const themeBtnText = document.getElementById('themeBtnText');
+      const greetIcon = document.getElementById('greetIcon');
+      const greetTitle = document.getElementById('greetTitle');
+
+      if (theme === 'night') {
+        document.body.classList.add('night-mode');
+        if (themeBtnIcon) themeBtnIcon.innerText = '☀️';
+        if (themeBtnText) themeBtnText.innerText = I18N[currentLang].themeDay;
+        if (greetIcon) greetIcon.innerText = '🌙';
+        if (greetTitle) greetTitle.innerText = I18N[currentLang].nightGreeting;
+      } else {
+        document.body.classList.remove('night-mode');
+        if (themeBtnIcon) themeBtnIcon.innerText = '🌙';
+        if (themeBtnText) themeBtnText.innerText = I18N[currentLang].themeNight;
+        if (greetIcon) greetIcon.innerText = '🦚';
+        if (greetTitle) greetTitle.innerText = I18N[currentLang].dayGreeting;
+      }
+    }
+
+    function toggleTheme() {
+      playTone(580, 0.1, 'sine', 0.25);
+      applyTheme(currentTheme === 'day' ? 'night' : 'day');
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('kiddietap_lang', lang);
+      const t = I18N[lang];
+
+      // Header labels
+      const brandSub = document.querySelector('.brand-sub');
+      if (brandSub) brandSub.innerText = t.brandSub;
+
+      const langBtnText = document.getElementById('langBtnText');
+      if (langBtnText) langBtnText.innerText = t.switchLangLabel;
+
+      const themeBtnText = document.getElementById('themeBtnText');
+      if (themeBtnText) {
+        themeBtnText.innerText = currentTheme === 'night' ? t.themeDay : t.themeNight;
+      }
+
+      // Audio activation banner
+      const audioAlertSpan = document.querySelector('#audioAlert span:last-child');
+      if (audioAlertSpan) audioAlertSpan.innerText = t.audioAlert;
+
+      // Greeting Card
+      const greetTitle = document.getElementById('greetTitle');
+      if (greetTitle) {
+        greetTitle.innerText = currentTheme === 'night' ? t.nightGreeting : t.dayGreeting;
+      }
+      const greetSub = document.getElementById('greetSub');
+      if (greetSub) greetSub.innerText = t.greetSub;
+
+      // Section title
+      const secTitleSpan = document.querySelector('.section-title span:last-child');
+      if (secTitleSpan) secTitleSpan.innerText = t.quickSectionTitle;
+
+      // Quick 1-tap cards
+      const gpRhymes = document.querySelector('.gp-rhymes h3');
+      if (gpRhymes) gpRhymes.innerText = t.rhymesTitle;
+      const gpRhymesP = document.querySelector('.gp-rhymes p');
+      if (gpRhymesP) gpRhymesP.innerText = t.rhymesSub;
+
+      const gpBedtime = document.querySelector('.gp-bedtime h3');
+      if (gpBedtime) gpBedtime.innerText = t.bedtimeTitle;
+      const gpBedtimeP = document.querySelector('.gp-bedtime p');
+      if (gpBedtimeP) gpBedtimeP.innerText = t.bedtimeSub;
+
+      const gpGita = document.querySelector('.gp-gita h3');
+      if (gpGita) gpGita.innerText = t.abcCardTitle;
+      const gpGitaP = document.querySelector('.gp-gita p');
+      if (gpGitaP) gpGitaP.innerText = t.abcCardSub;
+
+      const gpAarti = document.querySelector('.gp-aarti h3');
+      if (gpAarti) gpAarti.innerText = t.varCardTitle;
+      const gpAartiP = document.querySelector('.gp-aarti p');
+      if (gpAartiP) gpAartiP.innerText = t.varCardSub;
+
+      // Tab navigation buttons
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      if (tabBtns.length >= 6) {
+        tabBtns[0].innerText = t.tabAbc;
+        tabBtns[1].innerText = t.tabVar;
+        tabBtns[2].innerText = t.tabCount;
+        tabBtns[3].innerText = t.tabRhymes;
+        tabBtns[4].innerText = t.tabAnimals;
+        tabBtns[5].innerText = t.tabHabits;
+      }
+
+      // Re-render currently active tab
+      if (currentActiveTab) {
+        const activeBtn = Array.from(tabBtns).find(b => b.classList.contains('active')) || tabBtns[0];
+        switchTab(currentActiveTab, activeBtn);
+      }
+    }
+
+    function toggleLanguage() {
+      playTone(520, 0.1, 'sine', 0.25);
+      applyLanguage(currentLang === 'hi' ? 'en' : 'hi');
+    }
+
     const HINDI_COUNTING_WORDS = [
       "", "एक (Ek)", "दो (Do)", "तीन (Teen)", "चार (Chaar)", "पाँच (Paanch)", "छह (Chhah)", "सात (Saat)", "आठ (Aath)", "नौ (Nau)", "दस (Das)",
       "ग्यारह", "बारह", "तेरह", "चौदह", "पंद्रह", "सोलह", "सत्रह", "अठारह", "उन्नीस", "बीस",
@@ -1761,14 +2169,15 @@
 
       let items = '';
       for (let k = 1; k <= count; k++) {
-        items += `<span class="count-obj-item" style="font-size: ${size}px;" onclick="event.stopPropagation(); playTone(480 + (${k % 20}) * 15, 0.12, 'sine', 0.28); showSparkle(event.clientX || window.innerWidth/2, event.clientY || window.innerHeight/2, '${emoji}');" title="वस्तु ${k}">${emoji}</span>`;
+        items += `<span class="count-obj-item" style="font-size: ${size}px;" onclick="event.stopPropagation(); playTone(480 + (${k % 20}) * 15, 0.12, 'sine', 0.28); showSparkle(event.clientX || window.innerWidth/2, event.clientY || window.innerHeight/2, '${emoji}');" title="${emoji} ${k}">${emoji}</span>`;
       }
 
+      const prefix = (I18N[currentLang] && I18N[currentLang].countBadgePrefix) ? I18N[currentLang].countBadgePrefix : '👆 वस्तुओं को छूकर गिनो:';
       return `
         <div class="counting-objects-wrapper">
           ${items}
         </div>
-        <div class="count-badge-text">👆 वस्तुओं को छूकर गिनो: <strong>${count}</strong> ${emoji}</div>
+        <div class="count-badge-text">${prefix} <strong>${count}</strong> ${emoji}</div>
       `;
     }
 
@@ -1849,7 +2258,7 @@
       const bodyContent = config.customBodyHtml ? config.customBodyHtml : (icon ? `<div class="kids-modal-icon-huge">${icon}</div>` : '');
       modal.innerHTML = `
         <div class="kids-modal-top-bar">
-          <button class="kids-top-close-pill" onclick="closeFullScreenKidsCard(event)">✕ बंद करें (CLOSE)</button>
+          <button class="kids-top-close-pill" onclick="closeFullScreenKidsCard(event)">${(I18N[currentLang] && I18N[currentLang].modalCloseTop) ? I18N[currentLang].modalCloseTop : '✕ बंद करें'}</button>
         </div>
         <div class="kids-fullscreen-content" style="background: ${bgGradient || 'linear-gradient(135deg, #FF6B6B, #FF8E53)'};">
           <button class="kids-modal-close" onclick="closeFullScreenKidsCard(event)" title="बंद करें">✕</button>
@@ -1859,8 +2268,8 @@
             <div class="kids-modal-title-huge">${title || ''}</div>
             <div class="kids-modal-sub-huge">${subtitle || ''}</div>
           </div>
-          <div class="kids-modal-action-hint">👆 कार्ड पर छूकर दोबारा सुनो 🔊</div>
-          <button class="kids-bottom-close-btn" onclick="closeFullScreenKidsCard(event)">❌ बंद करें (Close & Go Back)</button>
+          <div class="kids-modal-action-hint">${(I18N[currentLang] && I18N[currentLang].modalReplayHint) ? I18N[currentLang].modalReplayHint : '👆 कार्ड पर छूकर दोबारा सुनो 🔊'}</div>
+          <button class="kids-bottom-close-btn" onclick="closeFullScreenKidsCard(event)">${(I18N[currentLang] && I18N[currentLang].modalCloseBottom) ? I18N[currentLang].modalCloseBottom : '❌ बंद करें'}</button>
         </div>
       `;
 
@@ -2321,14 +2730,15 @@
     }
 
     function updateAutoRunnerButtons() {
+      const t = I18N[currentLang] || I18N.hi;
       const btnAbc = document.getElementById('btnPlayAllAbc');
       if (btnAbc) {
         if (currentAutoRunnerType === 'abc') {
           btnAbc.classList.add('stop-mode');
-          btnAbc.innerHTML = '⏹️ तुरंत रोको (STOP)';
+          btnAbc.innerHTML = t.stopAbcBtn;
         } else {
           btnAbc.classList.remove('stop-mode');
-          btnAbc.innerHTML = '▶ पूरा A to Z एक साथ सुनो';
+          btnAbc.innerHTML = t.autoplayAbcBtn;
         }
       }
 
@@ -2336,10 +2746,10 @@
       if (btnCount) {
         if (currentAutoRunnerType === 'count') {
           btnCount.classList.add('stop-mode');
-          btnCount.innerHTML = '⏹️ गिनती रोको (STOP)';
+          btnCount.innerHTML = t.stopCountBtn;
         } else {
           btnCount.classList.remove('stop-mode');
-          btnCount.innerHTML = '▶ 1 से 100 लगातार गिनो';
+          btnCount.innerHTML = t.autoplayCountBtn;
         }
       }
 
@@ -2347,10 +2757,10 @@
       if (btnVar) {
         if (currentAutoRunnerType === 'var') {
           btnVar.classList.add('stop-mode');
-          btnVar.innerHTML = '⏹️ वर्णमाला रोको (STOP)';
+          btnVar.innerHTML = t.stopVarBtn;
         } else {
           btnVar.classList.remove('stop-mode');
-          btnVar.innerHTML = '▶ पूरी वर्णमाला सुनो';
+          btnVar.innerHTML = t.autoplayVarBtn;
         }
       }
     }
@@ -2407,9 +2817,16 @@
     }
 
     function switchTab(tab, btn) {
+      currentActiveTab = tab;
       stopAllAutoRunners();
       stopAllVoice();
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (!btn) {
+        const tabMap = { 'abc26': 0, 'varnamala': 1, 'count100': 2, 'rhymes_all': 3, 'animals': 4, 'habits': 5 };
+        const idx = tabMap[tab];
+        const allBtns = document.querySelectorAll('.tab-btn');
+        if (typeof idx === 'number' && allBtns[idx]) btn = allBtns[idx];
+      }
       if (btn) btn.classList.add('active');
 
       const container = document.getElementById('dynamicContainer');
@@ -2457,11 +2874,12 @@
     function renderAbcGrid() {
       const container = document.getElementById('dynamicContainer');
       
+      const t = I18N[currentLang] || I18N.hi;
       const bar = document.createElement('div');
       bar.className = 'autoplay-bar';
       bar.innerHTML = `
-        <span>🔤 पूरे 26 लेटर्स (A to Z)</span>
-        <button class="btn-play-all" id="btnPlayAllAbc" onclick="togglePlayAllAbc()">▶ पूरा A to Z एक साथ सुनो</button>
+        <span>${t.autoplayAbcTitle}</span>
+        <button class="btn-play-all ${currentAutoRunnerType === 'abc' ? 'stop-mode' : ''}" id="btnPlayAllAbc" onclick="togglePlayAllAbc()">${currentAutoRunnerType === 'abc' ? t.stopAbcBtn : t.autoplayAbcBtn}</button>
       `;
       container.appendChild(bar);
 
@@ -2593,12 +3011,13 @@
         // 3. COMPLETE 1 TO 100 COUNTING
     function renderCountingGrid() {
       const container = document.getElementById('dynamicContainer');
+      const t = I18N[currentLang] || I18N.hi;
       
       const bar = document.createElement('div');
       bar.className = 'autoplay-bar';
       bar.innerHTML = `
-        <span>🔢 पूरे 1 से 100 तक गिनती</span>
-        <button class="btn-play-all" id="btnPlayAllCount" onclick="toggleAutoCount()">▶ 1 से 100 लगातार गिनो</button>
+        <span>${t.autoplayCountTitle}</span>
+        <button class="btn-play-all ${currentAutoRunnerType === 'count' ? 'stop-mode' : ''}" id="btnPlayAllCount" onclick="toggleAutoCount()">${currentAutoRunnerType === 'count' ? t.stopCountBtn : t.autoplayCountBtn}</button>
       `;
       container.appendChild(bar);
 
@@ -2616,13 +3035,16 @@
           const emo = emojis[(i - 1) % emojis.length];
           const objectsHtml = generateCountingObjectsHtml(i, emo);
           const hindiWord = HINDI_COUNTING_WORDS[i] || `संख्या ${i}`;
+          const engWord = getEnglishNumberWord(i);
+          const cardTitle = currentLang === 'hi' ? `${t.numberPrefix} ${i} — ${hindiWord}` : `${t.numberPrefix} ${i} — ${engWord}`;
+          const cardSub = currentLang === 'hi' ? `${t.totalPrefix} ${i} ${emo} (${t.tapToCount})` : `${t.totalPrefix} ${i} ${emo} (${t.tapToCount})`;
 
           openFullScreenKidsCard({
             letter: String(i),
             icon: emo,
             customBodyHtml: objectsHtml,
-            title: `नंबर ${i} — ${hindiWord}`,
-            subtitle: `कुल ${i} ${emo} (छूकर गिनो 👆)`,
+            title: cardTitle,
+            subtitle: cardSub,
             bgGradient: 'linear-gradient(135deg, #11998e, #38ef7d)',
             soundFn: () => { playLocalAudio(`count_${i}.mp3`, `${i} ${hindiWord}`, "hi-IN"); }
           });
@@ -2636,6 +3058,8 @@
       let num = 1;
       stopAllVoice();
       const emojis = ['🎈', '🍎', '⭐', '🚗', '🍓', '🍭', '🦋', '⚽', '🌸', '🌟'];
+      const t = I18N[currentLang] || I18N.hi;
+
       function step() {
         if (currentAutoRunnerType !== 'count' || num > 100) {
           document.querySelectorAll('.count-cell').forEach(c => c.classList.remove('speaking'));
@@ -2653,13 +3077,16 @@
         const emo = emojis[(num - 1) % emojis.length];
         const objectsHtml = generateCountingObjectsHtml(num, emo);
         const hindiWord = HINDI_COUNTING_WORDS[num] || `संख्या ${num}`;
+        const engWord = getEnglishNumberWord(num);
+        const cardTitle = currentLang === 'hi' ? `${t.numberPrefix} ${num} — ${hindiWord}` : `${t.numberPrefix} ${num} — ${engWord}`;
+        const cardSub = currentLang === 'hi' ? `${t.totalPrefix} ${num} ${emo} (${t.countingInProgress})` : `${t.totalPrefix} ${num} ${emo} (${t.countingInProgress})`;
 
         openFullScreenKidsCard({
           letter: String(num),
           icon: emo,
           customBodyHtml: objectsHtml,
-          title: `नंबर ${num} — ${hindiWord}`,
-          subtitle: `कुल ${num} ${emo} (गिनती चालू है...)`,
+          title: cardTitle,
+          subtitle: cardSub,
           bgGradient: 'linear-gradient(135deg, #667eea, #764ba2)',
           soundFn: () => {
             playLocalAudio(`count_${num}.mp3`, `${num} ${hindiWord}`, "hi-IN", () => {
@@ -2677,11 +3104,12 @@
     function renderVarnamalaGrid() {
       const container = document.getElementById('dynamicContainer');
       
+      const t = I18N[currentLang] || I18N.hi;
       const bar = document.createElement('div');
       bar.className = 'autoplay-bar';
       bar.innerHTML = `
-        <span>🍎 अ से ज्ञ तक पूरी वर्णमाला</span>
-        <button class="btn-play-all" id="btnPlayAllVar" onclick="togglePlayAllVarnamala()">▶ पूरी वर्णमाला सुनो</button>
+        <span>${t.autoplayVarTitle}</span>
+        <button class="btn-play-all ${currentAutoRunnerType === 'var' ? 'stop-mode' : ''}" id="btnPlayAllVar" onclick="togglePlayAllVarnamala()">${currentAutoRunnerType === 'var' ? t.stopVarBtn : t.autoplayVarBtn}</button>
       `;
       container.appendChild(bar);
 
@@ -3122,6 +3550,10 @@
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
+      // Apply saved Theme and Language
+      applyTheme(currentTheme);
+      applyLanguage(currentLang);
+
       const firstTab = document.querySelector('.tab-btn');
       switchTab('abc26', firstTab);
 
