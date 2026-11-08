@@ -1146,6 +1146,162 @@
         font-size: 11px;
       }
     }
+
+    /* ====================================================
+       COMPREHENSIVE NIGHT MODE FOR ALL POPUPS & MODALS
+       ==================================================== */
+    
+    /* 1. SONG / RHYMES / LORIS / AARTI PLAYER MODAL */
+    body.night-mode .player-overlay {
+      background: rgba(4, 8, 18, 0.92) !important;
+    }
+
+    body.night-mode .player-box {
+      background: linear-gradient(180deg, #131d33 0%, #0a1120 100%) !important;
+      border: 5px solid #FFD166 !important;
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 209, 102, 0.25) !important;
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .close-player {
+      background: #2a1622 !important;
+      color: #FF5252 !important;
+      border: 2px solid #FF5252 !important;
+      box-shadow: 0 2px 8px rgba(255, 82, 82, 0.3) !important;
+    }
+
+    body.night-mode .player-visual {
+      background: #1b2844 !important;
+      border: 3px solid #FFD166 !important;
+      box-shadow: 0 8px 24px rgba(255, 209, 102, 0.35) !important;
+    }
+
+    body.night-mode .player-title {
+      color: #FFD166 !important;
+      text-shadow: 0 0 12px rgba(255, 209, 102, 0.45) !important;
+    }
+
+    body.night-mode .player-category {
+      color: #90CAF9 !important;
+    }
+
+    body.night-mode .player-lyrics {
+      background: #080e1c !important;
+      border: 3px dashed #2a3c5a !important;
+      color: #ECEFF1 !important;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    body.night-mode .lyrics-line {
+      color: #90A4AE !important;
+    }
+
+    body.night-mode .lyrics-line.active {
+      background: linear-gradient(135deg, #FF7043, #FF5722) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(255, 112, 67, 0.55) !important;
+    }
+
+    body.night-mode .ctrl-btn {
+      background: #FF7043 !important;
+      box-shadow: 0 4px 14px rgba(255, 112, 67, 0.45) !important;
+    }
+
+    body.night-mode .ctrl-btn.play-btn {
+      background: #2E7D32 !important;
+      box-shadow: 0 4px 16px rgba(46, 125, 50, 0.5) !important;
+    }
+
+    body.night-mode .btn-repeat {
+      background: #0d231d !important;
+      border-color: #26a69a !important;
+      color: #80cbc4 !important;
+    }
+
+    body.night-mode .btn-worship {
+      background: #141f38 !important;
+      border-color: #FFB74D !important;
+      color: #FFD54F !important;
+    }
+
+    /* 2. KIDS FULL SCREEN VISUAL CARD MODAL (A-Z, 1-100, VARNAMALA, ANIMALS, HABITS) */
+    body.night-mode .kids-fullscreen-overlay {
+      background: rgba(4, 8, 18, 0.92) !important;
+    }
+
+    body.night-mode .kids-fullscreen-content {
+      background: linear-gradient(135deg, #101c36 0%, #1a2a4c 50%, #0d1527 100%) !important;
+      border: 4px solid #64DFDF !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 25px rgba(100, 223, 223, 0.35) !important;
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .kids-modal-close {
+      background: #1b263b !important;
+      border: 3px solid #FF5252 !important;
+      color: #FF5252 !important;
+    }
+
+    body.night-mode .kids-modal-letter-huge {
+      color: #FFD166 !important;
+      text-shadow: 0 0 20px rgba(255, 209, 102, 0.6), 0 4px 12px rgba(0,0,0,0.5) !important;
+    }
+
+    body.night-mode .kids-modal-title-huge {
+      color: #FFFFFF !important;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+    }
+
+    body.night-mode .kids-modal-sub-huge {
+      color: #90CAF9 !important;
+    }
+
+    body.night-mode .kids-modal-action-hint {
+      color: #80CBC4 !important;
+      background: rgba(0, 0, 0, 0.45) !important;
+      border-radius: 20px;
+      padding: 4px 12px;
+      display: inline-block;
+    }
+
+    body.night-mode .counting-objects-wrapper {
+      background: rgba(0, 0, 0, 0.55) !important;
+      border: 2px solid rgba(100, 223, 223, 0.25) !important;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body.night-mode .count-badge-text {
+      background: rgba(0, 0, 0, 0.65) !important;
+      color: #FFD166 !important;
+      border: 1px solid rgba(255, 209, 102, 0.3) !important;
+    }
+
+    body.night-mode .kids-bottom-close-btn {
+      background: #152238 !important;
+      border: 2px solid #384e77 !important;
+      color: #FFFFFF !important;
+    }
+    body.night-mode .kids-bottom-close-btn:active {
+      background: #D32F2F !important;
+    }
+
+    /* 3. CINEMATIC SUBTITLE & BABY LOCK */
+    body.night-mode .cinematic-subtitle {
+      background: rgba(8, 14, 26, 0.96) !important;
+      border-color: #64DFDF !important;
+      box-shadow: 0 0 18px rgba(100, 223, 223, 0.35), 0 8px 24px rgba(0,0,0,0.6) !important;
+      color: #FFFFFF !important;
+    }
+
+    body.night-mode .lock-overlay {
+      background: rgba(4, 7, 15, 0.98) !important;
+    }
+
+    body.night-mode .lock-hint {
+      color: #64DFDF !important;
+      text-shadow: 0 0 10px rgba(100, 223, 223, 0.4);
+    }
+
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -2256,11 +2412,12 @@
       }
 
       const bodyContent = config.customBodyHtml ? config.customBodyHtml : (icon ? `<div class="kids-modal-icon-huge">${icon}</div>` : '');
+      const cardBg = currentTheme === 'night' ? 'linear-gradient(135deg, #101c36 0%, #1a2a4c 50%, #0d1527 100%)' : (bgGradient || 'linear-gradient(135deg, #FF6B6B, #FF8E53)');
       modal.innerHTML = `
         <div class="kids-modal-top-bar">
           <button class="kids-top-close-pill" onclick="closeFullScreenKidsCard(event)">${(I18N[currentLang] && I18N[currentLang].modalCloseTop) ? I18N[currentLang].modalCloseTop : '✕ बंद करें'}</button>
         </div>
-        <div class="kids-fullscreen-content" style="background: ${bgGradient || 'linear-gradient(135deg, #FF6B6B, #FF8E53)'};">
+        <div class="kids-fullscreen-content" style="background: ${cardBg};">
           <button class="kids-modal-close" onclick="closeFullScreenKidsCard(event)" title="बंद करें">✕</button>
           <div class="kids-replay-trigger">
             <div class="kids-modal-letter-huge">${letter || ''}</div>
