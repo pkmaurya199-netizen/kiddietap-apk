@@ -819,6 +819,51 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     .float-stop-btn:active { transform: scale(0.92); }
+
+    .counting-objects-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      max-width: 350px;
+      max-height: 150px;
+      overflow-y: auto;
+      margin: 8px 0;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.28);
+      border-radius: 24px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .count-obj-item {
+      display: inline-block;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+      animation: popObj 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s;
+    }
+    .count-obj-item:active {
+      transform: scale(1.4);
+    }
+
+    @keyframes popObj {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .count-badge-text {
+      font-size: 14px;
+      font-weight: 900;
+      color: #FFF;
+      background: rgba(0, 0, 0, 0.28);
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -1606,11 +1651,12 @@
         document.body.appendChild(modal);
       }
 
+      const bodyContent = config.customBodyHtml ? config.customBodyHtml : (icon ? `<div class="kids-modal-icon-huge">${icon}</div>` : '');
       modal.innerHTML = `
         <div class="kids-fullscreen-content" style="background: ${bgGradient || 'linear-gradient(135deg, #FF6B6B, #FF8E53)'};">
           <button class="kids-modal-close" onclick="closeFullScreenKidsCard(event)">✕</button>
           <div class="kids-modal-letter-huge">${letter || ''}</div>
-          <div class="kids-modal-icon-huge">${icon || ''}</div>
+          ${bodyContent}
           <div class="kids-modal-title-huge">${title || ''}</div>
           <div class="kids-modal-sub-huge">${subtitle || ''}</div>
           <div class="kids-modal-action-hint">👆 कार्ड पर टैप करके फिर से सुनो! 🔊</div>
@@ -1631,6 +1677,7 @@
     }
 
     function closeFullScreenKidsCard(e) {
+      stopMorningHabitBgm();
       if (e) {
         e.stopPropagation();
         e.preventDefault();
@@ -2348,14 +2395,16 @@
         cell.onclick = (e) => {
           stopAllVoice();
           playTone(480 + (i * 6), 0.16, 'sine', 0.28);
-          const emojis = ['🎈', '⭐', '🍓', '🚗', '🍭', '🦋', '🐶', '🍎', '⚽', '🌟'];
+          const emojis = ['🎈', '🍎', '⭐', '🚗', '🍓', '🍭', '🦋', '⚽', '🌸', '🌟'];
           const emo = emojis[(i - 1) % emojis.length];
+          const objectsHtml = generateCountingObjectsHtml(i, emo);
 
           if (i <= 5) {
             openFullScreenKidsCard({
               letter: String(i),
               icon: emo,
-              title: `${i} (गिनती)`,
+              customBodyHtml: objectsHtml,
+              title: `नंबर ${i}`,
               subtitle: '1, 2, 3, 4, 5 (आपकी असली आवाज़ 🎙️)',
               bgGradient: 'linear-gradient(135deg, #11998e, #38ef7d)',
               soundFn: () => { playHumanClip(16.4, 2.4); }
@@ -2366,6 +2415,7 @@
           openFullScreenKidsCard({
             letter: String(i),
             icon: emo,
+            customBodyHtml: objectsHtml,
             title: `नंबर ${i}`,
             subtitle: `संख्या ${i}`,
             bgGradient: 'linear-gradient(135deg, #667eea, #764ba2)',
@@ -2380,6 +2430,7 @@
     function startAutoCount() {
       let num = 1;
       stopAllVoice();
+      const emojis = ['🎈', '🍎', '⭐', '🚗', '🍓', '🍭', '🦋', '⚽', '🌸', '🌟'];
       function step() {
         if (currentAutoRunnerType !== 'count' || num > 100) {
           document.querySelectorAll('.count-cell').forEach(c => c.classList.remove('speaking'));
@@ -2393,9 +2444,24 @@
           active.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         playTone(480 + (num * 6), 0.14, 'sine', 0.25);
-        playLocalAudio(`count_${num}.mp3`, String(num), "hi-IN", () => {
-          num++;
-          autoRunnerTimer = setTimeout(step, 300);
+
+        const emo = emojis[(num - 1) % emojis.length];
+        const objectsHtml = generateCountingObjectsHtml(num, emo);
+
+        openFullScreenKidsCard({
+          letter: String(num),
+          icon: emo,
+          customBodyHtml: objectsHtml,
+          title: `नंबर ${num}`,
+          subtitle: `कुल ${num} वस्तुएं`,
+          bgGradient: 'linear-gradient(135deg, #667eea, #764ba2)',
+          soundFn: () => {
+            playLocalAudio(`count_${num}.mp3`, String(num), "hi-IN", () => {
+              if (currentAutoRunnerType !== 'count') return;
+              num++;
+              autoRunnerTimer = setTimeout(step, 450);
+            });
+          }
         });
       }
       step();
@@ -2422,20 +2488,46 @@
         card.onclick = (e) => {
           stopAllVoice();
           playCinematicChime();
-          const rect = card.getBoundingClientRect();
-          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+          const gradients = [
+            'linear-gradient(135deg, #FF416C, #FF4B2B)',
+            'linear-gradient(135deg, #F7971E, #FFD200)',
+            'linear-gradient(135deg, #11998e, #38ef7d)',
+            'linear-gradient(135deg, #8E2DE2, #4A00E0)',
+            'linear-gradient(135deg, #f857a6, #ff5858)',
+            'linear-gradient(135deg, #2193b0, #6dd5ed)'
+          ];
+          const grad = gradients[idx % gradients.length];
 
           if (item.a === 'अ') {
-            showCinematicSubtitle("अ से अनार! 🍎 (आपकी असली आवाज़)");
-            playHumanClip(5.2, 2.3);
+            openFullScreenKidsCard({
+              letter: 'अ',
+              icon: '🍎',
+              title: 'अ से अनार',
+              subtitle: 'मीठा-मीठा अनार (आपकी असली आवाज़ 🎙️)',
+              bgGradient: 'linear-gradient(135deg, #FF416C, #FF4B2B)',
+              soundFn: () => { playHumanClip(5.2, 2.3); }
+            });
             return;
           } else if (item.a === 'आ') {
-            showCinematicSubtitle("बड़े आ से आम! 🥭 (आपकी असली आवाज़)");
-            playHumanClip(7.5, 2.0);
+            openFullScreenKidsCard({
+              letter: 'आ',
+              icon: '🥭',
+              title: 'आ से आम',
+              subtitle: 'फलों का राजा आम (आपकी असली आवाज़ 🎙️)',
+              bgGradient: 'linear-gradient(135deg, #F7971E, #FFD200)',
+              soundFn: () => { playHumanClip(7.5, 2.0); }
+            });
             return;
           }
 
-          playLocalAudio(`var_${idx}.mp3`, `${item.a} से ${item.w}!`, "hi-IN");
+          openFullScreenKidsCard({
+            letter: item.a,
+            icon: item.e,
+            title: `${item.a} से ${item.w}`,
+            subtitle: `${item.w}`,
+            bgGradient: grad,
+            soundFn: () => { playLocalAudio(`var_${idx}.mp3`, `${item.a} से ${item.w}!`, "hi-IN"); }
+          });
         };
         card.innerHTML = `
           <div class="akshar">${item.a}</div>
@@ -2570,6 +2662,7 @@
           const grad = habitGrads[idx % habitGrads.length];
 
           if (idx === 0) {
+            startMorningHabitBgm();
             openFullScreenKidsCard({
               letter: '',
               icon: item.e,
@@ -2581,7 +2674,8 @@
             return;
           }
 
-          openFullScreenKidsCard({
+          startMorningHabitBgm();
+            openFullScreenKidsCard({
             letter: '',
             icon: item.e,
             title: item.t,
