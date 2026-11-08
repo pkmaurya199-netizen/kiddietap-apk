@@ -276,10 +276,26 @@
       flex-direction: column;
       align-items: center;
     }
+    @keyframes cinematicPulse {
+      0% {
+        transform: scale(1.08) translateY(-3px);
+        box-shadow: 0 0 18px rgba(255, 215, 0, 0.95), 0 0 35px rgba(255, 64, 129, 0.7);
+      }
+      50% {
+        transform: scale(1.16) translateY(-7px);
+        box-shadow: 0 0 30px rgba(255, 235, 59, 1), 0 0 55px rgba(255, 64, 129, 0.95), 0 0 75px rgba(0, 229, 255, 0.7);
+      }
+      100% {
+        transform: scale(1.08) translateY(-3px);
+        box-shadow: 0 0 18px rgba(255, 215, 0, 0.95), 0 0 35px rgba(255, 64, 129, 0.7);
+      }
+    }
+
     .item-card:active, .item-card.speaking {
-      transform: scale(0.93);
-      border-color: #FFB74D;
-      background: #FFFDE7;
+      animation: cinematicPulse 0.9s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      border-color: #FFD54F !important;
+      background: #FFFDE7 !important;
+      z-index: 10 !important;
     }
 
     .item-card .icon-wrap {
@@ -316,10 +332,10 @@
       transition: all 0.15s;
     }
     .abc-card:active, .abc-card.speaking {
-      transform: scale(1.1);
-      border-color: #1E88E5;
-      background: #E3F2FD;
-      z-index: 5;
+      animation: cinematicPulse 0.9s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      border-color: #1E88E5 !important;
+      background: #E3F2FD !important;
+      z-index: 10 !important;
     }
     .abc-card .letter { font-size: 32px; font-weight: 900; color: #E65100; line-height: 1; }
     .abc-card .emoji { font-size: 28px; margin: 4px 0; }
@@ -343,10 +359,10 @@
       transition: all 0.15s;
     }
     .var-card:active, .var-card.speaking {
-      transform: scale(1.1);
-      border-color: #C2185B;
-      background: #FCE4EC;
-      z-index: 5;
+      animation: cinematicPulse 0.9s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      border-color: #C2185B !important;
+      background: #FCE4EC !important;
+      z-index: 10 !important;
     }
     .var-card .akshar { font-size: 28px; font-weight: 900; color: #C2185B; }
     .var-card .v-emoji { font-size: 22px; margin: 2px 0; }
@@ -373,11 +389,45 @@
       transition: all 0.15s;
     }
     .count-cell:active, .count-cell.speaking {
-      background: #FFD54F;
-      color: #D84315;
-      transform: scale(1.2);
-      border-color: #FF8F00;
-      z-index: 5;
+      animation: cinematicPulse 0.9s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      background: #FFD54F !important;
+      color: #D84315 !important;
+      border-color: #FF8F00 !important;
+      z-index: 10 !important;
+    }
+
+    /* CINEMATIC FLOATING SUBTITLES */
+    .cinematic-subtitle {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: linear-gradient(135deg, rgba(20, 20, 40, 0.95), rgba(30, 40, 70, 0.95));
+      color: #FFF;
+      padding: 10px 24px;
+      border-radius: 35px;
+      font-size: 17px;
+      font-weight: 900;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.4), 0 0 20px rgba(255, 215, 0, 0.6);
+      border: 2px solid rgba(255, 215, 0, 0.75);
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+      max-width: 90vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.5px;
+    }
+    .cinematic-subtitle.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .cinematic-subtitle .sub-icon {
+      margin-right: 6px;
+      color: #FFD54F;
     }
 
     /* PLAYER MODAL */
@@ -620,10 +670,13 @@
   <!-- MAIN -->
   <main>
     <!-- GREETING -->
-    <div class="greeting-card">
+    <div class="greeting-card" onclick="playRealHumanIntro()" style="cursor: pointer;">
       <div class="greeting-text">
         <h2 id="greetTitle">सुप्रभात, नन्हे दोस्त! ☀️</h2>
         <p id="greetSub">हर चीज़ पर टैप करो और सुनो आवाज़!</p>
+        <span style="background: #E8F5E9; color: #2E7D32; font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 900; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+          🎙️ अपनी असली इंसानी आवाज़ में सुनो (टैप करें)
+        </span>
       </div>
       <div class="greeting-icon" id="greetIcon">🦚</div>
     </div>
@@ -1091,17 +1144,19 @@
     function wakeUpAudioSystem() {
       if (!audioAwakened) {
         audioAwakened = true;
-        getAudioContext();
+        try { getAudioContext(); } catch(e){}
         if ('speechSynthesis' in window) {
-          window.speechSynthesis.resume();
+          try { window.speechSynthesis.resume(); } catch(e){}
         }
-        document.getElementById('audioAlert').style.display = 'none';
+        const alertEl = document.getElementById('audioAlert');
+        if (alertEl) alertEl.style.display = 'none';
       }
     }
 
     function playTone(freq, dur = 0.35, type = 'sine', vol = 0.25) {
       try {
         const ctx = getAudioContext();
+        if (!ctx) return;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = type;
@@ -1115,30 +1170,183 @@
       } catch(e){}
     }
 
+    // CINEMATIC SOUND EFFECTS ENGINE
+    function playCinematicChime() {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6 magical harp chime
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            try {
+              const osc = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(freq, ctx.currentTime);
+              gain.gain.setValueAtTime(0.18, ctx.currentTime);
+              gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+              osc.connect(gain);
+              gain.connect(ctx.destination);
+              osc.start();
+              osc.stop(ctx.currentTime + 0.35);
+            } catch(e){}
+          }, idx * 45);
+        });
+      } catch(e){}
+    }
+
+    function playCinematicOmTemple() {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        // Resonant Sacred OM Tone (136.1Hz + harmonics)
+        [136.1, 272.2, 544.4].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = idx === 0 ? 'sine' : 'triangle';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.22 / (idx + 1), ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        });
+        setTimeout(() => {
+          playTone(1108.73, 1.4, 'sine', 0.35);
+        }, 80);
+      } catch(e){}
+    }
+
     function playAnimalSound(type) {
       const ctx = getAudioContext();
+      if (!ctx) return;
       if (type === 'cat') {
-        playTone(600, 0.4, 'sine', 0.2);
-        setTimeout(() => playTone(800, 0.3, 'sine', 0.15), 100);
+        playTone(620, 0.35, 'sine', 0.25);
+        setTimeout(() => playTone(820, 0.3, 'sine', 0.2), 90);
       } else if (type === 'cow') {
-        playTone(180, 0.8, 'sawtooth', 0.2);
+        playTone(175, 0.85, 'sawtooth', 0.25);
+        setTimeout(() => playTone(155, 0.4, 'sine', 0.2), 300);
       } else if (type === 'dog') {
-        playTone(300, 0.15, 'triangle', 0.3);
-        setTimeout(() => playTone(260, 0.2, 'triangle', 0.25), 150);
+        playTone(320, 0.16, 'triangle', 0.35);
+        setTimeout(() => playTone(280, 0.2, 'triangle', 0.3), 140);
       } else if (type === 'lion') {
-        playTone(120, 0.9, 'sawtooth', 0.35);
+        playTone(110, 0.9, 'sawtooth', 0.4);
+        setTimeout(() => playTone(85, 0.6, 'sine', 0.35), 200);
+      } else if (type === 'duck') {
+        playTone(400, 0.15, 'sawtooth', 0.25);
+        setTimeout(() => playTone(360, 0.18, 'sawtooth', 0.2), 120);
+      } else if (type === 'rooster') {
+        playTone(550, 0.2, 'triangle', 0.3);
+        setTimeout(() => playTone(780, 0.4, 'sine', 0.3), 150);
       } else {
         playTone(523.25, 0.3, 'sine', 0.2);
       }
     }
 
-    // HIGH QUALITY VOICEOVER ENGINE
+    function showCinematicSubtitle(text) {
+      let sub = document.getElementById('cinematicSubtitle');
+      if (!sub) {
+        sub = document.createElement('div');
+        sub.id = 'cinematicSubtitle';
+        sub.className = 'cinematic-subtitle';
+        document.body.appendChild(sub);
+      }
+      sub.innerHTML = `<span class="sub-icon">🗣️</span>${text}`;
+      sub.classList.add('show');
+      clearTimeout(window._subTimer);
+      window._subTimer = setTimeout(() => {
+        sub.classList.remove('show');
+      }, 2600);
+    }
+
+    // REAL HUMAN VOICE CLIPS ENGINE
+    let currentHtmlAudio = null;
+
+    function playRealHumanIntro() {
+      showCinematicSubtitle("नमस्ते प्यारे बच्चों! आपका किडीटैप में बहुत-बहुत स्वागत है!");
+      playHumanClip(0.0, 5.0, () => {
+        showSparkle(window.innerWidth / 2, 100, '💖');
+      });
+    }
+
+    function playHumanClip(startTime, duration, callback = null) {
+      wakeUpAudioSystem();
+      stopAllVoice();
+      try {
+        const audio = new Audio('audio/human_welcome.ogg');
+        currentHtmlAudio = audio;
+        audio.currentTime = startTime;
+        
+        let ended = false;
+        const finish = () => {
+          if (!ended) {
+            ended = true;
+            try { audio.pause(); } catch(e){}
+            if (callback) callback();
+          }
+        };
+
+        audio.oncanplay = () => {
+          audio.play().catch(e => console.log('Audio error:', e));
+        };
+        audio.play().catch(e => console.log('Audio error:', e));
+
+        setTimeout(finish, duration * 1000);
+        audio.onended = finish;
+      } catch(e) {
+        if (callback) callback();
+      }
+    }
+
+    // STUDIO NEURAL HUMAN MP3 PLAYER (100% OFFLINE BUNDLED ASSETS)
+    function playLocalAudio(fileName, text = "", lang = "hi-IN", callback = null) {
+      wakeUpAudioSystem();
+      stopAllVoice();
+      if (text) showCinematicSubtitle(text);
+
+      try {
+        const audio = new Audio('audio/' + fileName);
+        currentHtmlAudio = audio;
+
+        let finished = false;
+        const finish = () => {
+          if (!finished) {
+            finished = true;
+            try { audio.pause(); } catch(e){}
+            if (callback) callback();
+          }
+        };
+
+        audio.onended = finish;
+        audio.onerror = () => {
+          speakKidVoice(text, lang, finish);
+        };
+
+        audio.play().catch(() => {
+          speakKidVoice(text, lang, finish);
+        });
+
+        // Safety timeout so auto runners never freeze
+        setTimeout(finish, 4000);
+      } catch (e) {
+        speakKidVoice(text, lang, callback);
+      }
+    }
+
     function stopAllVoice() {
-      if (window.AndroidTTS && window.AndroidTTS.stop) {
-        window.AndroidTTS.stop();
+      if (currentHtmlAudio) {
+        try { currentHtmlAudio.pause(); currentHtmlAudio = null; } catch(e){}
+      }
+      const bridge = window.AndroidTTS || window.Android || window.KadamNative;
+      if (bridge) {
+        try { 
+          if (bridge.stopSpeaking) bridge.stopSpeaking();
+          else if (bridge.stop) bridge.stop();
+        } catch(e){}
       }
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+        try { window.speechSynthesis.cancel(); } catch(e){}
       }
       if (autoRunnerTimer) {
         clearTimeout(autoRunnerTimer);
@@ -1155,38 +1363,44 @@
         return;
       }
 
-      // 1. Android Native TTS Interface (Inside APK)
-      if (window.AndroidTTS && window.AndroidTTS.speak) {
+      showCinematicSubtitle(text);
+
+      const isHindi = (lang && lang.startsWith('hi'));
+      const wordCount = text.split(/\s+/).length;
+      const delay = Math.max(900, wordCount * 320);
+
+      // Clean text for speech URL
+      const tl = isHindi ? 'hi' : 'en';
+      let cleanText = text.replace(/[\!\?\,।\.\:\;\"\']/g, ' ').trim();
+      if (cleanText.length > 150) cleanText = cleanText.substring(0, 150);
+      const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${tl}&client=tw-ob&q=${encodeURIComponent(cleanText)}`;
+
+      // 1. Android Native MediaPlayer Stream Bridge (100% Guaranteed loud sound on phone!)
+      const bridge = window.AndroidTTS || window.Android || window.KadamNative;
+      if (bridge && bridge.playAudio) {
         try {
-          window.AndroidTTS.speak(text, lang);
-          if (callback) {
-            const wordCount = text.split(/\s+/).length;
-            const delay = Math.max(1500, wordCount * 520);
-            setTimeout(callback, delay);
-          }
+          bridge.playAudio(audioUrl, text, lang);
+          if (callback) setTimeout(callback, delay);
+          return;
+        } catch(e){
+          console.error("Native playAudio error:", e);
+        }
+      }
+
+      // If bridge has speak but not playAudio
+      if (bridge && bridge.speak) {
+        try {
+          bridge.speak(text, lang);
+          if (callback) setTimeout(callback, delay);
           return;
         } catch(e){}
       }
 
-      // 2. Web Speech API (Mobile Chrome & Edge)
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.resume();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.rate = 0.85; // Toddler friendly slow rate
-        utter.pitch = 1.15; // Cheerful friendly pitch
-
-        // Select suitable voice
-        const voices = window.speechSynthesis.getVoices();
-        if (lang.startsWith('hi')) {
-          const hiVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('Hindi')) ||
-                          voices.find(v => v.lang.includes('en-IN'));
-          if (hiVoice) utter.voice = hiVoice;
-          utter.lang = "hi-IN";
-        } else {
-          const enVoice = voices.find(v => v.lang.includes('en'));
-          if (enVoice) utter.voice = enVoice;
-          utter.lang = "en-US";
-        }
+      // 2. Browser HTML5 Audio with Google Studio Voice
+      try {
+        const audio = new Audio(audioUrl);
+        currentHtmlAudio = audio;
+        audio.playbackRate = isHindi ? 1.05 : 1.12;
 
         let finished = false;
         const doEnd = () => {
@@ -1196,17 +1410,65 @@
           }
         };
 
-        utter.onend = doEnd;
-        utter.onerror = doEnd;
+        audio.onended = doEnd;
+        audio.onerror = () => {
+          // If network audio fails, fallback to Web Speech API
+          fallbackWebSpeech(text, lang, doEnd);
+        };
 
-        window.speechSynthesis.speak(utter);
-
-        // Safety timeout so auto-play never gets stuck
-        const wordCount = text.split(/\s+/).length;
-        setTimeout(doEnd, Math.max(2500, wordCount * 650));
-      } else {
-        if (callback) setTimeout(callback, 1500);
+        const p = audio.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            fallbackWebSpeech(text, lang, doEnd);
+          });
+        }
+        setTimeout(doEnd, Math.max(1600, wordCount * 450));
+        return;
+      } catch(e) {
+        fallbackWebSpeech(text, lang, callback);
       }
+    }
+
+    function fallbackWebSpeech(text, lang, callback) {
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.resume();
+          const utter = new SpeechSynthesisUtterance(text);
+          const isHindi = (lang && lang.startsWith('hi'));
+          utter.rate = isHindi ? 1.05 : 1.12;
+          utter.pitch = 1.12;
+
+          const voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            if (isHindi) {
+              const hiVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('Hindi')) ||
+                              voices.find(v => v.lang.includes('en-IN')) ||
+                              voices[0];
+              if (hiVoice) utter.voice = hiVoice;
+              utter.lang = "hi-IN";
+            } else {
+              const enVoice = voices.find(v => v.lang.includes('en')) || voices[0];
+              if (enVoice) utter.voice = enVoice;
+              utter.lang = "en-US";
+            }
+          }
+
+          let done = false;
+          const end = () => {
+            if (!done) {
+              done = true;
+              if (callback) callback();
+            }
+          };
+
+          utter.onend = end;
+          utter.onerror = end;
+          window.speechSynthesis.speak(utter);
+          setTimeout(end, Math.max(1400, text.split(/\s+/).length * 400));
+          return;
+        } catch(e){}
+      }
+      if (callback) setTimeout(callback, 900);
     }
 
     function ringBell() {
@@ -1291,11 +1553,23 @@
         const card = document.createElement('div');
         card.className = 'abc-card';
         card.id = `abc_card_${idx}`;
-        card.onclick = () => {
+        card.onclick = (e) => {
           stopAllVoice();
-          playTone(523.25, 0.2, 'sine', 0.2);
-          speakKidVoice(`${item.l} for ${item.w}! ${item.p}`, "en-US");
-          showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
+          playCinematicChime();
+          const rect = card.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+
+          if (item.l === 'A') {
+            showCinematicSubtitle("A for Apple! 🍎 (आपकी असली आवाज़)");
+            playHumanClip(9.2, 1.8);
+            return;
+          } else if (item.l === 'B') {
+            showCinematicSubtitle("B for Ball! ⚽ (आपकी असली आवाज़)");
+            playHumanClip(11.2, 1.6);
+            return;
+          }
+
+          playLocalAudio(`abc_${idx}.mp3`, `${item.l} for ${item.w}!`, "en-US");
         };
         card.innerHTML = `
           <div class="letter">${item.l}</div>
@@ -1320,11 +1594,14 @@
         if (active) {
           active.classList.add('speaking');
           active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const rect = active.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, '✨');
         }
+        playCinematicChime();
         const item = ALPHABET_26[idx];
-        speakKidVoice(`${item.l} for ${item.w}!`, "en-US", () => {
+        playLocalAudio(`abc_${idx}.mp3`, `${item.l} for ${item.w}!`, "en-US", () => {
           idx++;
-          autoRunnerTimer = setTimeout(step, 300);
+          autoRunnerTimer = setTimeout(step, 140);
         });
       }
       step();
@@ -1349,11 +1626,12 @@
         cell.className = 'count-cell';
         cell.id = `count_cell_${i}`;
         cell.innerText = i;
-        cell.onclick = () => {
+        cell.onclick = (e) => {
           stopAllVoice();
-          playTone(440 + (i * 5), 0.15, 'sine', 0.2);
-          speakKidVoice(String(i), "hi-IN");
-          showSparkle(window.innerWidth / 2, window.innerHeight / 2, '🎈');
+          playTone(480 + (i * 6), 0.16, 'sine', 0.28);
+          const rect = cell.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, '🎈');
+          playLocalAudio(`count_${i}.mp3`, String(i), "hi-IN");
         };
         grid.appendChild(cell);
       }
@@ -1374,9 +1652,10 @@
           active.classList.add('speaking');
           active.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        speakKidVoice(String(num), "hi-IN", () => {
+        playTone(480 + (num * 6), 0.14, 'sine', 0.25);
+        playLocalAudio(`count_${num}.mp3`, String(num), "hi-IN", () => {
           num++;
-          autoRunnerTimer = setTimeout(step, 200);
+          autoRunnerTimer = setTimeout(step, 120);
         });
       }
       step();
@@ -1400,11 +1679,23 @@
         const card = document.createElement('div');
         card.className = 'var-card';
         card.id = `var_card_${idx}`;
-        card.onclick = () => {
+        card.onclick = (e) => {
           stopAllVoice();
-          playTone(392, 0.2, 'sine', 0.2);
-          speakKidVoice(`${item.a} से ${item.w}!`, "hi-IN");
-          showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
+          playCinematicChime();
+          const rect = card.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+
+          if (item.a === 'अ') {
+            showCinematicSubtitle("अ से अनार! 🍎 (आपकी असली आवाज़)");
+            playHumanClip(5.0, 2.2);
+            return;
+          } else if (item.a === 'आ') {
+            showCinematicSubtitle("बड़े आ से आम! 🥭 (आपकी असली आवाज़)");
+            playHumanClip(7.2, 2.0);
+            return;
+          }
+
+          playLocalAudio(`var_${idx}.mp3`, `${item.a} से ${item.w}!`, "hi-IN");
         };
         card.innerHTML = `
           <div class="akshar">${item.a}</div>
@@ -1429,11 +1720,14 @@
         if (active) {
           active.classList.add('speaking');
           active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const rect = active.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, '✨');
         }
+        playCinematicChime();
         const item = VARNAMALA[idx];
-        speakKidVoice(`${item.a} से ${item.w}!`, "hi-IN", () => {
+        playLocalAudio(`var_${idx}.mp3`, `${item.a} से ${item.w}!`, "hi-IN", () => {
           idx++;
-          autoRunnerTimer = setTimeout(step, 300);
+          autoRunnerTimer = setTimeout(step, 140);
         });
       }
       step();
@@ -1449,14 +1743,15 @@
 
       const grid = document.createElement('div');
       grid.className = 'items-grid';
-      ANIMALS.forEach(item => {
+      ANIMALS.forEach((item, idx) => {
         const card = document.createElement('div');
         card.className = 'item-card';
-        card.onclick = () => {
+        card.onclick = (e) => {
           stopAllVoice();
           playAnimalSound(item.sound);
-          speakKidVoice(item.s, "hi-IN");
-          showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
+          const rect = card.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+          playLocalAudio(`animal_${idx}.mp3`, item.s, "hi-IN");
         };
         card.innerHTML = `
           <div class="icon-wrap">${item.e}</div>
@@ -1478,14 +1773,15 @@
 
       const grid = document.createElement('div');
       grid.className = 'items-grid';
-      HABITS.forEach(item => {
+      HABITS.forEach((item, idx) => {
         const card = document.createElement('div');
         card.className = 'item-card';
-        card.onclick = () => {
+        card.onclick = (e) => {
           stopAllVoice();
-          playTone(440, 0.25, 'sine', 0.2);
-          speakKidVoice(item.s, "hi-IN");
-          showSparkle(window.innerWidth / 2, window.innerHeight / 2, item.e);
+          playCinematicChime();
+          const rect = card.getBoundingClientRect();
+          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+          playLocalAudio(`habit_${idx}.mp3`, item.s, "hi-IN");
         };
         card.innerHTML = `
           <div class="icon-wrap">${item.e}</div>
@@ -1506,8 +1802,15 @@
       document.getElementById('lockSongName').innerText = song.title;
       document.getElementById('lockVisual').innerText = song.icon;
 
+      const isSacred = (song.cat === 'aarti' || song.cat === 'gita');
       const worshipDiv = document.getElementById('worshipControls');
-      worshipDiv.style.display = (song.cat === 'aarti' || song.cat === 'gita') ? 'flex' : 'none';
+      worshipDiv.style.display = isSacred ? 'flex' : 'none';
+
+      if (isSacred) {
+        playCinematicOmTemple();
+      } else {
+        playCinematicChime();
+      }
 
       const lyricsBox = document.getElementById('pLyrics');
       lyricsBox.innerHTML = '';
@@ -1546,13 +1849,38 @@
       const text = song.lines[currentLineIndex];
       const lang = song.lang || "hi-IN";
 
-      playTone(392 + (currentLineIndex % 5) * 45, 0.35, 'triangle', 0.15);
+      if (song.title && song.title.includes("मछली") && currentLineIndex === 0) {
+        showCinematicSubtitle("मछली जल की रानी है, जीवन उसका पानी है! 🐟 (आपकी असली आवाज़)");
+        playHumanClip(12.8, 3.4, () => {
+          if (!isPlaying) return;
+          currentLineIndex++;
+          lineTimer = setTimeout(playLineSpoken, 200);
+        });
+        return;
+      }
 
-      speakKidVoice(text, lang, () => {
-        if (!isPlaying) return;
-        currentLineIndex++;
-        lineTimer = setTimeout(playLineSpoken, 350);
-      });
+      if (song.cat === 'gita' || song.cat === 'aarti') {
+        playTone(392 + (currentLineIndex % 4) * 55, 0.4, 'sine', 0.22);
+      } else {
+        playTone(523 + (currentLineIndex % 5) * 65, 0.25, 'triangle', 0.18);
+      }
+
+      const sIdx = CONTENT_MASTER.indexOf(song);
+      const audioFile = (sIdx >= 0) ? `song_${sIdx}_${currentLineIndex}.mp3` : '';
+
+      if (audioFile) {
+        playLocalAudio(audioFile, text, lang, () => {
+          if (!isPlaying) return;
+          currentLineIndex++;
+          lineTimer = setTimeout(playLineSpoken, 180);
+        });
+      } else {
+        speakKidVoice(text, lang, () => {
+          if (!isPlaying) return;
+          currentLineIndex++;
+          lineTimer = setTimeout(playLineSpoken, 180);
+        });
+      }
     }
 
     function repeatCurrentLine() {
@@ -1632,14 +1960,19 @@
     }
 
     function showSparkle(x, y, char = '⭐') {
-      const el = document.createElement('div');
-      el.className = 'sparkle';
-      el.style.left = `${x}px`;
-      el.style.top = `${y}px`;
-      el.style.fontSize = '34px';
-      el.innerText = char;
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 800);
+      const icons = [char, '✨', '🌟', '💫', '🌸', '🎉'];
+      for (let i = 0; i < 3; i++) {
+        const el = document.createElement('div');
+        el.className = 'sparkle';
+        const offsetX = (Math.random() * 60) - 30;
+        const offsetY = (Math.random() * 50) - 25;
+        el.style.left = `${x + offsetX}px`;
+        el.style.top = `${y + offsetY}px`;
+        el.style.fontSize = `${28 + Math.random() * 12}px`;
+        el.innerText = icons[i % icons.length];
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 850);
+      }
     }
 
     function startUnlock(e) {
