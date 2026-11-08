@@ -641,6 +641,127 @@
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
     @keyframes pulse-bg { 0%, 100% { background: #4CAF50; } 50% { background: #388E3C; } }
+
+    /* KIDS FULL SCREEN VISUAL CARD MODAL */
+    .kids-fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .kids-fullscreen-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .kids-fullscreen-content {
+      width: 94%;
+      max-width: 420px;
+      border-radius: 38px;
+      padding: 26px 20px 22px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 6px #FFFFFF;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.65) rotate(-3deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .kids-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 3px solid #FF5252;
+      color: #FF5252;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .kids-modal-close:active { transform: scale(0.9); }
+
+    .kids-modal-letter-huge {
+      font-size: 115px;
+      line-height: 1.05;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 24px rgba(255,255,255,0.7);
+      animation: bounceLetter 1.2s infinite alternate;
+    }
+
+    @keyframes bounceLetter {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .kids-modal-icon-huge {
+      font-size: 100px;
+      line-height: 1.1;
+      margin: 8px 0;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+      animation: pulseIcon 1.5s infinite;
+    }
+
+    @keyframes pulseIcon {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .kids-modal-title-huge {
+      font-size: 34px;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.35);
+      margin-top: 4px;
+    }
+
+    .kids-modal-sub-huge {
+      font-size: 20px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 6px 20px;
+      border-radius: 24px;
+      margin-top: 8px;
+    }
+
+    .kids-modal-action-hint {
+      font-size: 13px;
+      font-weight: 800;
+      color: #FFFFFF;
+      opacity: 0.95;
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -681,27 +802,13 @@
       <div class="greeting-icon" id="greetIcon">🦚</div>
     </div>
 
-    <!-- GRANDPARENT 1-TAP CARDS -->
+    <!-- KIDS QUICK 1-TAP CARDS -->
     <div class="section-title">
-      <span>✨</span>
-      <span>दादा-दादी 1-टैप प्ले (Grandparent Auto-Play):</span>
+      <span>🎈</span>
+      <span>बच्चों के पसंदीदा 1-टैप प्ले:</span>
     </div>
 
     <div class="grandparent-grid">
-      <div class="gp-card gp-gita" onclick="playPlaylist('gita')">
-        <span class="icon">📖</span>
-        <h3>श्रीमद्भगवद्गीता श्लोक</h3>
-        <p>कर्मण्येवाधिकारस्ते • यदा यदा हि</p>
-        <span class="tap-badge">▶ 1-Click Play</span>
-      </div>
-
-      <div class="gp-card gp-aarti" onclick="playPlaylist('aarti')">
-        <span class="icon">🪔</span>
-        <h3>बाल आरती व भजन</h3>
-        <p>गणेश आरती • हनुमान चालीसा</p>
-        <span class="tap-badge">▶ 1-Click Play</span>
-      </div>
-
       <div class="gp-card gp-rhymes" onclick="playPlaylist('rhymes')">
         <span class="icon">🎵</span>
         <h3>प्यारे बाल गीत</h3>
@@ -715,16 +822,29 @@
         <p>चंदा मामा • लल्ला लल्ला लोरी</p>
         <span class="tap-badge">▶ 1-Click Play</span>
       </div>
+
+      <div class="gp-card gp-gita" onclick="switchTab('abc26', document.querySelectorAll('.tab-btn')[0])">
+        <span class="icon">🔤</span>
+        <h3>A to Z पूरी वर्णमाला</h3>
+        <p>A for Apple • B for Ball</p>
+        <span class="tap-badge">▶ बड़ा स्क्रीन देखें</span>
+      </div>
+
+      <div class="gp-card gp-aarti" onclick="switchTab('varnamala', document.querySelectorAll('.tab-btn')[1])">
+        <span class="icon">🍎</span>
+        <h3>अ से ज्ञ हिंदी</h3>
+        <p>अ से अनार • आ से आम</p>
+        <span class="tap-badge">▶ बड़ा स्क्रीन देखें</span>
+      </div>
     </div>
 
     <!-- CATEGORY TABS -->
     <div class="tabs-nav">
-      <button class="tab-btn active" onclick="switchTab('gita_aarti', this)">🪔 गीता व आरती</button>
-      <button class="tab-btn" onclick="switchTab('abc26', this)">🔤 A to Z (पूरे 26)</button>
-      <button class="tab-btn" onclick="switchTab('count100', this)">🔢 1 से 100 गिनती</button>
+      <button class="tab-btn active" onclick="switchTab('abc26', this)">🔤 A to Z (पूरे 26)</button>
       <button class="tab-btn" onclick="switchTab('varnamala', this)">🍎 अ से ज्ञ वर्णमाला</button>
+      <button class="tab-btn" onclick="switchTab('count100', this)">🔢 1 से 100 गिनती</button>
       <button class="tab-btn" onclick="switchTab('rhymes_all', this)">🎵 बाल-गीत व लोरियां</button>
-      <button class="tab-btn" onclick="switchTab('animals', this)">🦁 जानवर व आवाजें</button>
+      <button class="tab-btn" onclick="switchTab('animals', this)">🦁 जानवर व असली आवाजें</button>
       <button class="tab-btn" onclick="switchTab('habits', this)">✨ अच्छी आदतें</button>
     </div>
 
@@ -787,114 +907,10 @@
   <script>
     // 1. MASTER GITA, AARTI, RHYMES & LULLABIES
     const CONTENT_MASTER = [
-      // === BHAGAVAD GITA SHLOKAS ===
-      {
-        id: "gita_karmanye",
-        title: "कर्मण्येवाधिकारस्ते (गीता श्लोक)",
-        sub: "फल की चिंता मत करो, अच्छा काम करो",
-        cat: "gita",
-        icon: "📖",
-        lines: [
-          "कर्मण्येवाधिकारस्ते",
-          "मा फलेषु कदाचन",
-          "मा कर्मफलहेतुर्भूर्मा",
-          "ते सङ्गोऽस्त्वकर्मणि।",
-          "अर्थ: तुम्हारा अधिकार केवल कर्म करने पर है, फल पर कभी नहीं।"
-        ]
-      },
-      {
-        id: "gita_yada_yada",
-        title: "यदा यदा हि धर्मस्य (गीता श्लोक)",
-        sub: "भगवान श्रीकृष्ण का वचन",
-        cat: "gita",
-        icon: "🦚",
-        lines: [
-          "यदा यदा हि धर्मस्य",
-          "ग्लानिर्भवति भारत",
-          "अभ्युत्थानमधर्मस्य",
-          "तदात्मानं सृजाम्यहम्।",
-          "परित्राणाय साधूनां",
-          "विनाशाय च दुष्कृताम्",
-          "धर्मसंस्थापनार्थाय",
-          "सम्भवामि युगे युगे!"
-        ]
-      },
-      {
-        id: "gita_sarva_dharman",
-        title: "सर्वधर्मान्परित्यज्य (गीता श्लोक)",
-        sub: "मेरी शरण में आओ, मैं तुम्हारी रक्षा करूंगा",
-        cat: "gita",
-        icon: "🕉️",
-        lines: [
-          "सर्वधर्मान्परित्यज्य",
-          "मामेकं शरणं व्रज",
-          "अहं त्वां सर्वपापेभ्यो",
-          "मोक्षयिष्यामि मा शुचः।"
-        ]
-      },
-
-      // === AARTI & SANSKAAR ===
-      {
-        id: "aarti_ganesh",
-        title: "श्री गणेश आरती",
-        sub: "जय गणेश जय गणेश देवा",
-        cat: "aarti",
-        icon: "🐘",
-        lines: [
-          "जय गणेश, जय गणेश, जय गणेश देवा",
-          "माता जाकी पार्वती, पिता महादेवा",
-          "एक दंत दयावंत, चार भुजा धारी",
-          "माथे पर तिलक सोहे, मूसे की सवारी",
-          "पान चढ़े, फूल चढ़े, और चढ़े मेवा",
-          "लड्डुअन का भोग लगे, संत करें सेवा",
-          "जय गणेश, जय गणेश, जय गणेश देवा!"
-        ]
-      },
-      {
-        id: "mantra_gayatri",
-        title: "गायत्री मंत्र",
-        sub: "ॐ भूर्भुवः स्वः",
-        cat: "aarti",
-        icon: "🕉️",
-        lines: [
-          "ॐ भूर्भुवः स्वः",
-          "तत्सवितुर्वरेण्यं",
-          "भर्गो देवस्य धीमहि",
-          "धियो यो नः प्रचोदयात्।"
-        ]
-      },
-      {
-        id: "hanuman_chalisa",
-        title: "बाल हनुमान चालीसा",
-        sub: "जय हनुमान ज्ञान गुन सागर",
-        cat: "aarti",
-        icon: "🐒",
-        lines: [
-          "श्री गुरु चरन सरोज रज, निज मनु मुकुरु सुधारि",
-          "बरनऊं रघुबर बिमल जसु, जो दायकु फल चारि",
-          "जय हनुमान ज्ञान गुन सागर",
-          "जय कपीस तिहुँ लोक उजागर",
-          "राम दूत अतुलित बल धामा",
-          "अंजनि पुत्र पवनसुत नामा!"
-        ]
-      },
-      {
-        id: "shloka_morning",
-        title: "सुबह का श्लोक",
-        sub: "कराग्रे वसते लक्ष्मी",
-        cat: "aarti",
-        icon: "🌅",
-        lines: [
-          "कराग्रे वसते लक्ष्मीः",
-          "करमध्ये सरस्वती",
-          "करमूले तु गोविन्दः",
-          "प्रभाते करदर्शनम्।"
-        ]
-      },
-
       // === BAL GEET (RHYMES) ===
       {
         id: "rhyme_machli",
+        audioIdx: 7,
         title: "मछली जल की रानी है",
         sub: "जीवन उसका पानी है",
         cat: "rhymes",
@@ -909,6 +925,7 @@
       },
       {
         id: "rhyme_lakdi",
+        audioIdx: 8,
         title: "लकड़ी की काठी",
         sub: "काठी पे घोड़ा",
         cat: "rhymes",
@@ -921,6 +938,7 @@
       },
       {
         id: "rhyme_titli",
+        audioIdx: 9,
         title: "तितली उड़ी बस पे चढ़ी",
         sub: "सीट ना मिली तो रोने लगी",
         cat: "rhymes",
@@ -934,6 +952,7 @@
       },
       {
         id: "rhyme_bandar",
+        audioIdx: 10,
         title: "बंदर मामा पहन पजामा",
         sub: "दावत खाने आए",
         cat: "rhymes",
@@ -951,6 +970,7 @@
       },
       {
         id: "rhyme_hathi",
+        audioIdx: 11,
         title: "एक मोटा हाथी",
         sub: "झूम के चला",
         cat: "rhymes",
@@ -965,6 +985,7 @@
       },
       {
         id: "rhyme_twinkle",
+        audioIdx: 12,
         title: "Twinkle Twinkle Little Star",
         sub: "How I wonder what you are",
         cat: "rhymes",
@@ -979,6 +1000,7 @@
       },
       {
         id: "rhyme_johny",
+        audioIdx: 13,
         title: "Johny Johny Yes Papa",
         sub: "Eating sugar? No Papa!",
         cat: "rhymes",
@@ -993,6 +1015,7 @@
       },
       {
         id: "rhyme_bus",
+        audioIdx: 14,
         title: "Wheels On The Bus",
         sub: "Go Round and Round",
         cat: "rhymes",
@@ -1009,6 +1032,7 @@
       // === LULLABIES (LORI & BEDTIME) ===
       {
         id: "lori_chanda",
+        audioIdx: 15,
         title: "चंदा मामा दूर के",
         sub: "पुए पकाएं बूर के",
         cat: "bedtime",
@@ -1022,6 +1046,7 @@
       },
       {
         id: "lori_lalla",
+        audioIdx: 16,
         title: "लल्ला लल्ला लोरी",
         sub: "दूध की कटोरी",
         cat: "bedtime",
@@ -1035,6 +1060,7 @@
       },
       {
         id: "lori_soja",
+        audioIdx: 17,
         title: "सो जा मेरे राजदुलारे",
         sub: "मीठे सपनों में खो जा",
         cat: "bedtime",
@@ -1221,26 +1247,233 @@
     function playAnimalSound(type) {
       const ctx = getAudioContext();
       if (!ctx) return;
-      if (type === 'cat') {
-        playTone(620, 0.35, 'sine', 0.25);
-        setTimeout(() => playTone(820, 0.3, 'sine', 0.2), 90);
-      } else if (type === 'cow') {
-        playTone(175, 0.85, 'sawtooth', 0.25);
-        setTimeout(() => playTone(155, 0.4, 'sine', 0.2), 300);
+      if (ctx.state === 'suspended') ctx.resume();
+      const now = ctx.currentTime;
+
+      if (type === 'cow') {
+        // Real Cow: Deep resonant formant "Moo"
+        const osc = ctx.createOscillator();
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(175, now);
+        osc.frequency.exponentialRampToValueAtTime(125, now + 1.6);
+
+        lfo.frequency.setValueAtTime(5.5, now);
+        lfoGain.gain.setValueAtTime(6.5, now);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(420, now);
+        filter.Q.setValueAtTime(2.2, now);
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.38, now + 0.25);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        lfo.start(now);
+        osc.stop(now + 1.85);
+        lfo.stop(now + 1.85);
       } else if (type === 'dog') {
-        playTone(320, 0.16, 'triangle', 0.35);
-        setTimeout(() => playTone(280, 0.2, 'triangle', 0.3), 140);
+        // Real Dog: Punchy double bark "Woof! Woof!"
+        [0, 0.28].forEach(offset => {
+          const t = now + offset;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const filter = ctx.createBiquadFilter();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(460, t);
+          osc.frequency.exponentialRampToValueAtTime(115, t + 0.18);
+
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(950, t);
+
+          gain.gain.setValueAtTime(0.42, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(t);
+          osc.stop(t + 0.24);
+        });
+      } else if (type === 'cat') {
+        // Real Cat: "Meoowww" pitch glide
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.linearRampToValueAtTime(780, now + 0.45);
+        osc.frequency.exponentialRampToValueAtTime(380, now + 1.1);
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1100, now);
+        filter.Q.setValueAtTime(1.8, now);
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.28, now + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 1.25);
       } else if (type === 'lion') {
-        playTone(110, 0.9, 'sawtooth', 0.4);
-        setTimeout(() => playTone(85, 0.6, 'sine', 0.35), 200);
+        // Real Lion: Deep sub-bass roar
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(95, now);
+        osc.frequency.linearRampToValueAtTime(130, now + 0.4);
+        osc.frequency.exponentialRampToValueAtTime(55, now + 1.6);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(480, now);
+
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.linearRampToValueAtTime(0.45, now + 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.7);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 1.75);
+      } else if (type === 'elephant') {
+        // Real Elephant: Brassy trumpet flutter
+        const osc = ctx.createOscillator();
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(340, now);
+        osc.frequency.linearRampToValueAtTime(620, now + 0.5);
+        osc.frequency.exponentialRampToValueAtTime(280, now + 1.2);
+
+        lfo.frequency.setValueAtTime(22, now);
+        lfoGain.gain.setValueAtTime(28, now);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+
+        gain.gain.setValueAtTime(0.02, now);
+        gain.gain.linearRampToValueAtTime(0.35, now + 0.25);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.25);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        lfo.start(now);
+        osc.stop(now + 1.3);
+        lfo.stop(now + 1.3);
       } else if (type === 'duck') {
-        playTone(400, 0.15, 'sawtooth', 0.25);
-        setTimeout(() => playTone(360, 0.18, 'sawtooth', 0.2), 120);
+        // Real Duck: Double "Quack! Quack!"
+        [0, 0.22].forEach(offset => {
+          const t = now + offset;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const filter = ctx.createBiquadFilter();
+
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(320, t);
+          osc.frequency.exponentialRampToValueAtTime(240, t + 0.16);
+
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(800, t);
+          filter.Q.setValueAtTime(3.5, t);
+
+          gain.gain.setValueAtTime(0.35, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+          osc.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(t);
+          osc.stop(t + 0.2);
+        });
       } else if (type === 'rooster') {
-        playTone(550, 0.2, 'triangle', 0.3);
-        setTimeout(() => playTone(780, 0.4, 'sine', 0.3), 150);
-      } else {
-        playTone(523.25, 0.3, 'sine', 0.2);
+        // Rooster: "Cock-a-doodle-doo!"
+        const notes = [
+          { f: 440, dur: 0.18, time: 0 },
+          { f: 560, dur: 0.20, time: 0.18 },
+          { f: 720, dur: 0.22, time: 0.38 },
+          { f: 600, dur: 0.55, time: 0.60 }
+        ];
+        notes.forEach(n => {
+          const t = now + n.time;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(n.f, t);
+          gain.gain.setValueAtTime(0.32, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + n.dur);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + n.dur + 0.05);
+        });
+      } else if (type === 'goat') {
+        // Goat: Bleat vibrato
+        const osc = ctx.createOscillator();
+        const lfo = ctx.createOscillator();
+        const lfoGain = ctx.createGain();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(260, now);
+
+        lfo.frequency.setValueAtTime(14, now);
+        lfoGain.gain.setValueAtTime(25, now);
+        lfo.connect(lfoGain);
+        lfoGain.connect(osc.frequency);
+
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.3, now + 0.15);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        lfo.start(now);
+        osc.stop(now + 1.15);
+        lfo.stop(now + 1.15);
+      } else if (type === 'monkey') {
+        [0, 0.22].forEach(offset => {
+          const t = now + offset;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, t);
+          osc.frequency.linearRampToValueAtTime(740, t + 0.09);
+          osc.frequency.exponentialRampToValueAtTime(440, t + 0.18);
+          gain.gain.setValueAtTime(0.3, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.2);
+        });
       }
     }
 
@@ -1258,6 +1491,125 @@
       window._subTimer = setTimeout(() => {
         sub.classList.remove('show');
       }, 2600);
+    }
+
+
+    // ==========================================
+    // 1. KIDS FULL SCREEN MODAL SYSTEM
+    // ==========================================
+    let activeKidsSoundFn = null;
+
+    function openFullScreenKidsCard(config) {
+      const { letter, icon, title, subtitle, bgGradient, soundFn } = config;
+      activeKidsSoundFn = soundFn;
+
+      let modal = document.getElementById('kidsFullScreenModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'kidsFullScreenModal';
+        modal.className = 'kids-fullscreen-overlay';
+        document.body.appendChild(modal);
+      }
+
+      modal.innerHTML = `
+        <div class="kids-fullscreen-content" style="background: ${bgGradient || 'linear-gradient(135deg, #FF6B6B, #FF8E53)'};">
+          <button class="kids-modal-close" onclick="closeFullScreenKidsCard(event)">✕</button>
+          <div class="kids-modal-letter-huge">${letter || ''}</div>
+          <div class="kids-modal-icon-huge">${icon || ''}</div>
+          <div class="kids-modal-title-huge">${title || ''}</div>
+          <div class="kids-modal-sub-huge">${subtitle || ''}</div>
+          <div class="kids-modal-action-hint">👆 कार्ड पर टैप करके फिर से सुनो! 🔊</div>
+        </div>
+      `;
+
+      modal.onclick = (e) => {
+        if (e.target.closest('.kids-modal-close')) {
+          closeFullScreenKidsCard(e);
+          return;
+        }
+        showSparkle(window.innerWidth / 2, window.innerHeight / 2, icon || '⭐');
+        if (activeKidsSoundFn) activeKidsSoundFn();
+      };
+
+      modal.classList.add('active');
+      if (soundFn) soundFn();
+    }
+
+    function closeFullScreenKidsCard(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      const modal = document.getElementById('kidsFullScreenModal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+      stopAllVoice();
+    }
+
+    // ==========================================
+    // 2. SOOTHING LULLABY & BAL-GEET BGM ENGINE
+    // ==========================================
+    let bgmInterval = null;
+    let isBgmRunning = false;
+
+    function startLullabyBgm() {
+      stopLullabyBgm();
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') ctx.resume();
+
+        // Pentatonic music box scale notes (C5, D5, E5, G5, A5, C6...)
+        const notes = [
+          523.25, 659.25, 783.99, 880.00,
+          659.25, 523.25, 587.33, 783.99,
+          880.00, 1046.50, 783.99, 659.25
+        ];
+        let noteIdx = 0;
+        isBgmRunning = true;
+
+        function playBgmNote() {
+          if (!isBgmRunning) return;
+          try {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+
+            osc.type = 'triangle';
+            const freq = notes[noteIdx % notes.length];
+            noteIdx++;
+
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(1200, ctx.currentTime);
+
+            // Soft nursery background volume (gentle chimes)
+            gain.gain.setValueAtTime(0.045, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.85);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start();
+            osc.stop(ctx.currentTime + 0.9);
+          } catch(e){}
+        }
+
+        playBgmNote();
+        bgmInterval = setInterval(playBgmNote, 480);
+      } catch(e) {
+        console.error("BGM start error:", e);
+      }
+    }
+
+    function stopLullabyBgm() {
+      isBgmRunning = false;
+      if (bgmInterval) {
+        clearInterval(bgmInterval);
+        bgmInterval = null;
+      }
     }
 
     // REAL HUMAN VOICE (EMBEDDED OFFLINE BASE64) & STUDIO ENGINE
@@ -1634,20 +1986,45 @@
         card.onclick = (e) => {
           stopAllVoice();
           playCinematicChime();
-          const rect = card.getBoundingClientRect();
-          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
+          const gradients = [
+            'linear-gradient(135deg, #FF6B6B, #FF8E53)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #a18cd1, #fbc2eb)'
+          ];
+          const grad = gradients[idx % gradients.length];
 
           if (item.l === 'A') {
-            showCinematicSubtitle("A for Apple! 🍎 (आपकी असली आवाज़)");
-            playHumanClip(9.5, 1.8);
+            openFullScreenKidsCard({
+              letter: 'A',
+              icon: '🍎',
+              title: 'A for Apple',
+              subtitle: 'Apple - सेब (आपकी असली आवाज़ 🎙️)',
+              bgGradient: 'linear-gradient(135deg, #FF416C, #FF4B2B)',
+              soundFn: () => { playHumanClip(9.5, 1.8); }
+            });
             return;
           } else if (item.l === 'B') {
-            showCinematicSubtitle("B for Ball! ⚽ (आपकी असली आवाज़)");
-            playHumanClip(11.2, 1.7);
+            openFullScreenKidsCard({
+              letter: 'B',
+              icon: '⚽',
+              title: 'B for Ball',
+              subtitle: 'Ball - गेंद (आपकी असली आवाज़ 🎙️)',
+              bgGradient: 'linear-gradient(135deg, #2193b0, #6dd5ed)',
+              soundFn: () => { playHumanClip(11.2, 1.7); }
+            });
             return;
           }
 
-          playLocalAudio(`abc_${idx}.mp3`, `${item.l} for ${item.w}!`, "en-US");
+          openFullScreenKidsCard({
+            letter: item.l,
+            icon: item.e,
+            title: `${item.l} for ${item.w}`,
+            subtitle: `${item.w}`,
+            bgGradient: grad,
+            soundFn: () => { playLocalAudio(`abc_${idx}.mp3`, `${item.l} for ${item.w}!`, "en-US"); }
+          });
         };
         card.innerHTML = `
           <div class="letter">${item.l}</div>
@@ -1724,14 +2101,29 @@
         cell.onclick = (e) => {
           stopAllVoice();
           playTone(480 + (i * 6), 0.16, 'sine', 0.28);
-          const rect = cell.getBoundingClientRect();
-          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, '🎈');
+          const emojis = ['🎈', '⭐', '🍓', '🚗', '🍭', '🦋', '🐶', '🍎', '⚽', '🌟'];
+          const emo = emojis[(i - 1) % emojis.length];
+
           if (i <= 5) {
-            showCinematicSubtitle("1, 2, 3, 4, 5 🎈 (आपकी असली आवाज़ 🎙️)");
-            playHumanClip(16.4, 2.4);
+            openFullScreenKidsCard({
+              letter: String(i),
+              icon: emo,
+              title: `${i} (गिनती)`,
+              subtitle: '1, 2, 3, 4, 5 (आपकी असली आवाज़ 🎙️)',
+              bgGradient: 'linear-gradient(135deg, #11998e, #38ef7d)',
+              soundFn: () => { playHumanClip(16.4, 2.4); }
+            });
             return;
           }
-          playLocalAudio(`count_${i}.mp3`, String(i), "hi-IN");
+
+          openFullScreenKidsCard({
+            letter: String(i),
+            icon: emo,
+            title: `नंबर ${i}`,
+            subtitle: `संख्या ${i}`,
+            bgGradient: 'linear-gradient(135deg, #667eea, #764ba2)',
+            soundFn: () => { playLocalAudio(`count_${i}.mp3`, String(i), "hi-IN"); }
+          });
         };
         grid.appendChild(cell);
       }
@@ -1865,10 +2257,32 @@
         card.className = 'item-card';
         card.onclick = (e) => {
           stopAllVoice();
-          playAnimalSound(item.sound);
-          const rect = card.getBoundingClientRect();
-          showSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2, item.e);
-          playLocalAudio(`animal_${idx}.mp3`, item.s, "hi-IN");
+          const animalGrads = {
+            cow: 'linear-gradient(135deg, #8E2DE2, #4A00E0)',
+            dog: 'linear-gradient(135deg, #f857a6, #ff5858)',
+            cat: 'linear-gradient(135deg, #a18cd1, #fbc2eb)',
+            lion: 'linear-gradient(135deg, #F7971E, #FFD200)',
+            elephant: 'linear-gradient(135deg, #43e97b, #38f9d7)',
+            duck: 'linear-gradient(135deg, #fa709a, #fee140)',
+            rooster: 'linear-gradient(135deg, #FF416C, #FF4B2B)',
+            goat: 'linear-gradient(135deg, #2193b0, #6dd5ed)',
+            monkey: 'linear-gradient(135deg, #f093fb, #f5576c)'
+          };
+          const grad = animalGrads[item.sound] || 'linear-gradient(135deg, #FF6B6B, #FF8E53)';
+
+          openFullScreenKidsCard({
+            letter: item.e,
+            icon: '',
+            title: item.t,
+            subtitle: 'असली आवाज़ सुनो 🔊',
+            bgGradient: grad,
+            soundFn: () => {
+              playAnimalSound(item.sound);
+              setTimeout(() => {
+                playLocalAudio(`animal_${idx}.mp3`, item.s, "hi-IN");
+              }, 1200);
+            }
+          });
         };
         card.innerHTML = `
           <div class="icon-wrap">${item.e}</div>
@@ -1917,6 +2331,7 @@
 
     // LINE BY LINE SPOKEN SING-ALONG PLAYER
     function openPlayer(song) {
+      startLullabyBgm();
       if (!song) return;
       document.getElementById('pVisual').innerText = song.icon;
       document.getElementById('pTitle').innerText = song.title;
@@ -1997,8 +2412,8 @@
         playTone(523 + (currentLineIndex % 5) * 65, 0.25, 'triangle', 0.18);
       }
 
-      const sIdx = CONTENT_MASTER.indexOf(song);
-      const audioFile = (sIdx >= 0) ? `song_${sIdx}_${currentLineIndex}.mp3` : '';
+      const aIdx = (song.audioIdx !== undefined) ? song.audioIdx : CONTENT_MASTER.indexOf(song);
+      const audioFile = (aIdx >= 0) ? `song_${aIdx}_${currentLineIndex}.mp3` : '';
 
       if (audioFile) {
         playLocalAudio(audioFile, text, lang, () => {
@@ -2042,6 +2457,7 @@
     }
 
     function closePlayer() {
+      stopLullabyBgm();
       document.getElementById('playerModal').style.display = 'none';
       isPlaying = false;
       if (lineTimer) clearTimeout(lineTimer);
@@ -2052,6 +2468,7 @@
       isPlaying = !isPlaying;
       document.getElementById('playPauseBtn').innerText = isPlaying ? '⏸' : '▶';
       if (isPlaying) {
+        startLullabyBgm();
         playLineSpoken();
       } else {
         if (lineTimer) clearTimeout(lineTimer);
@@ -2134,8 +2551,8 @@
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
-      const list = CONTENT_MASTER.filter(x => x.cat === 'gita' || x.cat === 'aarti');
-      renderSongsGrid(list);
+      const firstTab = document.querySelector('.tab-btn');
+      switchTab('abc26', firstTab);
 
       // Preload voices
       if ('speechSynthesis' in window) {
