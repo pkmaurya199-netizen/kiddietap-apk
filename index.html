@@ -1260,46 +1260,73 @@
       }, 2600);
     }
 
-    // REAL HUMAN VOICE CLIPS ENGINE
+    // REAL HUMAN VOICE & STUDIO AUDIO ENGINE (BUFFER-PERFECT TIMING)
     let currentHtmlAudio = null;
+    let userAudioBuffer = null;
+    let currentBufferSource = null;
+
+    async function loadUserAudioBuffer() {
+      if (userAudioBuffer) return userAudioBuffer;
+      try {
+        const ctx = getAudioContext();
+        const resp = await fetch('audio/human_welcome.ogg');
+        const arrayBuf = await resp.arrayBuffer();
+        userAudioBuffer = await ctx.decodeAudioData(arrayBuf);
+        return userAudioBuffer;
+      } catch(e) {
+        console.warn('Failed to decode user audio buffer:', e);
+        return null;
+      }
+    }
 
     function playRealHumanIntro() {
       showCinematicSubtitle("नमस्ते प्यारे बच्चों! आपका किडीटैप में बहुत-बहुत स्वागत है!");
-      playHumanClip(0.0, 5.0, () => {
+      playHumanClip(0.0, 5.2, () => {
         showSparkle(window.innerWidth / 2, 100, '💖');
       });
     }
 
-    function playHumanClip(startTime, duration, callback = null) {
+    async function playHumanClip(startTime, duration, callback = null) {
       wakeUpAudioSystem();
       stopAllVoice();
+      const ctx = getAudioContext();
+      
+      const buf = await loadUserAudioBuffer();
+      if (!buf) {
+        if (callback) callback();
+        return;
+      }
+
       try {
-        const audio = new Audio('audio/human_welcome.ogg');
-        currentHtmlAudio = audio;
-        audio.currentTime = startTime;
-        
-        let ended = false;
+        const source = ctx.createBufferSource();
+        source.buffer = buf;
+        source.connect(ctx.destination);
+        currentBufferSource = source;
+
+        let finished = false;
         const finish = () => {
-          if (!ended) {
-            ended = true;
-            try { audio.pause(); } catch(e){}
-            if (callback) callback();
+          if (!finished) {
+            finished = true;
+            try { source.stop(); } catch(e){}
+            currentBufferSource = null;
+            if (callback) {
+              setTimeout(callback, 500); // Natural 500ms breathing pause
+            }
           }
         };
 
-        audio.oncanplay = () => {
-          audio.play().catch(e => console.log('Audio error:', e));
-        };
-        audio.play().catch(e => console.log('Audio error:', e));
+        source.onended = finish;
+        source.start(0, startTime, duration);
 
-        setTimeout(finish, duration * 1000);
-        audio.onended = finish;
+        // Generous safety timer
+        setTimeout(finish, (duration + 1.5) * 1000);
       } catch(e) {
+        console.error("Buffer playback error:", e);
         if (callback) callback();
       }
     }
 
-    // STUDIO NEURAL HUMAN MP3 PLAYER (100% OFFLINE BUNDLED ASSETS)
+    // STUDIO NEURAL HUMAN MP3 PLAYER (NATURAL FULL-LINE PLAYBACK)
     function playLocalAudio(fileName, text = "", lang = "hi-IN", callback = null) {
       wakeUpAudioSystem();
       stopAllVoice();
@@ -1314,11 +1341,17 @@
           if (!finished) {
             finished = true;
             try { audio.pause(); } catch(e){}
-            if (callback) callback();
+            currentHtmlAudio = null;
+            if (callback) {
+              // Wait for natural 600ms pause BEFORE starting next line!
+              setTimeout(callback, 600);
+            }
           }
         };
 
+        // Audio plays completely to the natural end of the sentence!
         audio.onended = finish;
+        
         audio.onerror = () => {
           speakKidVoice(text, lang, finish);
         };
@@ -1327,16 +1360,21 @@
           speakKidVoice(text, lang, finish);
         });
 
-        // Safety timeout so auto runners never freeze
-        setTimeout(finish, 4000);
+        // 30-second watchdog ONLY (never cuts off real speech!)
+        setTimeout(finish, 30000);
       } catch (e) {
         speakKidVoice(text, lang, callback);
       }
     }
 
     function stopAllVoice() {
+      if (currentBufferSource) {
+        try { currentBufferSource.stop(); } catch(e){}
+        currentBufferSource = null;
+      }
       if (currentHtmlAudio) {
-        try { currentHtmlAudio.pause(); currentHtmlAudio = null; } catch(e){}
+        try { currentHtmlAudio.pause(); } catch(e){}
+        currentHtmlAudio = null;
       }
       const bridge = window.AndroidTTS || window.Android || window.KadamNative;
       if (bridge) {
@@ -1351,6 +1389,10 @@
       if (autoRunnerTimer) {
         clearTimeout(autoRunnerTimer);
         autoRunnerTimer = null;
+      }
+      if (lineTimer) {
+        clearTimeout(lineTimer);
+        lineTimer = null;
       }
     }
 
@@ -1561,11 +1603,11 @@
 
           if (item.l === 'A') {
             showCinematicSubtitle("A for Apple! 🍎 (आपकी असली आवाज़)");
-            playHumanClip(9.2, 1.8);
+            playHumanClip(9.5, 1.8);
             return;
           } else if (item.l === 'B') {
             showCinematicSubtitle("B for Ball! ⚽ (आपकी असली आवाज़)");
-            playHumanClip(11.2, 1.6);
+            playHumanClip(11.2, 1.7);
             return;
           }
 
@@ -1599,9 +1641,26 @@
         }
         playCinematicChime();
         const item = ALPHABET_26[idx];
+
+        if (item.l === 'A') {
+          showCinematicSubtitle("A for Apple! 🍎 (आपकी असली आवाज़)");
+          playHumanClip(9.5, 1.8, () => {
+            idx++;
+            autoRunnerTimer = setTimeout(step, 400);
+          });
+          return;
+        } else if (item.l === 'B') {
+          showCinematicSubtitle("B for Ball! ⚽ (आपकी असली आवाज़)");
+          playHumanClip(11.2, 1.7, () => {
+            idx++;
+            autoRunnerTimer = setTimeout(step, 400);
+          });
+          return;
+        }
+
         playLocalAudio(`abc_${idx}.mp3`, `${item.l} for ${item.w}!`, "en-US", () => {
           idx++;
-          autoRunnerTimer = setTimeout(step, 140);
+          autoRunnerTimer = setTimeout(step, 400);
         });
       }
       step();
@@ -1655,7 +1714,7 @@
         playTone(480 + (num * 6), 0.14, 'sine', 0.25);
         playLocalAudio(`count_${num}.mp3`, String(num), "hi-IN", () => {
           num++;
-          autoRunnerTimer = setTimeout(step, 120);
+          autoRunnerTimer = setTimeout(step, 300);
         });
       }
       step();
@@ -1687,11 +1746,11 @@
 
           if (item.a === 'अ') {
             showCinematicSubtitle("अ से अनार! 🍎 (आपकी असली आवाज़)");
-            playHumanClip(5.0, 2.2);
+            playHumanClip(5.2, 2.3);
             return;
           } else if (item.a === 'आ') {
             showCinematicSubtitle("बड़े आ से आम! 🥭 (आपकी असली आवाज़)");
-            playHumanClip(7.2, 2.0);
+            playHumanClip(7.5, 2.0);
             return;
           }
 
@@ -1725,9 +1784,26 @@
         }
         playCinematicChime();
         const item = VARNAMALA[idx];
+
+        if (item.a === 'अ') {
+          showCinematicSubtitle("अ से अनार! 🍎 (आपकी असली आवाज़)");
+          playHumanClip(5.2, 2.3, () => {
+            idx++;
+            autoRunnerTimer = setTimeout(step, 400);
+          });
+          return;
+        } else if (item.a === 'आ') {
+          showCinematicSubtitle("बड़े आ से आम! 🥭 (आपकी असली आवाज़)");
+          playHumanClip(7.5, 2.0, () => {
+            idx++;
+            autoRunnerTimer = setTimeout(step, 400);
+          });
+          return;
+        }
+
         playLocalAudio(`var_${idx}.mp3`, `${item.a} से ${item.w}!`, "hi-IN", () => {
           idx++;
-          autoRunnerTimer = setTimeout(step, 140);
+          autoRunnerTimer = setTimeout(step, 400);
         });
       }
       step();
@@ -1849,14 +1925,24 @@
       const text = song.lines[currentLineIndex];
       const lang = song.lang || "hi-IN";
 
-      if (song.title && song.title.includes("मछली") && currentLineIndex === 0) {
-        showCinematicSubtitle("मछली जल की रानी है, जीवन उसका पानी है! 🐟 (आपकी असली आवाज़)");
-        playHumanClip(12.8, 3.4, () => {
-          if (!isPlaying) return;
-          currentLineIndex++;
-          lineTimer = setTimeout(playLineSpoken, 200);
-        });
-        return;
+      if (song.title && song.title.includes("मछली")) {
+        if (currentLineIndex === 0) {
+          showCinematicSubtitle("मछली जल की रानी है! 🐟 (आपकी असली आवाज़)");
+          playHumanClip(12.8, 1.8, () => {
+            if (!isPlaying) return;
+            currentLineIndex++;
+            lineTimer = setTimeout(playLineSpoken, 400);
+          });
+          return;
+        } else if (currentLineIndex === 1) {
+          showCinematicSubtitle("जीवन उसका पानी है! 🌊 (आपकी असली आवाज़)");
+          playHumanClip(14.6, 2.0, () => {
+            if (!isPlaying) return;
+            currentLineIndex++;
+            lineTimer = setTimeout(playLineSpoken, 400);
+          });
+          return;
+        }
       }
 
       if (song.cat === 'gita' || song.cat === 'aarti') {
@@ -1872,13 +1958,13 @@
         playLocalAudio(audioFile, text, lang, () => {
           if (!isPlaying) return;
           currentLineIndex++;
-          lineTimer = setTimeout(playLineSpoken, 180);
+          lineTimer = setTimeout(playLineSpoken, 400);
         });
       } else {
         speakKidVoice(text, lang, () => {
           if (!isPlaying) return;
           currentLineIndex++;
-          lineTimer = setTimeout(playLineSpoken, 180);
+          lineTimer = setTimeout(playLineSpoken, 400);
         });
       }
     }
