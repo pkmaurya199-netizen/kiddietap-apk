@@ -3561,6 +3561,425 @@
       100% { transform: rotate(16deg); }
     }
 
+  
+    /* ====================================================
+       120FPS ULTRA AI ANIMATED GOOD HABITS THEATRE
+       ==================================================== */
+    .habit-theatre-box {
+      width: 100%;
+      position: relative;
+      margin: 8px auto 14px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 4px #FFD54F, inset 0 0 20px rgba(255,255,255,0.15);
+      border: 3px solid #FFF;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    body.night-mode .habit-theatre-box {
+      box-shadow: 0 16px 45px rgba(0,0,0,0.8), 0 0 0 4px #64DFDF !important;
+      border: 3px solid #1E293B !important;
+    }
+
+    .habit-theatre-badge {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    .habit-theatre-stage {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+    }
+
+    /* HABIT 0: BRUSH */
+    .stage-habit-brush {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #E0F7FA 0%, #80DEEA 55%, #0097A7 100%);
+      position: relative;
+    }
+    .brush-tool-wrap {
+      position: absolute;
+      top: 108px;
+      left: 105px;
+      animation: brushMove 1.1s infinite ease-in-out;
+      transform-origin: 20px 70px;
+      z-index: 5;
+    }
+    .brush-foam-1 { position: absolute; top: 120px; left: 140px; animation: bubbleFloat 1.2s infinite ease-out; }
+    .brush-foam-2 { position: absolute; top: 115px; left: 165px; animation: bubbleFloat 1.4s 0.3s infinite ease-out; }
+    .brush-foam-3 { position: absolute; top: 128px; left: 190px; animation: bubbleFloat 1.1s 0.6s infinite ease-out; }
+    .brush-foam-4 { position: absolute; top: 110px; left: 130px; animation: bubbleFloat 1.3s 0.5s infinite ease-out; }
+
+    .tooth-gleam-1 { position: absolute; top: 112px; left: 152px; animation: toothGleam 1.8s infinite ease-in-out; z-index: 6; }
+    .tooth-gleam-2 { position: absolute; top: 118px; left: 182px; animation: toothGleam 2.1s 0.7s infinite ease-in-out; z-index: 6; }
+
+    @keyframes brushMove {
+      0% { transform: translate3d(0, 0, 0) rotate(-16deg); }
+      30% { transform: translate3d(36px, -10px, 0) rotate(12deg); }
+      65% { transform: translate3d(60px, 6px, 0) rotate(-8deg); }
+      85% { transform: translate3d(24px, 12px, 0) rotate(8deg); }
+      100% { transform: translate3d(0, 0, 0) rotate(-16deg); }
+    }
+    @keyframes bubbleFloat {
+      0% { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0.9; }
+      50% { transform: translate3d(8px, -20px, 0) scale(1.2); opacity: 1; }
+      100% { transform: translate3d(-6px, -45px, 0) scale(0.4); opacity: 0; }
+    }
+    @keyframes toothGleam {
+      0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+      40% { transform: scale(1.4) rotate(90deg); opacity: 1; }
+      70% { transform: scale(1) rotate(180deg); opacity: 0.9; }
+      85% { transform: scale(0.3) rotate(220deg); opacity: 0; }
+    }
+
+    /* HABIT 1: PRANAM */
+    .stage-habit-pranam {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 60% 40%, #FFF3E0 0%, #FFE0B2 50%, #FF9800 100%);
+      position: relative;
+    }
+    .pranam-child {
+      position: absolute;
+      bottom: 25px;
+      left: 35px;
+      animation: childBows 2.2s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+    .pranam-elders {
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      animation: blessingPulse 2s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+    .blessing-beam {
+      position: absolute;
+      top: 45px;
+      right: 110px;
+      width: 130px;
+      height: 90px;
+      pointer-events: none;
+      animation: beamPulse 2s infinite ease-in-out;
+    }
+    .petal-1 { position: absolute; top: 40px; right: 120px; animation: petalDrift 2.8s infinite linear; font-size: 20px; }
+    .petal-2 { position: absolute; top: 60px; right: 150px; animation: petalDrift 3.2s 0.8s infinite linear; font-size: 16px; }
+    .petal-3 { position: absolute; top: 35px; right: 100px; animation: petalDrift 2.5s 1.5s infinite linear; font-size: 18px; }
+    .heart-bless-1 { position: absolute; top: 70px; right: 130px; animation: heartFloat 2.6s 0.4s infinite ease-out; font-size: 22px; }
+
+    @keyframes childBows {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(8px, 12px, 0) rotate(10deg); }
+    }
+    @keyframes blessingPulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.4)); }
+      50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.85)); }
+    }
+    @keyframes beamPulse {
+      0%, 100% { opacity: 0.4; transform: scaleX(0.9); }
+      50% { opacity: 0.95; transform: scaleX(1.1); }
+    }
+    @keyframes petalDrift {
+      0% { transform: translate3d(20px, 0, 0) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translate3d(-75px, 95px, 0) rotate(360deg); opacity: 0; }
+    }
+    @keyframes heartFloat {
+      0% { transform: translate3d(10px, 0, 0) scale(0.6); opacity: 0; }
+      30% { opacity: 1; transform: translate3d(-20px, 20px, 0) scale(1.1); }
+      100% { transform: translate3d(-60px, 60px, 0) scale(0.8); opacity: 0; }
+    }
+
+    /* HABIT 2: HANDWASH */
+    .stage-habit-handwash {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #E1F5FE 0%, #81D4FA 55%, #0288D1 100%);
+      position: relative;
+    }
+    .handwash-faucet {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+    .water-stream-anim {
+      stroke-dasharray: 8 6;
+      animation: waterFlow 0.6s infinite linear;
+    }
+    .handwash-hands {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: handsRubbing 0.85s infinite alternate ease-in-out;
+      z-index: 5;
+    }
+    .soap-bar-anim {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: soapSliding 0.85s infinite alternate ease-in-out;
+      z-index: 6;
+    }
+    .wash-bubble-1 { position: absolute; bottom: 70px; left: 110px; animation: soapBubbleRise 1.8s infinite linear; font-size: 20px; }
+    .wash-bubble-2 { position: absolute; bottom: 80px; right: 110px; animation: soapBubbleRise 2.1s 0.6s infinite linear; font-size: 24px; }
+    .wash-bubble-3 { position: absolute; bottom: 95px; left: 130px; animation: soapBubbleRise 1.6s 1.1s infinite linear; font-size: 18px; }
+    .wash-bubble-4 { position: absolute; bottom: 85px; right: 130px; animation: soapBubbleRise 1.9s 1.5s infinite linear; font-size: 22px; }
+
+    .germ-1 { position: absolute; bottom: 80px; left: 80px; animation: germVanish 2.2s infinite ease-in; font-size: 22px; }
+    .germ-2 { position: absolute; bottom: 75px; right: 85px; animation: germVanish 2.5s 0.8s infinite ease-in; font-size: 20px; }
+    .germ-3 { position: absolute; bottom: 50px; left: 140px; animation: germVanish 2s 1.4s infinite ease-in; font-size: 18px; }
+
+    .hand-gleam-1 { position: absolute; bottom: 70px; left: 80px; animation: toothGleam 1.5s infinite ease-in-out; z-index: 7; }
+    .hand-gleam-2 { position: absolute; bottom: 70px; right: 80px; animation: toothGleam 1.5s 0.75s infinite ease-in-out; z-index: 7; }
+
+    @keyframes waterFlow {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -28; }
+    }
+    @keyframes handsRubbing {
+      0% { transform: translateX(-50%) translate3d(-14px, 0, 0) rotate(-6deg); }
+      100% { transform: translateX(-50%) translate3d(14px, -6px, 0) rotate(6deg); }
+    }
+    @keyframes soapSliding {
+      0% { transform: translateX(-50%) translate3d(10px, 0, 0) rotate(5deg) scale(0.95); }
+      100% { transform: translateX(-50%) translate3d(-10px, -4px, 0) rotate(-5deg) scale(1.08); }
+    }
+    @keyframes soapBubbleRise {
+      0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+      20% { opacity: 0.95; }
+      80% { opacity: 0.95; }
+      100% { transform: translate3d(12px, -85px, 0) scale(1.25); opacity: 0; }
+    }
+    @keyframes germVanish {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: translate3d(15px, 35px, 0) scale(0.85) rotate(90deg); opacity: 0.8; }
+      100% { transform: translate3d(25px, 75px, 0) scale(0.1) rotate(270deg); opacity: 0; }
+    }
+
+    /* HABIT 3: MILK */
+    .stage-habit-milk {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #FFFDE7 0%, #FFF59D 55%, #FBC02D 100%);
+      position: relative;
+    }
+    .milk-steam-1 { position: absolute; top: 50px; left: 105px; animation: steamWave 1.6s infinite ease-out; }
+    .milk-steam-2 { position: absolute; top: 45px; left: 125px; animation: steamWave 1.8s 0.6s infinite ease-out; }
+    .milk-glass-wrap {
+      position: absolute;
+      bottom: 25px;
+      left: 55px;
+      animation: glassTilt 2.2s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+    .milk-kid-wrap {
+      position: absolute;
+      bottom: 22px;
+      right: 50px;
+    }
+    .muscle-arm-anim {
+      position: absolute;
+      top: 65px;
+      right: 25px;
+      animation: musclePump 1.2s infinite alternate ease-in-out;
+      transform-origin: 10px 40px;
+      font-size: 38px;
+    }
+    .power-bolt-1 { position: absolute; top: 45px; right: 55px; animation: powerSpark 1.1s infinite alternate; font-size: 24px; }
+    .power-bolt-2 { position: absolute; top: 85px; right: 15px; animation: powerSpark 1.3s 0.4s infinite alternate; font-size: 22px; }
+
+    @keyframes steamWave {
+      0% { transform: translate3d(0, 0, 0) scaleX(0.8); opacity: 0.3; }
+      50% { transform: translate3d(6px, -20px, 0) scaleX(1.2); opacity: 0.95; }
+      100% { transform: translate3d(-5px, -45px, 0) scaleX(0.7); opacity: 0; }
+    }
+    @keyframes glassTilt {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-18deg) translateY(-8px); }
+    }
+    @keyframes musclePump {
+      0% { transform: scale(0.95) rotate(0deg); }
+      100% { transform: scale(1.25) rotate(-12deg); filter: drop-shadow(0 0 10px #FF9800); }
+    }
+    @keyframes powerSpark {
+      0% { transform: scale(0.6); opacity: 0.4; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* HABIT 4: TOYS */
+    .stage-habit-toys {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #EDE7F6 0%, #D1C4E9 55%, #7E57C2 100%);
+      position: relative;
+    }
+    .toybox-wrap {
+      position: absolute;
+      bottom: 20px;
+      right: 35px;
+      z-index: 3;
+    }
+    .toy-jumping-1 { position: absolute; bottom: 35px; left: 30px; animation: toyHop 2.4s infinite ease-in-out; font-size: 36px; z-index: 4; }
+    .toy-jumping-2 { position: absolute; bottom: 35px; left: 75px; animation: toyHop 2.4s 0.7s infinite ease-in-out; font-size: 32px; z-index: 4; }
+    .toy-jumping-3 { position: absolute; bottom: 35px; left: 120px; animation: toyHop 2.4s 1.4s infinite ease-in-out; font-size: 34px; z-index: 4; }
+    .toy-check-badge {
+      position: absolute;
+      top: 30px;
+      right: 65px;
+      animation: checkPop 2.4s infinite ease-in-out;
+      font-size: 34px;
+      z-index: 6;
+    }
+
+    @keyframes toyHop {
+      0% { transform: translate3d(0, 0, 0) scale(0.9) rotate(-10deg); opacity: 1; }
+      40% { transform: translate3d(60px, -65px, 0) scale(1.15) rotate(25deg); opacity: 1; }
+      75% { transform: translate3d(120px, -20px, 0) scale(0.85) rotate(-15deg); opacity: 0.9; }
+      100% { transform: translate3d(145px, 25px, 0) scale(0.2) rotate(40deg); opacity: 0; }
+    }
+    @keyframes checkPop {
+      0%, 65% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* HABIT 5: SLEEP */
+    .stage-habit-sleep {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0D1B2A 0%, #1B263B 48%, #FFE082 52%, #FFB74D 100%);
+      position: relative;
+    }
+    .sleep-night-side {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+    .sleep-day-side {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      overflow: hidden;
+    }
+    .night-moon-anim {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      animation: moonSwayLight 3s infinite alternate ease-in-out;
+      font-size: 34px;
+    }
+    .zzz-text-1 { position: absolute; bottom: 95px; left: 80px; animation: zzzFloat 2s infinite ease-out; font-size: 16px; color: #FFF; font-weight: 900; }
+    .zzz-text-2 { position: absolute; bottom: 115px; left: 95px; animation: zzzFloat 2s 0.6s infinite ease-out; font-size: 20px; color: #FFF; font-weight: 900; }
+    .zzz-text-3 { position: absolute; bottom: 140px; left: 110px; animation: zzzFloat 2s 1.2s infinite ease-out; font-size: 24px; color: #FFD54F; font-weight: 900; }
+
+    .day-sun-anim {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      animation: sunSpinPulse 3s infinite alternate ease-in-out;
+      font-size: 40px;
+    }
+    .morning-alarm-anim {
+      position: absolute;
+      bottom: 25px;
+      right: 35px;
+      animation: clockRattle 0.6s infinite alternate ease-in-out;
+      font-size: 44px;
+    }
+
+    @keyframes moonSwayLight {
+      0% { transform: rotate(-8deg); }
+      100% { transform: rotate(8deg); }
+    }
+    @keyframes zzzFloat {
+      0% { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+      30% { opacity: 1; }
+      80% { opacity: 0.9; }
+      100% { transform: translate3d(20px, -45px, 0) scale(1.25); opacity: 0; }
+    }
+    @keyframes sunSpinPulse {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(35deg); filter: drop-shadow(0 0 16px #FF9800); }
+    }
+    @keyframes clockRattle {
+      0% { transform: rotate(-12deg) scale(1); }
+      100% { transform: rotate(12deg) scale(1.08); filter: drop-shadow(0 0 10px #FF3D00); }
+    }
+
+    /* HABIT 6: VEGGIES */
+    .stage-habit-veggies {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #E8F5E9 0%, #C8E6C9 55%, #43A047 100%);
+      position: relative;
+    }
+    .health-shield-glow {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: shieldGlowPulse 1.8s infinite alternate ease-in-out;
+      font-size: 44px;
+      z-index: 2;
+    }
+    .veggie-kid-anim {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+    .floating-apple { position: absolute; top: 60px; left: 35px; animation: veggieFloat 2.2s infinite ease-in-out; font-size: 32px; }
+    .floating-carrot { position: absolute; top: 120px; left: 45px; animation: veggieFloat 2.5s 0.5s infinite ease-in-out; font-size: 34px; }
+    .floating-banana { position: absolute; top: 55px; right: 40px; animation: veggieFloat 2.1s 0.8s infinite ease-in-out; font-size: 34px; }
+    .floating-broccoli { position: absolute; top: 115px; right: 45px; animation: veggieFloat 2.4s 1.2s infinite ease-in-out; font-size: 34px; }
+
+    @keyframes shieldGlowPulse {
+      0% { transform: translateX(-50%) scale(0.95); filter: drop-shadow(0 0 8px rgba(233, 30, 99, 0.4)); }
+      100% { transform: translateX(-50%) scale(1.2); filter: drop-shadow(0 0 24px rgba(233, 30, 99, 0.95)); }
+    }
+    @keyframes veggieFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(0, -12px, 0) rotate(12deg); }
+    }
+
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -3950,15 +4369,15 @@
       { t: "बंदर (Monkey)", s: "बंदर मामा बोले: खों-खों! पेड़ पर कूदते हैं बंदर मामा!", e: "🐵", sound: 'monkey' }
     ];
 
-    // 5. GOOD HABITS WITH CLEAR SPOKEN VOICEOVER
+        // 5. GOOD HABITS WITH CLEAR SPOKEN VOICEOVER
     const HABITS = [
-      { t: "सुबह उठकर ब्रश करो", s: "सुबह उठकर और रात को सोने से पहले रोज ब्रश करें! इससे दांत चमकेंगे और कीड़ा नहीं लगेगा!", e: "🪥" },
-      { t: "बड़ों को प्रणाम व नमस्ते", s: "सुबह उठकर मम्मी, पापा और दादा-दादी को हाथ जोड़कर प्रणाम और नमस्ते करें! यह बहुत अच्छी आदत है!", e: "🙏" },
-      { t: "साबुन से हाथ धोएं", s: "खाना खाने से पहले और खेल के बाद साबुन से 20 सेकंड तक अच्छी तरह हाथ धोएं!", e: "🧼" },
-      { t: "रोज एक गिलास दूध पिएं", s: "रोज सुबह गरम दूध पिएं! दूध पीने से हड्डियां मजबूत होती हैं और शरीर में ताकत आती है!", e: "🥛" },
-      { t: "खिलौने संभाल कर रखें", s: "खेलने के बाद अपने खिलौने सही जगह पर रखें! कमरे को साफ-सुथरा रखना अच्छे बच्चों की निशानी है!", e: "🧸" },
-      { t: "समय पर सोएं व उठें", s: "रात को समय पर सो जाएं और सुबह जल्दी उठें! इससे दिमाग तेज होता है और मन खुश रहता है!", e: "🛌" },
-      { t: "हरी सब्जियां व फल खाएं", s: "सेब, केला, गाजर और हरी सब्जियां खूब खाएं! इससे आंखें और सेहत अच्छी रहती है!", e: "🥗" }
+      { t: "सुबह उठकर ब्रश करो", s: "सुबह उठकर और रात को सोने से पहले रोज ब्रश करें! इससे दांत चमकेंगे और कीड़ा नहीं लगेगा!", e: "🪥", id: "brush" },
+      { t: "दादा-दादी को प्रणाम व नमस्ते", s: "सुबह उठकर मम्मी, पापा और दादा-दादी को हाथ जोड़कर प्रणाम और नमस्ते करें! यह बहुत अच्छी आदत है!", e: "🙏", id: "pranam" },
+      { t: "साबुन से हाथ धोएं (खेलने व खाने से पहले)", s: "खाना खाने से पहले और खेल के बाद साबुन से 20 सेकंड तक अच्छी तरह हाथ धोएं!", e: "🧼", id: "handwash" },
+      { t: "रोज एक गिलास दूध पिएं", s: "रोज सुबह गरम दूध पिएं! दूध पीने से हड्डियां मजबूत होती हैं और शरीर में ताकत आती है!", e: "🥛", id: "milk" },
+      { t: "खिलौने संभाल कर रखें", s: "खेलने के बाद अपने खिलौने सही जगह पर रखें! कमरे को साफ-सुथरा रखना अच्छे बच्चों की निशानी है!", e: "🧸", id: "toys" },
+      { t: "समय पर सोएं व उठें", s: "रात को समय पर सो जाएं और सुबह जल्दी उठें! इससे दिमाग तेज होता है और मन खुश रहता है!", e: "🛌", id: "sleep" },
+      { t: "हरी सब्जियां व फल खाएं", s: "सेब, केला, गाजर और हरी सब्जियां खूब खाएं! इससे आंखें और सेहत अच्छी रहती है!", e: "🥗", id: "veggies" }
     ];
 
     // STATE
@@ -5999,11 +6418,407 @@
     }
 
     // 6. GOOD HABITS WITH VOICES
+    
+    // ====================================================
+    // 120FPS AI ANIMATED CARTOON STAGES FOR ALL GOOD HABITS
+    // ====================================================
+    function getHabitAnimatedStageHtml(idx, item) {
+      const habitId = item.id || (idx === 0 ? 'brush' : idx === 1 ? 'pranam' : idx === 2 ? 'handwash' : idx === 3 ? 'milk' : idx === 4 ? 'toys' : idx === 5 ? 'sleep' : 'veggies');
+
+      let stageContent = '';
+
+      if (habitId === 'brush') {
+        stageContent = `
+          <div class="stage-habit-brush">
+            <!-- Bathroom Sunshine Window & Mirror Frame -->
+            <svg viewBox="0 0 300 200" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1;">
+              <!-- Mirror glow -->
+              <ellipse cx="150" cy="100" rx="130" ry="85" fill="#FFFFFF" opacity="0.35"/>
+              <ellipse cx="150" cy="100" rx="122" ry="78" fill="#E0F7FA" opacity="0.6"/>
+              <!-- Smiling Face -->
+              <ellipse cx="150" cy="105" rx="58" ry="52" fill="#FFE0B2" stroke="#FFB74D" stroke-width="3"/>
+              <!-- Cheeks -->
+              <ellipse cx="112" cy="116" rx="12" ry="7" fill="#FF80AB" opacity="0.6"/>
+              <ellipse cx="188" cy="116" rx="12" ry="7" fill="#FF80AB" opacity="0.6"/>
+              <!-- Eyes Blinking -->
+              <g class="anim-eye">
+                <circle cx="126" cy="92" r="8" fill="#263238"/>
+                <circle cx="128" cy="89" r="3" fill="#FFFFFF"/>
+                <circle cx="174" cy="92" r="8" fill="#263238"/>
+                <circle cx="176" cy="89" r="3" fill="#FFFFFF"/>
+                <path d="M 118,80 Q 126,74 134,80" stroke="#795548" stroke-width="2.5" fill="none"/>
+                <path d="M 166,80 Q 174,74 182,80" stroke="#795548" stroke-width="2.5" fill="none"/>
+              </g>
+              <!-- Nose -->
+              <circle cx="150" cy="104" r="3.5" fill="#FFA726"/>
+              <!-- Smiling Mouth with Sparkling Teeth -->
+              <path d="M 124,116 Q 150,150 176,116 Z" fill="#D32F2F"/>
+              <!-- Top Row Bright Teeth -->
+              <path d="M 126,116 Q 150,122 174,116 Q 170,128 150,128 Q 130,128 126,116 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1.5"/>
+              <!-- Hair Tuft -->
+              <path d="M 130,60 Q 150,38 170,60 Q 150,50 130,60 Z" fill="#5D4037"/>
+            </svg>
+
+            <!-- Animated Toothbrush Tool -->
+            <div class="brush-tool-wrap">
+              <svg viewBox="0 0 100 50" width="90" height="45">
+                <!-- Handle -->
+                <path d="M 5,28 L 65,22 Q 72,21 78,16 L 82,16 Q 74,25 65,26 L 5,34 Z" fill="#FF5252" stroke="#D32F2F" stroke-width="1.5"/>
+                <!-- Bristle head -->
+                <rect x="74" y="8" width="22" height="9" rx="3" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="1"/>
+                <!-- Toothpaste dollop -->
+                <path d="M 76,8 Q 85,0 94,8 Z" fill="#00E5FF"/>
+              </svg>
+            </div>
+
+            <!-- Floating Foam Bubbles -->
+            <div class="brush-foam-1">🫧</div>
+            <div class="brush-foam-2">🫧</div>
+            <div class="brush-foam-3">🫧</div>
+            <div class="brush-foam-4">🫧</div>
+
+            <!-- Sparkling Tooth Gleams -->
+            <div class="tooth-gleam-1">✨</div>
+            <div class="tooth-gleam-2">🌟</div>
+          </div>
+        `;
+      } else if (habitId === 'pranam') {
+        stageContent = `
+          <div class="stage-habit-pranam">
+            <!-- Living Room Toran Garland & Lamp -->
+            <svg viewBox="0 0 300 200" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1;">
+              <!-- Hanging Floral Toran -->
+              <path d="M 0,15 Q 75,35 150,15 Q 225,35 300,15" stroke="#FF5722" stroke-width="3" fill="none"/>
+              <circle cx="75" cy="26" r="6" fill="#FFEB3B"/>
+              <circle cx="150" cy="15" r="7" fill="#4CAF50"/>
+              <circle cx="225" cy="26" r="6" fill="#FFEB3B"/>
+              <!-- Warm Diya Lamp on Wall -->
+              <ellipse cx="25" cy="45" rx="12" ry="6" fill="#D84315"/>
+              <path d="M 25,40 Q 28,30 25,24 Q 22,30 25,40 Z" fill="#FFD54F"/>
+            </svg>
+
+            <!-- Respectful Child Bending in Pranam (Left) -->
+            <div class="pranam-child">
+              <svg viewBox="0 0 100 130" width="85" height="110">
+                <!-- Head -->
+                <circle cx="48" cy="38" r="22" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                <!-- Black Hair -->
+                <path d="M 30,34 Q 48,15 66,34 Q 48,22 30,34 Z" fill="#3E2723"/>
+                <!-- Eyes closed in reverence / smiling -->
+                <path d="M 40,36 Q 45,41 50,36" stroke="#5D4037" stroke-width="2" fill="none"/>
+                <path d="M 54,36 Q 59,41 64,36" stroke="#5D4037" stroke-width="2" fill="none"/>
+                <!-- Smiling lips -->
+                <path d="M 46,47 Q 52,52 58,47" stroke="#E91E63" stroke-width="2" fill="none"/>
+                <!-- Yellow Kurta -->
+                <path d="M 32,58 L 68,58 L 74,105 L 26,105 Z" fill="#FFD54F" stroke="#FFA000" stroke-width="2"/>
+                <!-- Folded Namaste Hands -->
+                <g transform="translate(56, 68) rotate(-15)">
+                  <ellipse cx="0" cy="0" rx="9" ry="14" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <path d="M -5,-14 L 0,-20 L 5,-14 Z" fill="#FFE0B2"/>
+                </g>
+                <!-- Legs -->
+                <rect x="36" y="105" width="10" height="20" fill="#FFFFFF"/>
+                <rect x="54" y="105" width="10" height="20" fill="#FFFFFF"/>
+              </svg>
+            </div>
+
+            <!-- Smiling Dada-Dadi Blessing (Right) -->
+            <div class="pranam-elders">
+              <svg viewBox="0 0 160 140" width="145" height="125">
+                <!-- DADI JI (Left side of elders) -->
+                <circle cx="48" cy="42" r="22" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                <!-- Grey Hair Bun -->
+                <circle cx="48" cy="18" r="10" fill="#B0BEC5"/>
+                <path d="M 28,40 Q 48,22 68,40" stroke="#78909C" stroke-width="4" fill="none"/>
+                <!-- Red Bindi -->
+                <circle cx="48" cy="33" r="2.5" fill="#D32F2F"/>
+                <!-- Eyes with Spectacles -->
+                <circle cx="40" cy="42" r="6" fill="none" stroke="#8D6E63" stroke-width="1.5"/>
+                <circle cx="56" cy="42" r="6" fill="none" stroke="#8D6E63" stroke-width="1.5"/>
+                <line x1="46" y1="42" x2="50" y2="42" stroke="#8D6E63" stroke-width="1.5"/>
+                <path d="M 44,52 Q 48,56 52,52" stroke="#D81B60" stroke-width="2" fill="none"/>
+                <!-- Pink Saree -->
+                <path d="M 26,62 L 70,62 L 76,125 L 20,125 Z" fill="#EC407A" stroke="#C2185B" stroke-width="2"/>
+                <!-- Raised Blessing Hand -->
+                <ellipse cx="24" cy="58" rx="8" ry="11" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+
+                <!-- DADA JI (Right side of elders) -->
+                <circle cx="112" cy="40" r="24" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                <!-- White Hair & Mustache -->
+                <path d="M 88,38 Q 112,18 136,38" stroke="#ECEFF1" stroke-width="5" fill="none"/>
+                <!-- Spectacles -->
+                <circle cx="104" cy="40" r="7" fill="none" stroke="#FFA000" stroke-width="1.8"/>
+                <circle cx="120" cy="40" r="7" fill="none" stroke="#FFA000" stroke-width="1.8"/>
+                <line x1="111" y1="40" x2="113" y2="40" stroke="#FFA000" stroke-width="1.8"/>
+                <!-- Mustache -->
+                <path d="M 98,51 Q 112,56 126,51 Q 112,47 98,51 Z" fill="#ECEFF1"/>
+                <!-- White Kurta & Orange Shawl -->
+                <path d="M 88,62 L 138,62 L 144,125 L 82,125 Z" fill="#FFFFFF" stroke="#B0BEC5" stroke-width="2"/>
+                <path d="M 86,62 L 102,62 L 96,125 L 82,125 Z" fill="#FF9800"/>
+                <!-- Raised Blessing Hand -->
+                <ellipse cx="88" cy="54" rx="9" ry="12" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                <!-- Wooden Cane -->
+                <path d="M 142,65 Q 146,55 152,65 L 148,130" stroke="#8D6E63" stroke-width="3" fill="none"/>
+              </svg>
+            </div>
+
+            <!-- Blessing Light Beams -->
+            <svg class="blessing-beam" viewBox="0 0 130 90">
+              <path d="M 120,20 L 10,75 M 120,20 L 30,85 M 120,20 L 0,60" stroke="#FFD54F" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+            </svg>
+
+            <!-- Floating Blessing Flower Petals & Hearts -->
+            <div class="petal-1">🌸</div>
+            <div class="petal-2">🌺</div>
+            <div class="petal-3">✨</div>
+            <div class="heart-bless-1">💖</div>
+          </div>
+        `;
+      } else if (habitId === 'handwash') {
+        stageContent = `
+          <div class="stage-habit-handwash">
+            <!-- Chrome Water Tap with Flowing Stream -->
+            <div class="handwash-faucet">
+              <svg viewBox="0 0 120 120" width="105" height="105">
+                <!-- Pipe and Curved Spout -->
+                <path d="M 20,10 L 60,10 Q 75,10 75,25 L 75,50 L 65,50 L 65,25 Q 65,20 55,20 L 20,20 Z" fill="#CFD8DC" stroke="#78909C" stroke-width="2"/>
+                <!-- Tap Knob Valve -->
+                <rect x="42" y="2" width="16" height="8" rx="2" fill="#00BCD4"/>
+                <rect x="47" y="0" width="6" height="4" fill="#00838F"/>
+                <!-- Flowing Animated Water Stream -->
+                <line class="water-stream-anim" x1="70" y1="50" x2="70" y2="115" stroke="#29B6F6" stroke-width="7" stroke-linecap="round"/>
+                <line class="water-stream-anim" x1="68" y1="52" x2="68" y2="115" stroke="#E1F5FE" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Two Cartoon Hands Rubbing Together -->
+            <div class="handwash-hands">
+              <svg viewBox="0 0 160 110" width="140" height="96">
+                <!-- Left Hand -->
+                <g transform="translate(30, 20) rotate(-10)">
+                  <rect x="15" y="25" width="38" height="42" rx="18" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                  <!-- Fingers -->
+                  <rect x="18" y="2" width="8" height="26" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="28" y="0" width="8" height="28" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="38" y="4" width="8" height="24" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="48" y="10" width="7" height="20" rx="3.5" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="5" y="32" width="12" height="8" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                </g>
+                <!-- Right Hand (Mirror Lathering) -->
+                <g transform="translate(85, 20) rotate(10)">
+                  <rect x="15" y="25" width="38" height="42" rx="18" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                  <!-- Fingers -->
+                  <rect x="18" y="4" width="8" height="24" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="28" y="0" width="8" height="28" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="38" y="2" width="8" height="26" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="48" y="8" width="7" height="20" rx="3.5" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                  <rect x="48" y="32" width="12" height="8" rx="4" fill="#FFE0B2" stroke="#FFB74D" stroke-width="1.5"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Pink Foam Soap Bar in Middle -->
+            <div class="soap-bar-anim">
+              <svg viewBox="0 0 60 36" width="54" height="32">
+                <rect x="4" y="4" width="52" height="28" rx="14" fill="#FF80AB" stroke="#F50057" stroke-width="2"/>
+                <ellipse cx="26" cy="12" rx="14" ry="4" fill="#FFFFFF" opacity="0.6"/>
+              </svg>
+            </div>
+
+            <!-- Rising Iridescent Foam Bubbles -->
+            <div class="wash-bubble-1">🫧</div>
+            <div class="wash-bubble-2">🫧</div>
+            <div class="wash-bubble-3">🫧</div>
+            <div class="wash-bubble-4">🫧</div>
+
+            <!-- Germs Vanishing Down the Drain -->
+            <div class="germ-1">🦠</div>
+            <div class="germ-2">👾</div>
+            <div class="germ-3">🦠</div>
+
+            <!-- Cleanliness Sparkles -->
+            <div class="hand-gleam-1">✨</div>
+            <div class="hand-gleam-2">🌟</div>
+          </div>
+        `;
+      } else if (habitId === 'milk') {
+        stageContent = `
+          <div class="stage-habit-milk">
+            <!-- Rising Warm Steam from Milk -->
+            <div class="milk-steam-1">
+              <svg viewBox="0 0 30 50" width="25" height="42">
+                <path d="M 15,45 Q 8,30 20,20 Q 28,10 15,0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="milk-steam-2">
+              <svg viewBox="0 0 30 50" width="25" height="42">
+                <path d="M 12,45 Q 22,30 10,20 Q 2,10 16,0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Tall Milk Glass -->
+            <div class="milk-glass-wrap">
+              <svg viewBox="0 0 80 120" width="75" height="110">
+                <!-- Glass Body -->
+                <path d="M 15,15 L 22,105 Q 24,115 40,115 Q 56,115 58,105 L 65,15 Z" fill="rgba(255,255,255,0.4)" stroke="#B0BEC5" stroke-width="2.5"/>
+                <!-- Rich White Milk Fill -->
+                <path d="M 18,35 L 23,103 Q 25,110 40,110 Q 55,110 57,103 L 62,35 Q 40,38 18,35 Z" fill="#FFFFFF"/>
+                <!-- Glass Highlight -->
+                <path d="M 24,38 L 27,98" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+              </svg>
+            </div>
+
+            <!-- Strong Happy Kid Drinking Milk -->
+            <div class="milk-kid-wrap">
+              <svg viewBox="0 0 110 130" width="95" height="115">
+                <!-- Face -->
+                <circle cx="55" cy="45" r="26" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                <!-- Hair -->
+                <path d="M 32,38 Q 55,14 78,38 Q 55,24 32,38 Z" fill="#4E342E"/>
+                <!-- Joyful Closed Eyes -->
+                <path d="M 44,42 Q 49,38 54,42" stroke="#5D4037" stroke-width="2.5" fill="none"/>
+                <path d="M 60,42 Q 65,38 70,42" stroke="#5D4037" stroke-width="2.5" fill="none"/>
+                <!-- Pink Cheeks -->
+                <circle cx="42" cy="52" r="5" fill="#FF80AB" opacity="0.7"/>
+                <circle cx="70" cy="52" r="5" fill="#FF80AB" opacity="0.7"/>
+                <!-- Milk Mustache on Upper Lip! -->
+                <ellipse cx="55" cy="54" rx="10" ry="3.5" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+                <!-- Smiling Mouth -->
+                <path d="M 49,58 Q 55,66 61,58" stroke="#D32F2F" stroke-width="2" fill="none"/>
+                <!-- Sports Jersey Body -->
+                <path d="M 32,71 L 78,71 L 84,120 L 26,120 Z" fill="#29B6F6" stroke="#0288D1" stroke-width="2"/>
+                <circle cx="55" cy="90" r="10" fill="#FFEB3B"/>
+                <text x="55" y="94" font-size="11" font-weight="900" text-anchor="middle" fill="#E65100">1</text>
+              </svg>
+            </div>
+
+            <!-- Flexing Strong Biceps Muscle -->
+            <div class="muscle-arm-anim">💪</div>
+            <div class="power-bolt-1">⚡</div>
+            <div class="power-bolt-2">⭐</div>
+          </div>
+        `;
+      } else if (habitId === 'toys') {
+        stageContent = `
+          <div class="stage-habit-toys">
+            <!-- Colorful Sturdy Toy Box -->
+            <div class="toybox-wrap">
+              <svg viewBox="0 0 130 110" width="120" height="100">
+                <!-- Box Base -->
+                <rect x="15" y="35" width="100" height="65" rx="8" fill="#FF7043" stroke="#D84315" stroke-width="2.5"/>
+                <!-- Star Decoration on Box -->
+                <polygon points="65,52 69,64 81,64 71,72 75,84 65,76 55,84 59,72 49,64 61,64" fill="#FFEB3B" stroke="#FBC02D" stroke-width="1.5"/>
+                <!-- Open Box Rim -->
+                <ellipse cx="65" cy="35" rx="50" ry="12" fill="#FFA270" stroke="#D84315" stroke-width="2"/>
+                <!-- Inside shadow -->
+                <ellipse cx="65" cy="35" rx="44" ry="9" fill="#BF360C"/>
+              </svg>
+            </div>
+
+            <!-- Toys Hopping & Tucking into Box -->
+            <div class="toy-jumping-1">🧸</div>
+            <div class="toy-jumping-2">⚽</div>
+            <div class="toy-jumping-3">🚗</div>
+
+            <!-- Done Checkmark Badge -->
+            <div class="toy-check-badge">✅</div>
+          </div>
+        `;
+      } else if (habitId === 'sleep') {
+        stageContent = `
+          <div class="stage-habit-sleep">
+            <!-- Left Half: Night Sleep -->
+            <div class="sleep-night-side">
+              <div class="night-moon-anim">🌙</div>
+              <div class="zzz-text-1">Z</div>
+              <div class="zzz-text-2">Z</div>
+              <div class="zzz-text-3">Z</div>
+              <!-- Cozy Bed with Blanket -->
+              <svg viewBox="0 0 150 110" style="position: absolute; bottom: 15px; left: 10px; width: 130px; height: 95px;">
+                <!-- Bed Frame -->
+                <rect x="5" y="55" width="125" height="30" rx="4" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+                <!-- Legs -->
+                <rect x="8" y="85" width="8" height="18" fill="#5D4037"/>
+                <rect x="115" y="85" width="8" height="18" fill="#5D4037"/>
+                <!-- Fluffy Pillow -->
+                <ellipse cx="35" cy="50" rx="20" ry="10" fill="#FFFFFF" stroke="#CFD8DC" stroke-width="1.5"/>
+                <!-- Sleeping Child Face -->
+                <circle cx="36" cy="46" r="12" fill="#FFE0B2"/>
+                <path d="M 32,46 Q 36,49 40,46" stroke="#795548" stroke-width="1.5" fill="none"/>
+                <!-- Blue Star Blanket -->
+                <path d="M 30,52 L 126,52 L 126,82 L 30,82 Z" fill="#1E88E5" stroke="#1565C0" stroke-width="2"/>
+              </svg>
+            </div>
+
+            <!-- Right Half: Bright Morning Sunrise & Wakeup -->
+            <div class="sleep-day-side">
+              <div class="day-sun-anim">☀️</div>
+              <div class="morning-alarm-anim">⏰</div>
+            </div>
+          </div>
+        `;
+      } else {
+        // VEGGIES & HEALTHY FRUITS
+        stageContent = `
+          <div class="stage-habit-veggies">
+            <!-- Glowing Health & Immunity Shield -->
+            <div class="health-shield-glow">💖</div>
+
+            <!-- Healthy Kid Eating Fresh Foods -->
+            <div class="veggie-kid-anim">
+              <svg viewBox="0 0 120 130" width="105" height="115">
+                <!-- Head -->
+                <circle cx="60" cy="42" r="26" fill="#FFE0B2" stroke="#FFB74D" stroke-width="2"/>
+                <!-- Hair -->
+                <path d="M 36,36 Q 60,12 84,36 Q 60,22 36,36 Z" fill="#3E2723"/>
+                <!-- Eyes Sparkle with Health -->
+                <circle cx="48" cy="40" r="4.5" fill="#2E7D32"/>
+                <circle cx="50" cy="38" r="1.5" fill="#FFFFFF"/>
+                <circle cx="72" cy="40" r="4.5" fill="#2E7D32"/>
+                <circle cx="74" cy="38" r="1.5" fill="#FFFFFF"/>
+                <!-- Rosy Cheeks -->
+                <circle cx="42" cy="50" r="6" fill="#FF5252" opacity="0.6"/>
+                <circle cx="78" cy="50" r="6" fill="#FF5252" opacity="0.6"/>
+                <!-- Happy Chewing Smile -->
+                <path d="M 52,54 Q 60,62 68,54" stroke="#D32F2F" stroke-width="2.5" fill="none"/>
+                <!-- Salad / Fruit Bowl in Front -->
+                <ellipse cx="60" cy="98" rx="42" ry="16" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+                <ellipse cx="60" cy="95" rx="38" ry="12" fill="#A5D6A7"/>
+              </svg>
+            </div>
+
+            <!-- Floating Fresh Fruits & Vegetables -->
+            <div class="floating-apple">🍎</div>
+            <div class="floating-carrot">🥕</div>
+            <div class="floating-banana">🍌</div>
+            <div class="floating-broccoli">🥦</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="habit-theatre-box" id="habitTheatreBox_${idx}">
+          <div class="habit-theatre-badge"><span class="live-dot"></span> 120FPS ULTRA AI VIDEO</div>
+          <div class="habit-theatre-stage">
+            ${stageContent}
+          </div>
+        </div>
+      `;
+    }
+
+    function triggerHabitAnimation(idx) {
+      const box = document.getElementById('habitTheatreBox_' + idx);
+      if (box) {
+        box.style.transform = 'scale(0.98)';
+        setTimeout(() => { box.style.transform = 'scale(1)'; }, 150);
+      }
+    }
+
     function renderHabitsGrid() {
       const container = document.getElementById('dynamicContainer');
       const intro = document.createElement('div');
       intro.style = "text-align: center; margin-bottom: 12px; font-weight: 900; color: #7B1FA2;";
-      intro.innerText = "✨ अच्छी आदत पर टैप करो — सुनो और सीखो!";
+      intro.innerText = "✨ अच्छी आदत पर टैप करो — 120FPS कार्टून वीडियो देखो और सीखो!";
       container.appendChild(intro);
 
       const grid = document.createElement('div');
@@ -6028,29 +6843,37 @@
             startMorningHabitBgm();
             openFullScreenKidsCard({
               letter: '',
-              icon: item.e,
+              icon: '',
+              customBodyHtml: getHabitAnimatedStageHtml(idx, item),
               title: item.t,
               subtitle: 'रोज सुबह जल्दी उठें! (आपकी असली आवाज़ 🎙️)',
               bgGradient: grad,
-              soundFn: () => { playHumanClip(18.8, 5.2); }
+              soundFn: () => {
+                playHumanClip(18.8, 5.2);
+                triggerHabitAnimation(idx);
+              }
             });
             return;
           }
 
           startMorningHabitBgm();
-            openFullScreenKidsCard({
+          openFullScreenKidsCard({
             letter: '',
-            icon: item.e,
+            icon: '',
+            customBodyHtml: getHabitAnimatedStageHtml(idx, item),
             title: item.t,
             subtitle: 'अच्छी आदत सीखो 🌟',
             bgGradient: grad,
-            soundFn: () => { playLocalAudio(`habit_${idx}.mp3`, item.s, "hi-IN"); }
+            soundFn: () => {
+              playLocalAudio(`habit_${idx}.mp3`, item.s, "hi-IN");
+              triggerHabitAnimation(idx);
+            }
           });
         };
         card.innerHTML = `
           <div class="icon-wrap">${item.e}</div>
           <h4>${item.t}</h4>
-          <span>टैप करो और सुनो 🗣️</span>
+          <span>टैप करो और वीडियो देखो 🎬</span>
         `;
         grid.appendChild(card);
       });
