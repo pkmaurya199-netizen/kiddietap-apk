@@ -1535,6 +1535,982 @@
 
   
         /* ====================================================
+       120FPS ULTRA AI CARTOON VIDEO THEATRE (GPU ACCELERATED)
+       ==================================================== */
+    .rhyme-theatre-box {
+      width: 100%;
+      position: relative;
+      margin: 4px 0 14px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #000000;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.4), 0 0 0 5px #FFD54F;
+      border: 3px solid #FFF;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+    }
+
+    body.night-mode .rhyme-theatre-box {
+      box-shadow: 0 18px 50px rgba(0,0,0,0.85), 0 0 0 5px #64DFDF !important;
+      border: 3px solid #1E293B !important;
+    }
+
+    .rhyme-theatre-stage {
+      position: relative;
+      width: 100%;
+      height: 285px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    /* 120FPS ULTRA LIVE BADGE */
+    .theatre-live-tag {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255, 215, 0, 0.75);
+      color: #FFD54F;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00E676;
+      box-shadow: 0 0 10px #00E676;
+      animation: livePulse120 0.8s infinite alternate ease-in-out;
+    }
+    @keyframes livePulse120 {
+      0% { opacity: 0.4; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* ====================================================
+       SCENE: EK MOTA HATHI (मकड़ी का जाल & दूसरा हाथी)
+       ==================================================== */
+    .scene-hathi {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #68d8d6 0%, #a8e6cf 60%, #ffd3b6 100%);
+      position: relative;
+    }
+    .hathi-main-hero {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 155px;
+      height: 140px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    /* Step 0: Marching proudly */
+    .action-hathi-0 .hathi-main-hero {
+      animation: hathiMarch 0.8s infinite alternate ease-in-out;
+    }
+    @keyframes hathiMarch {
+      0% { transform: translateX(-50%) rotate(-5deg) translateY(0); }
+      100% { transform: translateX(-50%) rotate(5deg) translateY(-10px); }
+    }
+    /* Spiderweb & Spider Dropping (Step 1 & 2) */
+    .spider-web-wrap {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 190px;
+      height: 170px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+      z-index: 5;
+    }
+    .spider-char {
+      position: absolute;
+      top: 15px;
+      right: 40px;
+      font-size: 28px;
+      animation: spiderDrop 1.2s infinite alternate ease-in-out;
+    }
+    @keyframes spiderDrop {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(35px); }
+    }
+    .action-hathi-1 .spider-web-wrap, .action-hathi-2 .spider-web-wrap {
+      opacity: 1;
+      animation: webSwing 1s infinite alternate ease-in-out;
+    }
+    @keyframes webSwing {
+      0% { transform: translateX(-50%) scale(0.96) rotate(-2deg); }
+      100% { transform: translateX(-50%) scale(1.04) rotate(2deg); }
+    }
+    .action-hathi-1 .hathi-main-hero, .action-hathi-2 .hathi-main-hero {
+      animation: hathiTrappedShake 0.25s infinite alternate ease-in-out !important;
+    }
+    @keyframes hathiTrappedShake {
+      0% { transform: translateX(-50%) rotate(-6deg) scale(0.96); }
+      100% { transform: translateX(-50%) rotate(6deg) scale(1.02); }
+    }
+    /* Step 3 & 4: Friend Elephant Arrives! */
+    .hathi-friend-hero {
+      position: absolute;
+      bottom: 25px;
+      right: -140px;
+      width: 135px;
+      height: 120px;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 6;
+    }
+    .action-hathi-3 .hathi-main-hero {
+      left: 35% !important;
+    }
+    .action-hathi-4 .hathi-main-hero {
+      left: 32% !important;
+    }
+    .action-hathi-4 .hathi-friend-hero {
+      right: 25px !important;
+      animation: friendHathiJump 0.4s infinite alternate ease-in-out;
+    }
+    @keyframes friendHathiJump {
+      0% { transform: translateY(0) rotate(-4deg); }
+      100% { transform: translateY(-12px) rotate(4deg); }
+    }
+
+    /* ====================================================
+       SCENE: JOHNY JOHNY YES PAPA (SUGAR JAR & HA HA HA)
+       ==================================================== */
+    .scene-johny {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #ffecd2 0%, #fcb69f 100%);
+      position: relative;
+    }
+    .johny-baby {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 140px;
+      transition: all 0.3s ease;
+    }
+    .sugar-jar {
+      position: absolute;
+      bottom: 30px;
+      right: 35px;
+      font-size: 42px;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+    }
+    /* Normal swaying */
+    .action-johny-0 .johny-baby {
+      animation: babyTilt 1s infinite alternate ease-in-out;
+    }
+    @keyframes babyTilt {
+      0% { transform: translateX(-50%) rotate(-5deg); }
+      100% { transform: translateX(-50%) rotate(5deg); }
+    }
+    /* Step 1 & 2: Shaking Head 'No Papa' */
+    .action-johny-1 .johny-baby, .action-johny-2 .johny-baby {
+      animation: babyHeadShake 0.3s infinite alternate ease-in-out;
+    }
+    @keyframes babyHeadShake {
+      0% { transform: translateX(-50%) rotate(-12deg); }
+      100% { transform: translateX(-50%) rotate(12deg); }
+    }
+    /* Step 3: Open your mouth Ha Ha Ha! */
+    .action-johny-3 .johny-baby {
+      animation: babyLaughHop 0.25s infinite alternate ease-in-out;
+    }
+    @keyframes babyLaughHop {
+      0% { transform: translateX(-50%) translateY(0) scale(1); }
+      100% { transform: translateX(-50%) translateY(-18px) scale(1.1); }
+    }
+
+    /* ====================================================
+       SCENE: LALLA LORI & SO JA RAJDULARE (CRADLE & FAIRY)
+       ==================================================== */
+    .scene-lalla {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #2b1055 0%, #16082f 60%, #070014 100%);
+      position: relative;
+    }
+    .cradle-box {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      animation: cradleRock 1.6s infinite alternate ease-in-out;
+    }
+    @keyframes cradleRock {
+      0% { transform: translateX(-50%) rotate(-8deg); }
+      100% { transform: translateX(-50%) rotate(8deg); }
+    }
+    .milk-bowl {
+      position: absolute;
+      bottom: 32px;
+      left: 30px;
+      font-size: 38px;
+      animation: milkSteam 1s infinite alternate ease-in-out;
+    }
+    @keyframes milkSteam {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+    .sleep-fairy {
+      position: absolute;
+      top: 30px;
+      right: 35px;
+      font-size: 44px;
+      animation: fairyHover 2s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 15px #FFD700);
+    }
+    @keyframes fairyHover {
+      0% { transform: translateY(0) rotate(-6deg); }
+      100% { transform: translateY(-16px) rotate(8deg); }
+    }
+    .sleep-zzz {
+      position: absolute;
+      top: 60px;
+      left: 45%;
+      font-size: 26px;
+      color: #FFD54F;
+      font-weight: 900;
+      animation: zzzFly 1.8s infinite ease-out;
+    }
+    @keyframes zzzFly {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translate(35px, -45px) scale(1.2); }
+    }
+
+    /* ====================================================
+       ACTION: LAKDI KI KAATHI (घोड़े की दुम पे हथौड़ा & दौड़)
+       ==================================================== */
+    .scene-lakdi {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #b9f2ff 0%, #d5e8ff 55%, #88d49e 100%);
+      position: relative;
+    }
+    .lakdi-horse-container {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 170px;
+      height: 140px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .action-lakdi-0 .lakdi-horse-container {
+      animation: horseGentleRock 1.1s infinite alternate ease-in-out;
+    }
+    @keyframes horseGentleRock {
+      0% { transform: translateX(-50%) rotate(-6deg); }
+      100% { transform: translateX(-50%) rotate(6deg) translateY(-6px); }
+    }
+    .lakdi-hammer {
+      position: absolute;
+      top: -65px;
+      left: -10px;
+      width: 70px;
+      height: 70px;
+      font-size: 55px;
+      opacity: 0;
+      pointer-events: none;
+      transform-origin: 80% 20%;
+    }
+    .action-lakdi-1 .lakdi-hammer {
+      opacity: 1;
+      animation: hammerSmash 0.85s infinite ease-in;
+    }
+    @keyframes hammerSmash {
+      0% { transform: rotate(-55deg) translate(-20px, -20px); opacity: 0; }
+      30% { opacity: 1; transform: rotate(-40deg); }
+      70% { transform: rotate(35deg) translate(25px, 60px); }
+      80% { transform: rotate(30deg) translate(22px, 55px); }
+      100% { opacity: 0; }
+    }
+    .action-lakdi-1 .lakdi-horse-container {
+      animation: horseShockJump 0.35s infinite alternate ease-in-out;
+    }
+    @keyframes horseShockJump {
+      0% { transform: translateX(-50%) rotate(-14deg) scale(0.95); }
+      100% { transform: translateX(-50%) rotate(16deg) translateY(-24px) scale(1.08); }
+    }
+    .lakdi-sparks {
+      position: absolute;
+      left: 10px;
+      bottom: 60px;
+      font-size: 28px;
+      opacity: 0;
+    }
+    .action-lakdi-1 .lakdi-sparks {
+      animation: sparkPop 0.85s infinite;
+    }
+    @keyframes sparkPop {
+      0%, 65% { opacity: 0; transform: scale(0.2); }
+      70% { opacity: 1; transform: scale(1.5) rotate(20deg); }
+      90% { opacity: 0; transform: scale(1.8) translateY(-18px); }
+    }
+    .action-lakdi-2 .lakdi-horse-container {
+      animation: horseHyperRun 0.25s infinite alternate ease-in-out;
+    }
+    @keyframes horseHyperRun {
+      0% { transform: translateX(-50%) rotate(-12deg) translateY(0); }
+      100% { transform: translateX(-50%) rotate(14deg) translateY(-18px); }
+    }
+    .dust-trail {
+      position: absolute;
+      bottom: 18px;
+      left: 25px;
+      font-size: 28px;
+      opacity: 0;
+    }
+    .action-lakdi-2 .dust-trail {
+      animation: dustBlow 0.4s infinite linear;
+    }
+    @keyframes dustBlow {
+      0% { opacity: 0.95; transform: translateX(0) scale(0.7); }
+      100% { opacity: 0; transform: translateX(-70px) scale(1.6); }
+    }
+    .speed-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .action-lakdi-2 .speed-lines {
+      opacity: 1;
+      animation: speedStream 0.3s infinite linear;
+    }
+    @keyframes speedStream {
+      0% { background-position: 0 0; }
+      100% { background-position: -200px 0; }
+    }
+
+    /* ====================================================
+       ACTION: MACHHLI JAL KI RANI HAI (HAATH LAGAO & DAR)
+       ==================================================== */
+    .scene-machli {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #00b4db 0%, #0083b0 60%, #003973 100%);
+      position: relative;
+    }
+    .machli-hero {
+      position: absolute;
+      top: 70px;
+      width: 130px;
+      height: 110px;
+      transition: all 0.4s ease;
+    }
+    .action-machli-0 .machli-hero, .action-machli-1 .machli-hero {
+      animation: fishSwimNormal 7s infinite linear;
+    }
+    @keyframes fishSwimNormal {
+      0% { left: -130px; transform: scaleX(1) translateY(0); }
+      48% { left: 300px; transform: scaleX(1) translateY(-14px); }
+      50% { left: 300px; transform: scaleX(-1) translateY(-14px); }
+      98% { left: -130px; transform: scaleX(-1) translateY(10px); }
+      100% { left: -130px; transform: scaleX(1) translateY(0); }
+    }
+    .water-hand {
+      position: absolute;
+      top: -90px;
+      right: 50px;
+      font-size: 58px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 5;
+    }
+    .action-machli-2 .water-hand {
+      opacity: 1;
+      animation: handDipIn 1.5s infinite alternate ease-in-out;
+    }
+    @keyframes handDipIn {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(120px) rotate(-15deg); }
+    }
+    .action-machli-2 .machli-hero {
+      left: 40px !important;
+      animation: fishScaredDart 0.22s infinite alternate ease-in-out !important;
+    }
+    @keyframes fishScaredDart {
+      0% { transform: scaleX(1) rotate(-8deg) translateX(-6px); }
+      100% { transform: scaleX(1) rotate(12deg) translateX(6px) translateY(-12px); }
+    }
+    .action-machli-4 .machli-hero {
+      left: 100px;
+      animation: fishJoySomersault 1.6s infinite ease-in-out !important;
+    }
+    @keyframes fishJoySomersault {
+      0% { transform: translateY(30px) rotate(0deg) scale(0.9); }
+      50% { transform: translateY(-35px) rotate(360deg) scale(1.15); }
+      100% { transform: translateY(30px) rotate(720deg) scale(0.9); }
+    }
+
+    /* ====================================================
+       ACTION: CHANDA MAMA (थाली, प्याली, टूटना & तालियां)
+       ==================================================== */
+    .scene-chanda {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #1e3c72 0%, #101c3d 60%, #060b18 100%);
+      position: relative;
+    }
+    .chanda-moon-svg {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 110px;
+      filter: drop-shadow(0 0 25px rgba(255, 235, 59, 0.85));
+      animation: moonGentlePulse 2.5s infinite alternate ease-in-out;
+    }
+    @keyframes moonGentlePulse {
+      0% { transform: translateX(-50%) scale(0.96) rotate(-3deg); }
+      100% { transform: translateX(-50%) scale(1.04) rotate(3deg); }
+    }
+    .chanda-prop-container {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .prop-thaali {
+      font-size: 44px;
+      animation: propBob 1s infinite alternate ease-in-out;
+    }
+    .prop-pyali {
+      font-size: 38px;
+      transition: all 0.3s ease;
+    }
+    @keyframes propBob {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+    .action-chanda-2 .prop-pyali {
+      animation: pyaliBreak 0.7s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 12px #FF5252);
+    }
+    @keyframes pyaliBreak {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(-35deg) translateY(12px) scale(0.9); }
+      100% { transform: rotate(45deg) translateY(20px) scale(0.85); }
+    }
+    .action-chanda-3 .chanda-prop-container {
+      animation: taaliyanClap 0.5s infinite alternate ease-in-out;
+    }
+    @keyframes taaliyanClap {
+      0% { transform: translateX(-50%) scale(0.95); }
+      100% { transform: translateX(-50%) scale(1.15) rotate(4deg); }
+    }
+
+    /* ====================================================
+       ACTION: BANDAR MAMA (कुर्ता, गरम रसगुल्ला & जीभ जलना)
+       ==================================================== */
+    .scene-bandar {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #43a047 0%, #2e7d32 70%, #1b5e20 100%);
+      position: relative;
+    }
+    .bandar-char {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 140px;
+      transition: all 0.3s ease;
+    }
+    .action-bandar-normal .bandar-char {
+      animation: bandarStrut 0.6s infinite alternate ease-in-out;
+    }
+    @keyframes bandarStrut {
+      0% { transform: translateX(-50%) rotate(-6deg); }
+      100% { transform: translateX(-50%) rotate(6deg) translateY(-8px); }
+    }
+    .hot-rasgulla {
+      position: absolute;
+      top: 30px;
+      right: 35px;
+      font-size: 38px;
+      opacity: 0;
+      filter: drop-shadow(0 0 10px #FF9800);
+    }
+    .action-bandar-hot .hot-rasgulla {
+      opacity: 1;
+      animation: rasgullaZoom 1.2s infinite ease-in;
+    }
+    @keyframes rasgullaZoom {
+      0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+      40% { opacity: 1; transform: translate(-30px, 40px) scale(1.1); }
+      80% { transform: translate(-65px, 80px) scale(1.2); opacity: 1; }
+      100% { transform: translate(-70px, 90px) scale(0.6); opacity: 0; }
+    }
+    .action-bandar-burn .bandar-char {
+      animation: bandarBurnJump 0.22s infinite alternate ease-in-out !important;
+    }
+    @keyframes bandarBurnJump {
+      0% { transform: translateX(-50%) translateY(0) scale(0.95); filter: hue-rotate(330deg); }
+      100% { transform: translateX(-50%) translateY(-22px) scale(1.1); filter: hue-rotate(360deg); }
+    }
+    .steam-cloud {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      opacity: 0;
+    }
+    .action-bandar-burn .steam-cloud {
+      opacity: 1;
+      animation: steamPuff 0.6s infinite ease-out;
+    }
+    @keyframes steamPuff {
+      0% { transform: translateX(-50%) translateY(0) scale(0.6); opacity: 0.9; }
+      100% { transform: translateX(-50%) translateY(-50px) scale(1.6); opacity: 0; }
+    }
+
+    /* ====================================================
+       ACTION: TITLI UDI (बस पे चढ़ी & रोना & ड्राइवर)
+       ==================================================== */
+    .scene-titli {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #70e1f5 0%, #ffd194 65%, #a8e063 100%);
+      position: relative;
+    }
+    .titli-bus-box {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      animation: busDriveHop 0.4s infinite alternate ease-in-out;
+    }
+    @keyframes busDriveHop {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-5px); }
+    }
+    .titli-flyer {
+      position: absolute;
+      width: 70px;
+      height: 60px;
+      transition: all 0.5s ease;
+      z-index: 6;
+    }
+    .action-titli-0 .titli-flyer {
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: titliOnBus 0.8s infinite alternate ease-in-out;
+    }
+    @keyframes titliOnBus {
+      0% { transform: translateX(-50%) scale(1) translateY(0); }
+      100% { transform: translateX(-50%) scale(1.08) translateY(-8px); }
+    }
+    .titli-tears {
+      position: absolute;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      opacity: 0;
+      z-index: 7;
+    }
+    .action-titli-1 .titli-tears {
+      opacity: 1;
+      animation: tearsFall 0.5s infinite linear;
+    }
+    @keyframes tearsFall {
+      0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      100% { transform: translateX(-50%) translateY(35px); opacity: 0; }
+    }
+    .driver-avatar {
+      position: absolute;
+      bottom: 60px;
+      left: 70px;
+      font-size: 28px;
+      opacity: 0;
+      z-index: 7;
+    }
+    .action-titli-2 .driver-avatar {
+      opacity: 1;
+      animation: driverWaving 0.4s infinite alternate ease-in-out;
+    }
+    @keyframes driverWaving {
+      0% { transform: rotate(-10deg); }
+      100% { transform: rotate(15deg); }
+    }
+    .action-titli-3 .titli-flyer {
+      top: 20px;
+      left: 75%;
+      animation: titliFlyHome 0.4s infinite alternate ease-in-out !important;
+    }
+    @keyframes titliFlyHome {
+      0% { transform: translateY(0) scale(1.1) rotate(-15deg); }
+      100% { transform: translateY(-20px) scale(0.9) rotate(15deg); }
+    }
+
+    /* SCENE: TWINKLE TWINKLE */
+    .scene-twinkle {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #4a00e0 0%, #200052 60%, #0d0022 100%);
+      position: relative;
+    }
+    .hero-star {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 125px;
+      height: 125px;
+      animation: starTwinklePulse 1.4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 30px #FFD700);
+    }
+    @keyframes starTwinklePulse {
+      0% { transform: translateX(-50%) scale(0.92) rotate(-6deg); filter: drop-shadow(0 0 18px #FFD700); }
+      100% { transform: translateX(-50%) scale(1.08) rotate(6deg); filter: drop-shadow(0 0 40px #FFF700) drop-shadow(0 0 15px #FF6F00); }
+    }
+    .shooting-star {
+      position: absolute;
+      top: 25px;
+      right: -80px;
+      width: 90px;
+      height: 2px;
+      background: linear-gradient(90deg, #FFFFFF, transparent);
+      border-radius: 2px;
+      transform: rotate(-35deg);
+      animation: shootingStreak 4s infinite 1.5s ease-out;
+    }
+    @keyframes shootingStreak {
+      0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+      10% { opacity: 1; }
+      35% { transform: translateX(-350px) translateY(220px) rotate(-35deg); opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* SCENE: WHEELS ON THE BUS */
+    .scene-bus {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #89f7fe 0%, #66a6ff 70%, #708090 100%);
+      position: relative;
+    }
+    .yellow-bus {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 185px;
+      animation: yellowBusDrive 0.45s infinite alternate ease-in-out;
+    }
+    @keyframes yellowBusDrive {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-6px); }
+    }
+    .spinning-wheel {
+      animation: wheelSpin 0.8s infinite linear;
+      transform-origin: center center;
+    }
+    @keyframes wheelSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* SCENE: AARTI / SACRED SANSKAAR */
+    .scene-aarti {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #ff8008 0%, #ffc837 50%, #4a154b 100%);
+      position: relative;
+    }
+    .aarti-diya {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      filter: drop-shadow(0 0 25px rgba(255, 193, 7, 0.9));
+      animation: diyaGlow 1.2s infinite alternate ease-in-out;
+    }
+    @keyframes diyaGlow {
+      0% { transform: translateX(-50%) scale(0.97); }
+      100% { transform: translateX(-50%) scale(1.04); }
+    }
+    .hanging-bell {
+      position: absolute;
+      top: 10px;
+      width: 44px;
+      transform-origin: top center;
+      animation: bellSway 1.8s infinite alternate ease-in-out;
+    }
+    .bell-l { left: 30px; }
+    .bell-r { right: 30px; animation-delay: 0.9s; }
+    @keyframes bellSway {
+      0% { transform: rotate(-16deg); }
+      100% { transform: rotate(16deg); }
+    }
+
+    /* ====================================================
+       TALKING ANIMATED ANIMAL STAGE (LIVELY 3D MOVEMENT)
+       ==================================================== */
+    .animal-stage {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 10px auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .animal-stage-portal {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 60%, rgba(255,215,0,0.4) 100%);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25), inset 0 0 20px rgba(255,255,255,0.8), 0 0 0 6px rgba(255,255,255,0.9);
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    body.night-mode .animal-stage-portal {
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 70%, #334155 100%) !important;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 20px rgba(100,223,223,0.3), 0 0 0 5px #64DFDF !important;
+    }
+
+    .animal-stage.talking .animal-stage-portal {
+      animation: pulsePortal 0.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulsePortal {
+      0% { transform: scale(1); box-shadow: 0 15px 35px rgba(255,107,107,0.3), 0 0 0 6px #FFD166; }
+      100% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(255,107,107,0.5), 0 0 0 10px #FF6B6B; }
+    }
+
+    .animal-svg {
+      width: 190px;
+      height: 190px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.25));
+      transform-origin: 50% 90%;
+      animation: animalIdleBreathing 2.8s infinite ease-in-out;
+    }
+
+    @keyframes animalIdleBreathing {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.02) translateY(-4px); }
+    }
+
+    .animal-stage.talking .animal-svg {
+      animation: animalTalkingBounce 0.4s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes animalTalkingBounce {
+      0% { transform: scale(1) translateY(0) rotate(-1deg); }
+      100% { transform: scale(1.05) translateY(-8px) rotate(1.5deg); }
+    }
+
+    /* MOUTH MOVEMENT FOR ALL ANIMALS */
+    .anim-mouth-closed {
+      display: block;
+      transition: all 0.15s ease;
+    }
+    .anim-mouth-open {
+      display: none;
+      transform-origin: 50% 50%;
+    }
+
+    .animal-stage.talking .anim-mouth-closed {
+      display: none;
+    }
+    .animal-stage.talking .anim-mouth-open {
+      display: block;
+      animation: mouthTalkAnimation 0.28s infinite alternate ease-in-out;
+    }
+
+    @keyframes mouthTalkAnimation {
+      0% { transform: scaleY(0.4) scaleX(0.9); }
+      100% { transform: scaleY(1.3) scaleX(1.08); }
+    }
+
+    /* EYE BLINK ANIMATION */
+    .anim-eye {
+      transform-origin: 50% 50%;
+      animation: eyeBlink 3.8s infinite;
+    }
+
+    @keyframes eyeBlink {
+      0%, 94%, 100% { transform: scaleY(1); }
+      96%, 98% { transform: scaleY(0.08); }
+    }
+
+    /* EAR WIGGLE / FLAP */
+    .anim-ear-left {
+      transform-origin: 25% 40%;
+    }
+    .anim-ear-right {
+      transform-origin: 75% 40%;
+    }
+    .animal-stage.talking .anim-ear-left {
+      animation: earWiggleL 0.35s infinite alternate ease-in-out;
+    }
+    .animal-stage.talking .anim-ear-right {
+      animation: earWiggleR 0.35s infinite alternate ease-in-out;
+    }
+
+    @keyframes earWiggleL {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-14deg); }
+    }
+    @keyframes earWiggleR {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(14deg); }
+    }
+
+    /* ELEPHANT TRUNK */
+    .anim-trunk {
+      transform-origin: 50% 30%;
+    }
+    .animal-stage.talking .anim-trunk {
+      animation: trunkSwing 0.5s infinite alternate ease-in-out;
+    }
+    @keyframes trunkSwing {
+      0% { transform: rotate(-8deg) scaleY(0.95); }
+      100% { transform: rotate(12deg) scaleY(1.1); }
+    }
+
+    /* ROOSTER COMB & BEAK */
+    .anim-comb {
+      transform-origin: 50% 100%;
+    }
+    .animal-stage.talking .anim-comb {
+      animation: combBob 0.3s infinite alternate ease-in-out;
+    }
+    @keyframes combBob {
+      0% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg) scale(1.08); }
+    }
+
+    /* FLOATING MUSIC & SPEECH NOTES */
+    .animal-notes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      overflow: hidden;
+    }
+    .note-bubble {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      bottom: 25%;
+    }
+    .animal-stage.talking .note-1 {
+      left: 15%;
+      animation: floatNote 1.4s infinite ease-out;
+    }
+    .animal-stage.talking .note-2 {
+      right: 15%;
+      animation: floatNote 1.6s infinite 0.4s ease-out;
+    }
+    .animal-stage.talking .note-3 {
+      left: 45%;
+      animation: floatNote 1.5s infinite 0.8s ease-out;
+    }
+
+    @keyframes floatNote {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      40% { opacity: 0.95; }
+      100% { transform: translateY(-75px) scale(1.3) rotate(20deg); opacity: 0; }
+    }
+
+    /* TALKING STATUS BADGE WITH DANCING EQUALIZER */
+    .animal-talking-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 8px 18px;
+      border-radius: 25px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border: 2px solid #FFD166;
+      font-size: 15px;
+      font-weight: 800;
+      color: #2E7D32;
+    }
+
+    body.night-mode .animal-talking-badge {
+      background: #141f38 !important;
+      border-color: #64DFDF !important;
+      color: #64DFDF !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    .eq-wave {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      width: 22px;
+    }
+    .eq-wave span {
+      width: 3px;
+      background: #43A047;
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+    body.night-mode .eq-wave span {
+      background: #64DFDF !important;
+    }
+
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(1) { animation: eqBar 0.35s infinite alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(2) { animation: eqBar 0.45s infinite 0.1s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(3) { animation: eqBar 0.3s infinite 0.2s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(4) { animation: eqBar 0.5s infinite 0.15s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(5) { animation: eqBar 0.4s infinite 0.05s alternate ease-in-out; }
+
+    @keyframes eqBar {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+
+  
+        /* ====================================================
        ACTION-DRIVEN 60FPS AI CARTOON VIDEO THEATRE
        ==================================================== */
     .rhyme-theatre-box {
@@ -5083,46 +6059,76 @@
 
     // LINE BY LINE SPOKEN SING-ALONG PLAYER
     
-    // DYNAMIC 60FPS AI CARTOON VIDEO SCENE GENERATOR WITH ACTION HOOKS
+    // DYNAMIC 120FPS ULTRA AI CARTOON VIDEO SCENE GENERATOR WITH ACTION HOOKS
     function getRhymeVideoSceneHtml(song) {
       if (!song) return '';
       const id = song.id || '';
       const title = song.title || '';
 
-      // 1. LAKDI KI KAATHI (घोड़े की दुम पे हथौड़ा & दौड़)
+      // 1. EK MOTA HATHI (एक मोटा हाथी झूम के चला, मकड़ी का जाल & दूसरा हाथी)
+      if (id.includes('hathi') || title.includes('हाथी')) {
+        return `
+          <div class="scene-hathi" id="activeSceneRoot">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
+            <!-- Giant Sticky Spiderweb with dangling spider -->
+            <div class="spider-web-wrap">
+              <div class="spider-char">🕷️</div>
+              <svg viewBox="0 0 190 170" style="width: 100%; height: 100%;">
+                <path d="M 95,10 L 15,160 M 95,10 L 95,165 M 95,10 L 175,160" stroke="#FFFFFF" stroke-width="2.5" opacity="0.8"/>
+                <path d="M 45,65 Q 95,78 145,65" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 30,110 Q 95,130 160,110" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 20,150 Q 95,175 170,150" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.8"/>
+              </svg>
+            </div>
+            <!-- Main Cute Chubby Elephant -->
+            <div class="hathi-main-hero">
+              <svg viewBox="0 0 155 140" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));">
+                <ellipse cx="40" cy="55" rx="26" ry="34" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+                <ellipse cx="40" cy="55" rx="16" ry="24" fill="#FFCDD2"/>
+                <circle cx="85" cy="65" r="42" fill="#CFD8DC" stroke="#78909C" stroke-width="3"/>
+                <circle cx="68" cy="55" r="5.5" fill="#212121"/>
+                <circle cx="70" cy="53" r="2" fill="#FFFFFF"/>
+                <path d="M 85,75 Q 82,115 95,128 Q 106,134 112,122 Q 100,108 96,75 Z" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+                <path d="M 72,88 Q 62,106 54,100 Q 64,92 74,88 Z" fill="#FFFFFF" stroke="#78909C" stroke-width="1.5"/>
+                <ellipse cx="85" cy="110" rx="35" ry="25" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <!-- Friend Elephant that comes to rescue! -->
+            <div class="hathi-friend-hero">
+              <svg viewBox="0 0 135 120" style="width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));">
+                <ellipse cx="100" cy="45" rx="22" ry="28" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+                <circle cx="60" cy="55" r="36" fill="#CFD8DC" stroke="#78909C" stroke-width="3"/>
+                <circle cx="72" cy="46" r="4.5" fill="#212121"/>
+                <path d="M 60,65 Q 45,95 32,92 Q 40,82 52,65 Z" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+                <ellipse cx="60" cy="95" rx="28" ry="20" fill="#B0BEC5" stroke="#78909C" stroke-width="2.5"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2. LAKDI KI KAATHI (घोड़े की दुम पे हथौड़ा & दौड़)
       if (id.includes('lakdi') || title.includes('लकड़ी')) {
         return `
           <div class="scene-lakdi" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <div class="dust-trail">💨💨</div>
             <div class="speed-lines"></div>
             <div class="lakdi-horse-container">
-              <!-- Giant Hammer that Strikes -->
               <div class="lakdi-hammer">🔨</div>
               <div class="lakdi-sparks">💥✨</div>
-              <!-- Detailed Wooden Rocking Horse -->
               <svg viewBox="0 0 170 140" style="width: 100%; height: 100%;">
-                <!-- Curved Rockers (काठी की धुरी) -->
                 <path d="M 15,124 Q 85,142 155,124" stroke="#8D5B28" stroke-width="7" stroke-linecap="round" fill="none"/>
-                <!-- Rocker Legs -->
                 <line x1="50" y1="90" x2="38" y2="128" stroke="#8D5B28" stroke-width="6" stroke-linecap="round"/>
                 <line x1="120" y1="90" x2="132" y2="128" stroke="#8D5B28" stroke-width="6" stroke-linecap="round"/>
-                <!-- Wooden Horse Body -->
                 <ellipse cx="85" cy="78" rx="48" ry="26" fill="#D7CCC8" stroke="#5D4037" stroke-width="3.5"/>
-                <!-- Red Saddle (लाल काठी) -->
                 <path d="M 68,58 Q 85,68 102,58 L 105,74 Q 85,82 65,74 Z" fill="#E53935" stroke="#B71C1C" stroke-width="2"/>
-                <!-- Horse Tail (घोड़े की दुम) -->
                 <path id="horseTailPart" d="M 40,78 Q 20,70 18,92 Q 28,95 38,82 Z" fill="#FF7043" stroke="#D84315" stroke-width="2"/>
-                <!-- Neck & Head -->
                 <path d="M 120,75 L 140,36 Q 155,40 148,54 L 132,84 Z" fill="#D7CCC8" stroke="#5D4037" stroke-width="3.5"/>
-                <!-- Cute Pointy Ears -->
                 <polygon points="138,30 144,14 150,32" fill="#8D5B28"/>
-                <!-- Orange Woolly Mane -->
                 <path d="M 128,38 Q 120,50 122,66" stroke="#FF7043" stroke-width="5" stroke-linecap="round"/>
-                <!-- Big Cartoon Eyes -->
                 <circle cx="140" cy="42" r="5" fill="#212121"/>
                 <circle cx="142" cy="40" r="1.8" fill="#FFFFFF"/>
-                <!-- Bridle Reins -->
                 <path d="M 102,64 Q 125,72 144,46" stroke="#FFB300" stroke-width="2.5" fill="none"/>
               </svg>
             </div>
@@ -5130,25 +6136,21 @@
         `;
       }
 
-      // 2. MACHHLI JAL KI RANI HAI (हाथ लगाओ & डरना & तैरना)
+      // 3. MACHHLI JAL KI RANI HAI (हाथ लगाओ & डरना & तैरना)
       if (id.includes('machli') || title.includes('मछली')) {
         return `
           <div class="scene-machli" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
-            <!-- Waving Seaweeds -->
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <svg style="position: absolute; bottom: 0; left: 15px; width: 35px; height: 110px;" viewBox="0 0 35 110">
               <path d="M 15,110 Q 5,80 25,55 Q 5,30 20,0" stroke="#00E676" stroke-width="9" stroke-linecap="round" fill="none"/>
             </svg>
             <svg style="position: absolute; bottom: 0; right: 25px; width: 35px; height: 120px;" viewBox="0 0 35 120">
               <path d="M 15,120 Q 28,85 10,55 Q 30,25 18,0" stroke="#00E676" stroke-width="9" stroke-linecap="round" fill="none"/>
             </svg>
-            <!-- Water Hand for 'Haath lagao to dar jayegi' -->
             <div class="water-hand">🖐️</div>
-            <!-- Rising Bubbles -->
             <div class="bubble" style="left: 45px; width: 14px; height: 14px; animation-delay: 0.2s;"></div>
             <div class="bubble" style="left: 150px; width: 22px; height: 22px; animation-delay: 1.1s;"></div>
             <div class="bubble" style="left: 260px; width: 16px; height: 16px; animation-delay: 2s;"></div>
-            <!-- Hero Fish -->
             <div class="machli-hero" id="machliHeroChar">
               <svg viewBox="0 0 130 110" style="width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));">
                 <polygon points="20,55 0,25 5,55 0,85" fill="#FF7043" stroke="#D84315" stroke-width="2"/>
@@ -5167,19 +6169,49 @@
         `;
       }
 
-      // 3. CHANDA MAMA (थाली, प्याली टूटना & तालियां)
+      // 4. BANDAR MAMA (कुर्ता, गरम रसगुल्ला & जीभ जलना)
+      if (id.includes('bandar') || title.includes('बंदर')) {
+        return `
+          <div class="scene-bandar" id="activeSceneRoot">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
+            <div class="hot-rasgulla">🟡💨</div>
+            <div class="steam-cloud">♨️♨️</div>
+            <div class="bandar-char">
+              <svg viewBox="0 0 130 140" style="width: 100%; height: 100%;">
+                <circle cx="28" cy="48" r="15" fill="#8D6E63" stroke="#4E342E" stroke-width="2.5"/>
+                <circle cx="28" cy="48" r="8" fill="#D7CCC8"/>
+                <circle cx="102" cy="48" r="15" fill="#8D6E63" stroke="#4E342E" stroke-width="2.5"/>
+                <circle cx="102" cy="48" r="8" fill="#D7CCC8"/>
+                <circle cx="65" cy="52" r="34" fill="#795548" stroke="#4E342E" stroke-width="3"/>
+                <polygon points="50,22 65,4 80,22" fill="#FFD600" stroke="#E65100" stroke-width="2"/>
+                <circle cx="65" cy="4" r="3" fill="#E53935"/>
+                <path d="M 45,44 A 12,12 0 0,1 65,48 A 12,12 0 0,1 85,44 A 20,20 0 0,1 45,44 Z" fill="#FFE0B2"/>
+                <ellipse cx="65" cy="64" rx="22" ry="16" fill="#FFE0B2"/>
+                <circle cx="52" cy="46" r="4.5" fill="#212121"/>
+                <circle cx="78" cy="46" r="4.5" fill="#212121"/>
+                <path d="M 42,85 L 35,115 L 95,115 L 88,85 Z" fill="#FFEB3B" stroke="#F57F17" stroke-width="2"/>
+                <rect x="42" y="115" width="20" height="20" fill="#E53935"/>
+                <rect x="68" y="115" width="20" height="20" fill="#E53935"/>
+                <g id="bandarMouthAction">
+                  <path d="M 55,66 Q 65,76 75,66" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 5. CHANDA MAMA (थाली, प्याली टूटना & तालियां)
       if (id.includes('chanda') || title.includes('चंदा मामा')) {
         return `
           <div class="scene-chanda" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
-            <!-- Stars -->
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
               <circle cx="30" cy="25" r="2" fill="#FFF"/>
               <circle cx="85" cy="18" r="2.5" fill="#FFD700"/>
               <circle cx="270" cy="28" r="3" fill="#FFF"/>
               <circle cx="330" cy="45" r="2" fill="#FFD700"/>
             </svg>
-            <!-- Smiling Chanda Mama -->
             <div class="chanda-moon-svg">
               <svg viewBox="0 0 110 110" style="width: 100%; height: 100%;">
                 <circle cx="55" cy="55" r="46" fill="#FFF59D" stroke="#FBC02D" stroke-width="3"/>
@@ -5193,7 +6225,6 @@
                 <path d="M 48,68 Q 55,76 62,68 Z" fill="#FF5252"/>
               </svg>
             </div>
-            <!-- Props: Thaali & Pyali -->
             <div class="chanda-prop-container">
               <div class="prop-thaali">🌕</div>
               <div class="prop-pyali">🥣</div>
@@ -5202,49 +6233,65 @@
         `;
       }
 
-      // 4. BANDAR MAMA (कुर्ता, गरम रसगुल्ला & जीभ जलना)
-      if (id.includes('bandar') || title.includes('बंदर')) {
+      // 6. JOHNY JOHNY YES PAPA (शुगर जार & हा हा हा)
+      if (id.includes('johny') || title.includes('Johny')) {
         return `
-          <div class="scene-bandar" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
-            <div class="hot-rasgulla">🟡💨</div>
-            <div class="steam-cloud">♨️♨️</div>
-            <div class="bandar-char">
-              <svg viewBox="0 0 130 140" style="width: 100%; height: 100%;">
-                <!-- Monkey Ears -->
-                <circle cx="28" cy="48" r="15" fill="#8D6E63" stroke="#4E342E" stroke-width="2.5"/>
-                <circle cx="28" cy="48" r="8" fill="#D7CCC8"/>
-                <circle cx="102" cy="48" r="15" fill="#8D6E63" stroke="#4E342E" stroke-width="2.5"/>
-                <circle cx="102" cy="48" r="8" fill="#D7CCC8"/>
-                <!-- Head -->
-                <circle cx="65" cy="52" r="34" fill="#795548" stroke="#4E342E" stroke-width="3"/>
-                <!-- Party Topi (टोपी) -->
-                <polygon points="50,22 65,4 80,22" fill="#FFD600" stroke="#E65100" stroke-width="2"/>
-                <circle cx="65" cy="4" r="3" fill="#E53935"/>
-                <!-- Face Mask -->
-                <path d="M 45,44 A 12,12 0 0,1 65,48 A 12,12 0 0,1 85,44 A 20,20 0 0,1 45,44 Z" fill="#FFE0B2"/>
-                <ellipse cx="65" cy="64" rx="22" ry="16" fill="#FFE0B2"/>
-                <circle cx="52" cy="46" r="4.5" fill="#212121"/>
-                <circle cx="78" cy="46" r="4.5" fill="#212121"/>
-                <!-- Kurta & Pajama Body -->
-                <path d="M 42,85 L 35,115 L 95,115 L 88,85 Z" fill="#FFEB3B" stroke="#F57F17" stroke-width="2"/>
-                <rect x="42" y="115" width="20" height="20" fill="#E53935"/>
-                <rect x="68" y="115" width="20" height="20" fill="#E53935"/>
-                <!-- Mouth with burning tongue -->
-                <g id="bandarMouthAction">
-                  <path d="M 55,66 Q 65,76 75,66" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
-                </g>
+          <div class="scene-johny" id="activeSceneRoot">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
+            <div class="sugar-jar">🍯✨</div>
+            <div class="johny-baby">
+              <svg viewBox="0 0 140 140" style="width: 100%; height: 100%;">
+                <circle cx="70" cy="60" r="42" fill="#FFE0B2" stroke="#FFB74D" stroke-width="3"/>
+                <!-- Hair Tuft -->
+                <path d="M 66,22 Q 70,8 74,22" stroke="#8D5B28" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <!-- Cheeks -->
+                <circle cx="50" cy="72" r="7" fill="#FF8A80" opacity="0.7"/>
+                <circle cx="90" cy="72" r="7" fill="#FF8A80" opacity="0.7"/>
+                <!-- Eyes -->
+                <circle cx="54" cy="58" r="6" fill="#212121"/>
+                <circle cx="56" cy="56" r="2" fill="#FFFFFF"/>
+                <circle cx="86" cy="58" r="6" fill="#212121"/>
+                <circle cx="88" cy="56" r="2" fill="#FFFFFF"/>
+                <!-- Laughing Mouth -->
+                <path d="M 56,76 Q 70,96 84,76 Z" fill="#E53935" stroke="#B71C1C" stroke-width="2"/>
+                <!-- Bib Body -->
+                <path d="M 45,98 Q 70,125 95,98 L 105,130 L 35,130 Z" fill="#64B5F6" stroke="#1976D2" stroke-width="2"/>
               </svg>
             </div>
           </div>
         `;
       }
 
-      // 5. TITLI UDI (बस पे चढ़ी & रोना & ड्राइवर)
+      // 7. LALLA LALLA LORI / SO JA (CRADLE & FAIRY)
+      if (id.includes('lalla') || id.includes('soja') || title.includes('लोरी') || title.includes('सो जा')) {
+        return `
+          <div class="scene-lalla" id="activeSceneRoot">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
+            <div class="milk-bowl">🥛🍼</div>
+            <div class="sleep-fairy">🧚‍♀️✨</div>
+            <div class="sleep-zzz">💤</div>
+            <div class="cradle-box">
+              <svg viewBox="0 0 150 110" style="width: 100%; height: 100%;">
+                <path d="M 20,95 Q 75,115 130,95" stroke="#8D5B28" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <line x1="35" y1="65" x2="25" y2="98" stroke="#8D5B28" stroke-width="5"/>
+                <line x1="115" y1="65" x2="125" y2="98" stroke="#8D5B28" stroke-width="5"/>
+                <rect x="30" y="35" width="90" height="42" rx="12" fill="#FFE082" stroke="#FFB300" stroke-width="3"/>
+                <!-- Sleeping Baby -->
+                <circle cx="55" cy="50" r="14" fill="#FFE0B2"/>
+                <path d="M 49,50 Q 55,54 61,50" stroke="#795548" stroke-width="2" fill="none"/>
+                <!-- Blanket -->
+                <path d="M 50,55 Q 75,50 118,55 L 118,75 L 50,75 Z" fill="#FF80AB"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 8. TITLI UDI (बस पे चढ़ी & रोना & ड्राइवर)
       if (id.includes('titli') || title.includes('तितली')) {
         return `
           <div class="scene-titli" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <div class="titli-tears">💧💧</div>
             <div class="driver-avatar">👨‍✈️👋</div>
             <div class="titli-bus-box">
@@ -5271,11 +6318,11 @@
         `;
       }
 
-      // 6. TWINKLE TWINKLE
+      // 9. TWINKLE TWINKLE
       if (id.includes('twinkle') || title.includes('Twinkle')) {
         return `
           <div class="scene-twinkle" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <div class="shooting-star"></div>
             <svg class="hero-star" viewBox="0 0 120 120">
               <polygon points="60,8 74,44 112,46 82,70 92,106 60,84 28,106 38,70 8,46 46,44" fill="#FFEB3B" stroke="#FBC02D" stroke-width="3.5"/>
@@ -5291,11 +6338,11 @@
         `;
       }
 
-      // 7. WHEELS ON THE BUS
+      // 10. WHEELS ON THE BUS
       if (id.includes('bus') || title.includes('Bus')) {
         return `
           <div class="scene-bus" id="activeSceneRoot">
-            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
             <div class="yellow-bus">
               <svg viewBox="0 0 180 110">
                 <rect x="10" y="20" width="160" height="65" rx="16" fill="#FFD600" stroke="#FF9100" stroke-width="3.5"/>
@@ -5319,7 +6366,7 @@
         `;
       }
 
-      // 8. SACRED AARTI
+      // 11. SACRED AARTI
       if (song.cat === 'aarti' || song.cat === 'gita') {
         return `
           <div class="scene-aarti" id="activeSceneRoot">
@@ -5349,7 +6396,7 @@
       // Default Dancing Character
       return `
         <div class="scene-jungle" id="activeSceneRoot">
-          <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+          <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 120FPS ULTRA VIDEO</div>
           <div class="dancing-char">
             <div style="font-size: 95px; text-align: center; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));">${song.icon || '🌟'}</div>
           </div>
@@ -5367,7 +6414,21 @@
       // Reset previous action classes
       root.className = root.className.replace(/\baction-[a-z0-9-]+\b/g, '').trim();
 
-      // 1. LAKDI KI KAATHI
+      // 1. EK MOTA HATHI (एक मोटा हाथी झूम के चला)
+      if (id.includes('hathi') || title.includes('हाथी')) {
+        if (lineIndex === 0) {
+          root.classList.add('action-hathi-0'); // Marching proudly
+        } else if (lineIndex === 1 || lineIndex === 2) {
+          root.classList.add('action-hathi-1'); // Trapped in spiderweb & shaking!
+        } else if (lineIndex === 3) {
+          root.classList.add('action-hathi-3'); // Calling friend elephant
+        } else {
+          root.classList.add('action-hathi-4'); // FRIEND ELEPHANT RESCUE ARRIVAL!
+        }
+        return;
+      }
+
+      // 2. LAKDI KI KAATHI
       if (id.includes('lakdi') || title.includes('लकड़ी')) {
         if (lineIndex === 0) {
           root.classList.add('action-lakdi-0'); // Gentle rocking
@@ -5379,30 +6440,14 @@
         return;
       }
 
-      // 2. MACHHLI JAL KI RANI
+      // 3. MACHHLI JAL KI RANI
       if (id.includes('machli') || title.includes('मछली')) {
         if (lineIndex === 0 || lineIndex === 1) {
           root.classList.add('action-machli-0'); // Swimming peacefully
-        } else if (lineIndex === 2) {
+        } else if (lineIndex === 2 || lineIndex === 3) {
           root.classList.add('action-machli-2'); // HAATH LAGAO -> HAND DIPS IN & FISH DARTS!
-        } else if (lineIndex === 3) {
-          root.classList.add('action-machli-2'); // Scared fish
-        } else if (lineIndex === 4) {
+        } else if (lineIndex >= 4) {
           root.classList.add('action-machli-4'); // PANI ME DALO -> JOY SOMERSAULT!
-        }
-        return;
-      }
-
-      // 3. CHANDA MAMA
-      if (id.includes('chanda') || title.includes('चंदा मामा')) {
-        if (lineIndex === 0) {
-          root.classList.add('action-chanda-0'); // Peaceful moon
-        } else if (lineIndex === 1) {
-          root.classList.add('action-chanda-1'); // Thaali and pyali
-        } else if (lineIndex === 2) {
-          root.classList.add('action-chanda-2'); // PYALI GAYI TOOT!
-        } else {
-          root.classList.add('action-chanda-3'); // TAALIYAN & HAPPY MOON!
         }
         return;
       }
@@ -5419,7 +6464,21 @@
         return;
       }
 
-      // 5. TITLI UDI
+      // 5. CHANDA MAMA
+      if (id.includes('chanda') || title.includes('चंदा मामा')) {
+        if (lineIndex === 0) {
+          root.classList.add('action-chanda-0'); // Peaceful moon
+        } else if (lineIndex === 1) {
+          root.classList.add('action-chanda-1'); // Thaali and pyali
+        } else if (lineIndex === 2) {
+          root.classList.add('action-chanda-2'); // PYALI GAYI TOOT!
+        } else {
+          root.classList.add('action-chanda-3'); // TAALIYAN & HAPPY MOON!
+        }
+        return;
+      }
+
+      // 6. TITLI UDI
       if (id.includes('titli') || title.includes('तितली')) {
         if (lineIndex === 0) {
           root.classList.add('action-titli-0'); // Boarding bus
@@ -5432,8 +6491,19 @@
         }
         return;
       }
-    }
 
+      // 7. JOHNY JOHNY
+      if (id.includes('johny') || title.includes('Johny')) {
+        if (lineIndex === 0) {
+          root.classList.add('action-johny-0'); // Yes papa
+        } else if (lineIndex === 1 || lineIndex === 2) {
+          root.classList.add('action-johny-1'); // Shaking head no papa
+        } else {
+          root.classList.add('action-johny-3'); // Open mouth Ha Ha Ha!
+        }
+        return;
+      }
+    }
 
     function openPlayer(song) {
       startLullabyBgm();
