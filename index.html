@@ -1533,6 +1533,370 @@
       100% { height: 16px; }
     }
 
+  
+    /* ====================================================
+       60FPS AI ANIMATED CARTOON VIDEO THEATRE
+       ==================================================== */
+    .rhyme-theatre-box {
+      width: 100%;
+      position: relative;
+      margin: 8px 0 12px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #000000;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 4px #FFD54F;
+      border: 3px solid #FFF;
+    }
+
+    body.night-mode .rhyme-theatre-box {
+      box-shadow: 0 16px 45px rgba(0,0,0,0.8), 0 0 0 4px #64DFDF !important;
+      border: 3px solid #1E293B !important;
+    }
+
+    .rhyme-theatre-stage {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    /* LIVE BADGE */
+    .theatre-live-tag {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+      letter-spacing: 0.5px;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FF3B30;
+      box-shadow: 0 0 8px #FF3B30;
+      animation: livePulse 1s infinite alternate ease-in-out;
+    }
+    @keyframes livePulse {
+      0% { opacity: 0.4; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* STREAMLINED SUBTITLE RIBBON */
+    .rhyme-theatre-sub {
+      position: absolute;
+      bottom: 10px;
+      left: 12px;
+      right: 12px;
+      background: rgba(10, 15, 30, 0.78);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 215, 0, 0.5);
+      border-radius: 16px;
+      padding: 7px 14px;
+      color: #FFF9C4;
+      font-size: 14.5px;
+      font-weight: 800;
+      text-align: center;
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      transition: all 0.25s ease;
+    }
+
+    /* SCENE 1: CHANDA MAMA (चंदा मामा दूर के) */
+    .scene-chanda {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #1e3c72 0%, #101c3d 60%, #060b18 100%);
+      position: relative;
+    }
+    .chanda-moon {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      animation: moonSway 3.5s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 25px rgba(255, 235, 59, 0.8));
+    }
+    @keyframes moonSway {
+      0% { transform: translateX(-50%) rotate(-5deg) translateY(0); }
+      100% { transform: translateX(-50%) rotate(5deg) translateY(-8px); }
+    }
+    .chanda-cloud-1 {
+      position: absolute;
+      top: 65px;
+      left: -60px;
+      width: 130px;
+      opacity: 0.85;
+      animation: cloudDriftL 14s infinite linear;
+    }
+    .chanda-cloud-2 {
+      position: absolute;
+      top: 110px;
+      right: -70px;
+      width: 150px;
+      opacity: 0.75;
+      animation: cloudDriftR 18s infinite linear;
+    }
+    @keyframes cloudDriftL {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(450px); }
+    }
+    @keyframes cloudDriftR {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-450px); }
+    }
+    .chanda-thaali {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: thaaliBounce 1.2s infinite alternate ease-in-out;
+    }
+    @keyframes thaaliBounce {
+      0% { transform: translateX(-50%) translateY(0) scale(1); }
+      100% { transform: translateX(-50%) translateY(-6px) scale(1.05); }
+    }
+
+    /* SCENE 2: MACHHLI (मछली जल की रानी है) */
+    .scene-machli {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #00b4db 0%, #0083b0 60%, #003973 100%);
+      position: relative;
+    }
+    .seaweed {
+      position: absolute;
+      bottom: 0;
+      width: 35px;
+      height: 110px;
+      transform-origin: bottom center;
+      animation: seaweedSway 2.5s infinite alternate ease-in-out;
+    }
+    .seaweed-1 { left: 15px; animation-duration: 2.2s; }
+    .seaweed-2 { left: 55px; height: 80px; animation-duration: 3s; }
+    .seaweed-3 { right: 25px; height: 120px; animation-duration: 2.7s; }
+    .seaweed-4 { right: 70px; height: 90px; animation-duration: 2.1s; }
+    @keyframes seaweedSway {
+      0% { transform: rotate(-10deg); }
+      100% { transform: rotate(12deg); }
+    }
+    .fish-hero {
+      position: absolute;
+      top: 40px;
+      width: 130px;
+      height: 110px;
+      animation: fishSwim 7s infinite linear;
+    }
+    @keyframes fishSwim {
+      0% { left: -140px; transform: scaleX(1) translateY(0); }
+      48% { left: 320px; transform: scaleX(1) translateY(-15px); }
+      50% { left: 320px; transform: scaleX(-1) translateY(-15px); }
+      98% { left: -140px; transform: scaleX(-1) translateY(10px); }
+      100% { left: -140px; transform: scaleX(1) translateY(0); }
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.7);
+      animation: bubbleRise 3.5s infinite ease-in;
+    }
+    @keyframes bubbleRise {
+      0% { bottom: 20px; opacity: 0; transform: translateX(0) scale(0.6); }
+      20% { opacity: 0.9; }
+      100% { bottom: 230px; opacity: 0; transform: translateX(18px) scale(1.2); }
+    }
+
+    /* SCENE 3: TWINKLE TWINKLE */
+    .scene-twinkle {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #4a00e0 0%, #200052 60%, #0d0022 100%);
+      position: relative;
+    }
+    .hero-star {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 125px;
+      height: 125px;
+      animation: starTwinklePulse 1.4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 30px #FFD700);
+    }
+    @keyframes starTwinklePulse {
+      0% { transform: translateX(-50%) scale(0.92) rotate(-6deg); filter: drop-shadow(0 0 18px #FFD700); }
+      100% { transform: translateX(-50%) scale(1.08) rotate(6deg); filter: drop-shadow(0 0 40px #FFF700) drop-shadow(0 0 15px #FF6F00); }
+    }
+    .shooting-star {
+      position: absolute;
+      top: 25px;
+      right: -80px;
+      width: 90px;
+      height: 2px;
+      background: linear-gradient(90deg, #FFFFFF, transparent);
+      border-radius: 2px;
+      transform: rotate(-35deg);
+      animation: shootingStreak 4s infinite 1.5s ease-out;
+    }
+    @keyframes shootingStreak {
+      0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+      10% { opacity: 1; }
+      35% { transform: translateX(-350px) translateY(220px) rotate(-35deg); opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* SCENE 4: TITLI UDI (तितली उड़ी बस पे चढ़ी) */
+    .scene-titli {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #70e1f5 0%, #ffd194 65%, #a8e063 100%);
+      position: relative;
+    }
+    .cartoon-bus {
+      position: absolute;
+      bottom: 42px;
+      left: 20px;
+      width: 160px;
+      animation: busBounce 0.4s infinite alternate ease-in-out;
+    }
+    @keyframes busBounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+    .titli-hero {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      width: 100px;
+      height: 85px;
+      animation: titliFlutter 3s infinite ease-in-out;
+    }
+    @keyframes titliFlutter {
+      0% { transform: translateY(0) rotate(0deg) scale(0.9); }
+      50% { transform: translateY(-22px) translateX(-30px) rotate(-15deg) scale(1.1); }
+      100% { transform: translateY(0) rotate(0deg) scale(0.9); }
+    }
+
+    /* SCENE 5: LAKDI KI KAATHI */
+    .scene-lakdi {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #fbc2eb 0%, #a6c1ee 70%, #d4fc79 100%);
+      position: relative;
+    }
+    .wooden-horse {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      animation: horseGallop 0.65s infinite alternate ease-in-out;
+    }
+    @keyframes horseGallop {
+      0% { transform: translateX(-50%) rotate(-8deg) translateY(0); }
+      100% { transform: translateX(-50%) rotate(8deg) translateY(-12px); }
+    }
+
+    /* SCENE 6: WHEELS ON THE BUS */
+    .scene-bus {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #89f7fe 0%, #66a6ff 70%, #708090 100%);
+      position: relative;
+    }
+    .yellow-bus {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      animation: yellowBusDrive 0.45s infinite alternate ease-in-out;
+    }
+    @keyframes yellowBusDrive {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-5px); }
+    }
+    .spinning-wheel {
+      animation: wheelSpin 1s infinite linear;
+      transform-origin: center center;
+    }
+    @keyframes wheelSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* SCENE 7: HATHI & BANDAR & LALLA LORI */
+    .scene-jungle {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #56ab2f 0%, #a8e063 80%, #3e8e41 100%);
+      position: relative;
+    }
+    .dancing-char {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      animation: charDance 0.6s infinite alternate ease-in-out;
+    }
+    @keyframes charDance {
+      0% { transform: translateX(-50%) scale(0.95) rotate(-4deg); }
+      100% { transform: translateX(-50%) scale(1.05) rotate(4deg) translateY(-8px); }
+    }
+
+    /* SCENE 8: AARTI / SACRED SANSKAAR */
+    .scene-aarti {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 40%, #ff8008 0%, #ffc837 50%, #4a154b 100%);
+      position: relative;
+    }
+    .aarti-diya {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      filter: drop-shadow(0 0 25px rgba(255, 193, 7, 0.9));
+      animation: diyaGlow 1.2s infinite alternate ease-in-out;
+    }
+    @keyframes diyaGlow {
+      0% { transform: translateX(-50%) scale(0.97); }
+      100% { transform: translateX(-50%) scale(1.04); }
+    }
+    .hanging-bell {
+      position: absolute;
+      top: 10px;
+      width: 44px;
+      transform-origin: top center;
+      animation: bellSway 1.8s infinite alternate ease-in-out;
+    }
+    .bell-l { left: 30px; }
+    .bell-r { right: 30px; animation-delay: 0.9s; }
+    @keyframes bellSway {
+      0% { transform: rotate(-16deg); }
+      100% { transform: rotate(16deg); }
+    }
+
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -1633,12 +1997,20 @@
   <div class="player-overlay" id="playerModal">
     <div class="player-box">
       <button class="close-player" onclick="closePlayer()">✕</button>
-      <div class="player-visual" id="pVisual">🪔</div>
-      <h3 class="player-title" id="pTitle">जय गणेश देवा</h3>
-      <div class="player-category" id="pCategory">आरती एवं संस्कार</div>
+      <div class="rhyme-theatre-header">
+        <h3 class="player-title" id="pTitle">जय गणेश देवा</h3>
+        <div class="player-category" id="pCategory">आरती एवं संस्कार</div>
+        <div id="pVisual" style="display: none;">🪔</div>
+      </div>
       
-      <!-- LINE HIGHLIGHTED LYRICS -->
-      <div class="player-lyrics" id="pLyrics"></div>
+      <!-- 🎬 60FPS AI ANIMATED CARTOON VIDEO THEATRE (NO CLUTTERED TEXT) -->
+      <div class="rhyme-theatre-box">
+        <div class="rhyme-theatre-stage" id="rhymeVideoStage"></div>
+        <div class="rhyme-theatre-sub" id="rhymeVideoSub">शुरू हो रहा है... 🎶</div>
+      </div>
+
+      <!-- Hidden compatibility container for lyrics -->
+      <div class="player-lyrics" id="pLyrics" style="display: none;"></div>
 
       <div class="player-controls">
         <button class="ctrl-btn" onclick="prevSong()">⏮</button>
@@ -4022,6 +4394,279 @@
     }
 
     // LINE BY LINE SPOKEN SING-ALONG PLAYER
+    
+    // DYNAMIC 60FPS AI CARTOON VIDEO SCENE GENERATOR
+    function getRhymeVideoSceneHtml(song) {
+      if (!song) return '';
+      const id = song.id || '';
+      const title = song.title || '';
+
+      // 1. CHANDA MAMA (चंदा मामा दूर के)
+      if (id.includes('chanda') || title.includes('चंदा मामा')) {
+        return `
+          <div class="scene-chanda">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <!-- Twinkling Stars -->
+            <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;">
+              <circle cx="20" cy="30" r="1.5" fill="#FFF" opacity="0.9"/>
+              <circle cx="80" cy="20" r="2" fill="#FFD700" opacity="0.8"/>
+              <circle cx="280" cy="35" r="2.5" fill="#FFF" opacity="0.95"/>
+              <circle cx="340" cy="50" r="1.5" fill="#FFD700" opacity="0.7"/>
+              <circle cx="50" cy="180" r="2" fill="#FFF" opacity="0.6"/>
+              <circle cx="310" cy="160" r="2" fill="#FFF" opacity="0.8"/>
+            </svg>
+            <!-- Smiling Chanda Mama -->
+            <svg class="chanda-moon" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="48" fill="#FFF59D" stroke="#FBC02D" stroke-width="3"/>
+              <!-- Cheeks -->
+              <ellipse cx="40" cy="68" rx="8" ry="5" fill="#FF8A80" opacity="0.7"/>
+              <ellipse cx="80" cy="68" rx="8" ry="5" fill="#FF8A80" opacity="0.7"/>
+              <!-- Eyes -->
+              <circle cx="44" cy="54" r="5" fill="#212121"/>
+              <circle cx="46" cy="52" r="2" fill="#FFFFFF"/>
+              <circle cx="76" cy="54" r="5" fill="#212121"/>
+              <circle cx="78" cy="52" r="2" fill="#FFFFFF"/>
+              <!-- Smile -->
+              <path d="M 46,70 Q 60,84 74,70" fill="none" stroke="#E65100" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M 52,73 Q 60,82 68,73 Z" fill="#FF5252"/>
+            </svg>
+            <!-- Clouds -->
+            <svg class="chanda-cloud-1" viewBox="0 0 130 60">
+              <path d="M 20,45 Q 10,45 10,35 Q 10,25 25,25 Q 35,10 55,15 Q 75,5 95,20 Q 115,15 120,35 Q 120,45 110,45 Z" fill="#E8EAF6" opacity="0.85"/>
+            </svg>
+            <svg class="chanda-cloud-2" viewBox="0 0 150 70">
+              <path d="M 20,55 Q 10,55 10,40 Q 10,25 30,25 Q 45,10 70,15 Q 95,5 120,20 Q 140,20 145,45 Q 145,55 130,55 Z" fill="#C5CAE9" opacity="0.75"/>
+            </svg>
+            <!-- Steaming Golden Thaali of Puaye -->
+            <svg class="chanda-thaali" viewBox="0 0 110 50" style="width: 110px;">
+              <ellipse cx="55" cy="35" rx="50" ry="14" fill="#FFD54F" stroke="#FF8F00" stroke-width="2.5"/>
+              <ellipse cx="55" cy="32" rx="42" ry="10" fill="#FFE082"/>
+              <!-- Sweet Puaye -->
+              <circle cx="38" cy="30" r="9" fill="#8D5B28"/>
+              <circle cx="55" cy="27" r="10" fill="#A16B35"/>
+              <circle cx="72" cy="30" r="9" fill="#8D5B28"/>
+              <!-- Steam -->
+              <path d="M 52,20 Q 55,10 50,4 M 60,20 Q 63,10 58,4" stroke="#FFF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.75"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      // 2. MACHHLI JAL KI RANI HAI (मछली जल की रानी है)
+      if (id.includes('machli') || title.includes('मछली')) {
+        return `
+          <div class="scene-machli">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <!-- Seaweed -->
+            <svg class="seaweed seaweed-1" viewBox="0 0 35 110">
+              <path d="M 15,110 Q 5,80 25,55 Q 5,30 20,0" stroke="#00E676" stroke-width="9" stroke-linecap="round" fill="none"/>
+            </svg>
+            <svg class="seaweed seaweed-2" viewBox="0 0 35 80">
+              <path d="M 15,80 Q 28,55 8,30 Q 25,10 18,0" stroke="#00C853" stroke-width="8" stroke-linecap="round" fill="none"/>
+            </svg>
+            <svg class="seaweed seaweed-3" viewBox="0 0 35 120">
+              <path d="M 15,120 Q 28,85 10,55 Q 30,25 18,0" stroke="#00E676" stroke-width="9" stroke-linecap="round" fill="none"/>
+            </svg>
+            <svg class="seaweed seaweed-4" viewBox="0 0 35 90">
+              <path d="M 15,90 Q 5,60 25,35 Q 8,15 20,0" stroke="#00C853" stroke-width="8" stroke-linecap="round" fill="none"/>
+            </svg>
+            <!-- Bubbles -->
+            <div class="bubble" style="left: 45px; width: 14px; height: 14px; animation-delay: 0.2s;"></div>
+            <div class="bubble" style="left: 140px; width: 20px; height: 20px; animation-delay: 1.2s;"></div>
+            <div class="bubble" style="left: 240px; width: 16px; height: 16px; animation-delay: 2.1s;"></div>
+            <div class="bubble" style="left: 180px; width: 10px; height: 10px; animation-delay: 0.8s;"></div>
+            <!-- Cute Hero Fish -->
+            <div class="fish-hero">
+              <svg viewBox="0 0 130 110" style="width: 100%; height: 100%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));">
+                <!-- Tail Fin -->
+                <polygon points="20,55 0,25 5,55 0,85" fill="#FF7043" stroke="#D84315" stroke-width="2"/>
+                <!-- Body -->
+                <ellipse cx="65" cy="55" rx="45" ry="32" fill="#FFA726" stroke="#E65100" stroke-width="3"/>
+                <!-- Stripes -->
+                <path d="M 52,26 Q 58,55 52,84" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+                <path d="M 72,24 Q 78,55 72,86" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+                <!-- Top Fin -->
+                <path d="M 50,25 Q 65,8 85,24" fill="#FF7043" stroke="#D84315" stroke-width="2"/>
+                <!-- Eye -->
+                <circle cx="92" cy="46" r="9" fill="#FFFFFF"/>
+                <circle cx="94" cy="46" r="5" fill="#212121"/>
+                <circle cx="96" cy="44" r="2" fill="#FFFFFF"/>
+                <!-- Cute Mouth Blowing Bubbles -->
+                <path d="M 108,55 Q 115,58 108,62" fill="none" stroke="#D84315" stroke-width="3.5" stroke-linecap="round"/>
+                <!-- Pectoral Fin -->
+                <ellipse cx="68" cy="62" rx="14" ry="9" fill="#FF7043" transform="rotate(-15 68 62)"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 3. TWINKLE TWINKLE LITTLE STAR
+      if (id.includes('twinkle') || title.includes('Twinkle')) {
+        return `
+          <div class="scene-twinkle">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="shooting-star"></div>
+            <!-- Hero Smiling Diamond Star -->
+            <svg class="hero-star" viewBox="0 0 120 120">
+              <polygon points="60,8 74,44 112,46 82,70 92,106 60,84 28,106 38,70 8,46 46,44" fill="#FFEB3B" stroke="#FBC02D" stroke-width="3.5"/>
+              <!-- Cheeks -->
+              <circle cx="46" cy="62" r="5" fill="#FF80AB" opacity="0.8"/>
+              <circle cx="74" cy="62" r="5" fill="#FF80AB" opacity="0.8"/>
+              <!-- Eyes -->
+              <circle cx="48" cy="52" r="4.5" fill="#212121"/>
+              <circle cx="50" cy="50" r="1.5" fill="#FFFFFF"/>
+              <circle cx="72" cy="52" r="4.5" fill="#212121"/>
+              <circle cx="74" cy="50" r="1.5" fill="#FFFFFF"/>
+              <!-- Smile -->
+              <path d="M 52,65 Q 60,75 68,65" fill="none" stroke="#E65100" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      // 4. TITLI UDI (तितली उड़ी बस पे चढ़ी)
+      if (id.includes('titli') || title.includes('तितली')) {
+        return `
+          <div class="scene-titli">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <!-- Red Cartoon Bus -->
+            <div class="cartoon-bus">
+              <svg viewBox="0 0 160 90">
+                <rect x="10" y="15" width="140" height="55" rx="14" fill="#E53935" stroke="#B71C1C" stroke-width="3"/>
+                <!-- Windows -->
+                <rect x="25" y="24" width="25" height="20" rx="4" fill="#E0F7FA"/>
+                <rect x="58" y="24" width="25" height="20" rx="4" fill="#E0F7FA"/>
+                <rect x="91" y="24" width="25" height="20" rx="4" fill="#E0F7FA"/>
+                <rect x="124" y="24" width="18" height="20" rx="4" fill="#E0F7FA"/>
+                <!-- Wheels -->
+                <circle cx="42" cy="70" r="14" fill="#333333"/>
+                <circle cx="42" cy="70" r="6" fill="#BDBDBD"/>
+                <circle cx="120" cy="70" r="14" fill="#333333"/>
+                <circle cx="120" cy="70" r="6" fill="#BDBDBD"/>
+                <!-- Headlight -->
+                <circle cx="148" cy="52" r="5" fill="#FFEB3B"/>
+              </svg>
+            </div>
+            <!-- Fluttering Butterfly -->
+            <div class="titli-hero">
+              <svg viewBox="0 0 100 85">
+                <!-- Wings -->
+                <ellipse cx="32" cy="35" rx="26" ry="18" fill="#FF4081" stroke="#C2185B" stroke-width="2.5" transform="rotate(-25 32 35)"/>
+                <ellipse cx="68" cy="35" rx="26" ry="18" fill="#FF4081" stroke="#C2185B" stroke-width="2.5" transform="rotate(25 68 35)"/>
+                <ellipse cx="38" cy="55" rx="18" ry="12" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2" transform="rotate(15 38 55)"/>
+                <ellipse cx="62" cy="55" rx="18" ry="12" fill="#FFEB3B" stroke="#FBC02D" stroke-width="2" transform="rotate(-15 62 55)"/>
+                <!-- Body -->
+                <ellipse cx="50" cy="45" rx="6" ry="24" fill="#6A1B9A"/>
+                <!-- Antennae -->
+                <path d="M 47,24 Q 40,12 36,15 M 53,24 Q 60,12 64,15" stroke="#4A148C" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 5. LAKDI KI KAATHI (लकड़ी की काठी)
+      if (id.includes('lakdi') || title.includes('लकड़ी')) {
+        return `
+          <div class="scene-lakdi">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="wooden-horse">
+              <svg viewBox="0 0 150 120">
+                <!-- Rocking Base -->
+                <path d="M 15,108 Q 75,124 135,108" stroke="#8D5B28" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <!-- Legs -->
+                <line x1="45" y1="75" x2="35" y2="110" stroke="#8D5B28" stroke-width="6" stroke-linecap="round"/>
+                <line x1="105" y1="75" x2="115" y2="110" stroke="#8D5B28" stroke-width="6" stroke-linecap="round"/>
+                <!-- Body -->
+                <ellipse cx="75" cy="65" rx="42" ry="22" fill="#D7CCC8" stroke="#8D5B28" stroke-width="3"/>
+                <!-- Red Saddle (काठी) -->
+                <path d="M 60,48 Q 75,56 90,48 L 92,62 Q 75,70 58,62 Z" fill="#E53935" stroke="#B71C1C" stroke-width="1.5"/>
+                <!-- Neck & Head -->
+                <path d="M 105,62 L 122,30 Q 135,32 128,45 L 115,70 Z" fill="#D7CCC8" stroke="#8D5B28" stroke-width="3"/>
+                <!-- Ears & Mane -->
+                <polygon points="120,25 125,12 130,26" fill="#8D5B28"/>
+                <path d="M 112,32 Q 106,42 108,55" stroke="#FF7043" stroke-width="4" stroke-linecap="round"/>
+                <!-- Eye -->
+                <circle cx="122" cy="34" r="3" fill="#212121"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 6. WHEELS ON THE BUS
+      if (id.includes('bus') || title.includes('Bus')) {
+        return `
+          <div class="scene-bus">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+            <div class="yellow-bus">
+              <svg viewBox="0 0 180 110">
+                <rect x="10" y="20" width="160" height="65" rx="16" fill="#FFD600" stroke="#FF9100" stroke-width="3.5"/>
+                <!-- Windows -->
+                <rect x="25" y="30" width="30" height="24" rx="5" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+                <rect x="65" y="30" width="30" height="24" rx="5" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+                <rect x="105" y="30" width="30" height="24" rx="5" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+                <rect x="145" y="30" width="18" height="24" rx="5" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+                <!-- Wheels with Spinning Hub -->
+                <g transform="translate(50, 85)">
+                  <circle cx="0" cy="0" r="16" fill="#263238" stroke="#37474F" stroke-width="2"/>
+                  <circle cx="0" cy="0" r="7" fill="#B0BEC5"/>
+                  <line x1="-7" y1="0" x2="7" y2="0" stroke="#37474F" stroke-width="2" class="spinning-wheel"/>
+                </g>
+                <g transform="translate(135, 85)">
+                  <circle cx="0" cy="0" r="16" fill="#263238" stroke="#37474F" stroke-width="2"/>
+                  <circle cx="0" cy="0" r="7" fill="#B0BEC5"/>
+                  <line x1="-7" y1="0" x2="7" y2="0" stroke="#37474F" stroke-width="2" class="spinning-wheel"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 7. AARTI & SACRED GITA
+      if (song.cat === 'aarti' || song.cat === 'gita') {
+        return `
+          <div class="scene-aarti">
+            <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 SACRED DARSHAN</div>
+            <svg class="hanging-bell bell-l" viewBox="0 0 44 60">
+              <line x1="22" y1="0" x2="22" y2="20" stroke="#FFD700" stroke-width="3"/>
+              <path d="M 10,45 Q 12,20 22,20 Q 32,20 34,45 Z" fill="#FFD700" stroke="#B7950B" stroke-width="2"/>
+              <circle cx="22" cy="48" r="5" fill="#B7950B"/>
+            </svg>
+            <svg class="hanging-bell bell-r" viewBox="0 0 44 60">
+              <line x1="22" y1="0" x2="22" y2="20" stroke="#FFD700" stroke-width="3"/>
+              <path d="M 10,45 Q 12,20 22,20 Q 32,20 34,45 Z" fill="#FFD700" stroke="#B7950B" stroke-width="2"/>
+              <circle cx="22" cy="48" r="5" fill="#B7950B"/>
+            </svg>
+            <!-- Glowing Aarti Diya -->
+            <div class="aarti-diya">
+              <svg viewBox="0 0 130 90">
+                <!-- Brass Base -->
+                <path d="M 25,65 Q 65,85 105,65 Q 65,55 25,65 Z" fill="#FFB300" stroke="#FF6F00" stroke-width="2.5"/>
+                <ellipse cx="65" cy="62" rx="42" ry="12" fill="#FFA000"/>
+                <!-- Flame -->
+                <path d="M 65,20 Q 52,42 65,55 Q 78,42 65,20 Z" fill="#FF3D00"/>
+                <path d="M 65,28 Q 58,44 65,52 Q 72,44 65,28 Z" fill="#FFEA00"/>
+              </svg>
+            </div>
+          </div>
+        `;
+      }
+
+      // 8. GENERAL DANCING JUNGLE ANIMATION (Hathi, Bandar, Lori, Johny, etc.)
+      return `
+        <div class="scene-jungle">
+          <div class="theatre-live-tag"><span class="live-dot"></span> 🎬 60FPS AI VIDEO</div>
+          <div class="dancing-char">
+            <div style="font-size: 85px; text-align: center; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));">${song.icon || '🌟'}</div>
+          </div>
+        </div>
+      `;
+    }
+
+
     function openPlayer(song) {
       startLullabyBgm();
       if (!song) return;
@@ -4041,15 +4686,27 @@
         playCinematicChime();
       }
 
+      // 🎬 Inject 60FPS AI Animated Video Scene
+      const stage = document.getElementById('rhymeVideoStage');
+      if (stage) {
+        stage.innerHTML = getRhymeVideoSceneHtml(song);
+      }
+      const subRibbon = document.getElementById('rhymeVideoSub');
+      if (subRibbon && song.lines && song.lines[0]) {
+        subRibbon.innerText = song.lines[0];
+      }
+
       const lyricsBox = document.getElementById('pLyrics');
-      lyricsBox.innerHTML = '';
-      song.lines.forEach((line, idx) => {
-        const div = document.createElement('div');
-        div.className = 'lyrics-line';
-        div.id = `line_${idx}`;
-        div.innerText = line;
-        lyricsBox.appendChild(div);
-      });
+      if (lyricsBox) {
+        lyricsBox.innerHTML = '';
+        song.lines.forEach((line, idx) => {
+          const div = document.createElement('div');
+          div.className = 'lyrics-line';
+          div.id = `line_${idx}`;
+          div.innerText = line;
+          lyricsBox.appendChild(div);
+        });
+      }
 
       document.getElementById('playerModal').style.display = 'flex';
       isPlaying = true;
@@ -4070,9 +4727,11 @@
 
       document.querySelectorAll('.lyrics-line').forEach(l => l.classList.remove('active'));
       const activeLineEl = document.getElementById(`line_${currentLineIndex}`);
-      if (activeLineEl) {
-        activeLineEl.classList.add('active');
-        activeLineEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (activeLineEl) activeLineEl.classList.add('active');
+
+      const subRibbon = document.getElementById('rhymeVideoSub');
+      if (subRibbon && song.lines && song.lines[currentLineIndex]) {
+        subRibbon.innerText = song.lines[currentLineIndex];
       }
 
       const text = song.lines[currentLineIndex];
