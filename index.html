@@ -1302,6 +1302,237 @@
       text-shadow: 0 0 10px rgba(100, 223, 223, 0.4);
     }
 
+  
+    /* ====================================================
+       TALKING ANIMATED ANIMAL STAGE (LIVELY 3D MOVEMENT)
+       ==================================================== */
+    .animal-stage {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 10px auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .animal-stage-portal {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 60%, rgba(255,215,0,0.4) 100%);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25), inset 0 0 20px rgba(255,255,255,0.8), 0 0 0 6px rgba(255,255,255,0.9);
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    body.night-mode .animal-stage-portal {
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 70%, #334155 100%) !important;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 20px rgba(100,223,223,0.3), 0 0 0 5px #64DFDF !important;
+    }
+
+    .animal-stage.talking .animal-stage-portal {
+      animation: pulsePortal 0.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulsePortal {
+      0% { transform: scale(1); box-shadow: 0 15px 35px rgba(255,107,107,0.3), 0 0 0 6px #FFD166; }
+      100% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(255,107,107,0.5), 0 0 0 10px #FF6B6B; }
+    }
+
+    .animal-svg {
+      width: 190px;
+      height: 190px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.25));
+      transform-origin: 50% 90%;
+      animation: animalIdleBreathing 2.8s infinite ease-in-out;
+    }
+
+    @keyframes animalIdleBreathing {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.02) translateY(-4px); }
+    }
+
+    .animal-stage.talking .animal-svg {
+      animation: animalTalkingBounce 0.4s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes animalTalkingBounce {
+      0% { transform: scale(1) translateY(0) rotate(-1deg); }
+      100% { transform: scale(1.05) translateY(-8px) rotate(1.5deg); }
+    }
+
+    /* MOUTH MOVEMENT FOR ALL ANIMALS */
+    .anim-mouth-closed {
+      display: block;
+      transition: all 0.15s ease;
+    }
+    .anim-mouth-open {
+      display: none;
+      transform-origin: 50% 50%;
+    }
+
+    .animal-stage.talking .anim-mouth-closed {
+      display: none;
+    }
+    .animal-stage.talking .anim-mouth-open {
+      display: block;
+      animation: mouthTalkAnimation 0.28s infinite alternate ease-in-out;
+    }
+
+    @keyframes mouthTalkAnimation {
+      0% { transform: scaleY(0.4) scaleX(0.9); }
+      100% { transform: scaleY(1.3) scaleX(1.08); }
+    }
+
+    /* EYE BLINK ANIMATION */
+    .anim-eye {
+      transform-origin: 50% 50%;
+      animation: eyeBlink 3.8s infinite;
+    }
+
+    @keyframes eyeBlink {
+      0%, 94%, 100% { transform: scaleY(1); }
+      96%, 98% { transform: scaleY(0.08); }
+    }
+
+    /* EAR WIGGLE / FLAP */
+    .anim-ear-left {
+      transform-origin: 25% 40%;
+    }
+    .anim-ear-right {
+      transform-origin: 75% 40%;
+    }
+    .animal-stage.talking .anim-ear-left {
+      animation: earWiggleL 0.35s infinite alternate ease-in-out;
+    }
+    .animal-stage.talking .anim-ear-right {
+      animation: earWiggleR 0.35s infinite alternate ease-in-out;
+    }
+
+    @keyframes earWiggleL {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-14deg); }
+    }
+    @keyframes earWiggleR {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(14deg); }
+    }
+
+    /* ELEPHANT TRUNK */
+    .anim-trunk {
+      transform-origin: 50% 30%;
+    }
+    .animal-stage.talking .anim-trunk {
+      animation: trunkSwing 0.5s infinite alternate ease-in-out;
+    }
+    @keyframes trunkSwing {
+      0% { transform: rotate(-8deg) scaleY(0.95); }
+      100% { transform: rotate(12deg) scaleY(1.1); }
+    }
+
+    /* ROOSTER COMB & BEAK */
+    .anim-comb {
+      transform-origin: 50% 100%;
+    }
+    .animal-stage.talking .anim-comb {
+      animation: combBob 0.3s infinite alternate ease-in-out;
+    }
+    @keyframes combBob {
+      0% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg) scale(1.08); }
+    }
+
+    /* FLOATING MUSIC & SPEECH NOTES */
+    .animal-notes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      overflow: hidden;
+    }
+    .note-bubble {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0;
+      bottom: 25%;
+    }
+    .animal-stage.talking .note-1 {
+      left: 15%;
+      animation: floatNote 1.4s infinite ease-out;
+    }
+    .animal-stage.talking .note-2 {
+      right: 15%;
+      animation: floatNote 1.6s infinite 0.4s ease-out;
+    }
+    .animal-stage.talking .note-3 {
+      left: 45%;
+      animation: floatNote 1.5s infinite 0.8s ease-out;
+    }
+
+    @keyframes floatNote {
+      0% { transform: translateY(0) scale(0.5); opacity: 0; }
+      40% { opacity: 0.95; }
+      100% { transform: translateY(-75px) scale(1.3) rotate(20deg); opacity: 0; }
+    }
+
+    /* TALKING STATUS BADGE WITH DANCING EQUALIZER */
+    .animal-talking-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 8px 18px;
+      border-radius: 25px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border: 2px solid #FFD166;
+      font-size: 15px;
+      font-weight: 800;
+      color: #2E7D32;
+    }
+
+    body.night-mode .animal-talking-badge {
+      background: #141f38 !important;
+      border-color: #64DFDF !important;
+      color: #64DFDF !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    .eq-wave {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      width: 22px;
+    }
+    .eq-wave span {
+      width: 3px;
+      background: #43A047;
+      border-radius: 2px;
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+    body.night-mode .eq-wave span {
+      background: #64DFDF !important;
+    }
+
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(1) { animation: eqBar 0.35s infinite alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(2) { animation: eqBar 0.45s infinite 0.1s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(3) { animation: eqBar 0.3s infinite 0.2s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(4) { animation: eqBar 0.5s infinite 0.15s alternate ease-in-out; }
+    .animal-stage.talking ~ .animal-talking-badge .eq-wave span:nth-child(5) { animation: eqBar 0.4s infinite 0.05s alternate ease-in-out; }
+
+    @keyframes eqBar {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+
   </style>
 </head>
 <body onclick="wakeUpAudioSystem()">
@@ -2483,6 +2714,9 @@
 
     function closeFullScreenKidsCard(e) {
       stopMorningHabitBgm();
+      clearTimeout(animalTalkingTimeout);
+      const stage = document.getElementById('activeAnimalStage');
+      if (stage) stage.classList.remove('talking');
       if (e) {
         try { e.stopPropagation(); } catch(err){}
         try { e.preventDefault(); } catch(err){}
@@ -3335,6 +3569,343 @@
     }
 
     // 5. ANIMALS WITH VOICES
+    
+    // ANIMATED 3D VECTOR STAGES FOR ALL ANIMALS
+    function getAnimalAnimatedStageHtml(animalKey, emoji) {
+      let svgContent = '';
+
+      if (animalKey === 'cow') {
+        svgContent = `
+          <!-- COW (गाय) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Ears -->
+            <ellipse class="anim-ear-left" cx="42" cy="78" rx="26" ry="14" fill="#FFFFFF" stroke="#333333" stroke-width="3" transform="rotate(-20 42 78)"/>
+            <ellipse cx="44" cy="78" rx="16" ry="8" fill="#FFB6C1" transform="rotate(-20 44 78)"/>
+            <ellipse class="anim-ear-right" cx="158" cy="78" rx="26" ry="14" fill="#FFFFFF" stroke="#333333" stroke-width="3" transform="rotate(20 158 78)"/>
+            <ellipse cx="156" cy="78" rx="16" ry="8" fill="#FFB6C1" transform="rotate(20 156 78)"/>
+            <!-- Horns -->
+            <path d="M 68,58 Q 58,22 42,32 Q 54,48 64,62 Z" fill="#E0A96D" stroke="#8D5B28" stroke-width="2"/>
+            <path d="M 132,58 Q 142,22 158,32 Q 146,48 136,62 Z" fill="#E0A96D" stroke="#8D5B28" stroke-width="2"/>
+            <!-- Head Body -->
+            <ellipse cx="100" cy="98" rx="55" ry="50" fill="#FFFFFF" stroke="#333333" stroke-width="3.5"/>
+            <!-- Black Patches -->
+            <path d="M 60,65 Q 85,55 80,85 Q 55,90 60,65 Z" fill="#333333"/>
+            <path d="M 135,70 Q 150,60 152,88 Q 130,95 135,70 Z" fill="#333333"/>
+            <!-- Cute Tuft of Hair -->
+            <path d="M 92,50 Q 100,38 108,50 Q 104,44 100,52 Z" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="75" cy="90" r="10" fill="#222222"/>
+              <circle cx="78" cy="87" r="3.5" fill="#FFFFFF"/>
+              <circle cx="125" cy="90" r="10" fill="#222222"/>
+              <circle cx="128" cy="87" r="3.5" fill="#FFFFFF"/>
+            </g>
+            <!-- Pink Cheeks -->
+            <ellipse cx="62" cy="108" rx="10" ry="6" fill="#FF80AB" opacity="0.6"/>
+            <ellipse cx="138" cy="108" rx="10" ry="6" fill="#FF80AB" opacity="0.6"/>
+            <!-- Snout -->
+            <ellipse cx="100" cy="128" rx="46" ry="32" fill="#FFAAA6" stroke="#333333" stroke-width="3"/>
+            <!-- Nostrils -->
+            <ellipse cx="85" cy="122" rx="6" ry="8" fill="#5D4037"/>
+            <ellipse cx="115" cy="122" rx="6" ry="8" fill="#5D4037"/>
+            <!-- Mouth: Closed (Smile) -->
+            <path class="anim-mouth-closed" d="M 85,138 Q 100,152 115,138" fill="none" stroke="#D81B60" stroke-width="4" stroke-linecap="round"/>
+            <!-- Mouth: Open Talking (Moo!) -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="144" rx="20" ry="14" fill="#880E4F"/>
+              <path d="M 90,146 Q 100,156 110,146 Z" fill="#FF4081"/>
+              <ellipse cx="100" cy="138" rx="8" ry="3" fill="#FFFFFF"/>
+            </g>
+            <!-- Golden Cow Bell -->
+            <polygon points="94,166 106,166 110,180 90,180" fill="#FFD700" stroke="#B7950B" stroke-width="2"/>
+            <circle cx="100" cy="180" r="3" fill="#B7950B"/>
+          </svg>`;
+      } else if (animalKey === 'dog') {
+        svgContent = `
+          <!-- DOG (कुत्ता) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Floppy Ears -->
+            <path class="anim-ear-left" d="M 50,60 Q 15,90 28,135 Q 46,140 55,95 Z" fill="#8D5B28" stroke="#5D3A1A" stroke-width="3"/>
+            <path class="anim-ear-right" d="M 150,60 Q 185,90 172,135 Q 154,140 145,95 Z" fill="#8D5B28" stroke="#5D3A1A" stroke-width="3"/>
+            <!-- Head Body -->
+            <ellipse cx="100" cy="98" rx="54" ry="48" fill="#E0A96D" stroke="#8D5B28" stroke-width="3.5"/>
+            <!-- Eye Patch -->
+            <ellipse cx="74" cy="88" rx="19" ry="21" fill="#C48849" transform="rotate(-8 74 88)"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="74" cy="88" r="9.5" fill="#212121"/>
+              <circle cx="77" cy="85" r="3" fill="#FFFFFF"/>
+              <circle cx="126" cy="88" r="9.5" fill="#212121"/>
+              <circle cx="129" cy="85" r="3" fill="#FFFFFF"/>
+            </g>
+            <!-- Cheeks -->
+            <ellipse cx="60" cy="106" rx="8" ry="5" fill="#FF8A80" opacity="0.6"/>
+            <ellipse cx="140" cy="106" rx="8" ry="5" fill="#FF8A80" opacity="0.6"/>
+            <!-- Muzzle -->
+            <ellipse cx="100" cy="120" rx="34" ry="24" fill="#FFFFFF" stroke="#8D5B28" stroke-width="2.5"/>
+            <!-- Nose -->
+            <path d="M 92,108 L 108,108 Q 100,122 92,108 Z" fill="#212121"/>
+            <!-- Mouth: Closed (Smile) -->
+            <path class="anim-mouth-closed" d="M 100,118 L 100,125 Q 90,132 82,125 M 100,125 Q 110,132 118,125" fill="none" stroke="#212121" stroke-width="3" stroke-linecap="round"/>
+            <!-- Mouth: Open Talking (Bark!) -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="132" rx="16" ry="12" fill="#4E342E"/>
+              <path d="M 90,134 Q 100,148 110,134 Z" fill="#FF5252"/>
+              <path d="M 94,124 L 98,128 L 102,124 L 106,128" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+            </g>
+          </svg>`;
+      } else if (animalKey === 'cat') {
+        svgContent = `
+          <!-- CAT (बिल्ली) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Pointy Ears -->
+            <polygon class="anim-ear-left" points="45,90 40,35 85,65" fill="#FFCC80" stroke="#E65100" stroke-width="3"/>
+            <polygon points="48,82 45,46 76,68" fill="#FF80AB"/>
+            <polygon class="anim-ear-right" points="155,90 160,35 115,65" fill="#FFCC80" stroke="#E65100" stroke-width="3"/>
+            <polygon points="152,82 155,46 124,68" fill="#FF80AB"/>
+            <!-- Head Body -->
+            <ellipse cx="100" cy="102" rx="55" ry="46" fill="#FFE0B2" stroke="#E65100" stroke-width="3.5"/>
+            <!-- Stripes on Top -->
+            <path d="M 100,60 L 100,75 M 88,64 L 92,76 M 112,64 L 108,76" stroke="#E65100" stroke-width="3" stroke-linecap="round"/>
+            <!-- Big Cute Eyes -->
+            <g class="anim-eye">
+              <ellipse cx="72" cy="94" rx="11" ry="13" fill="#43A047"/>
+              <ellipse cx="72" cy="94" rx="5" ry="11" fill="#1B5E20"/>
+              <circle cx="75" cy="90" r="4" fill="#FFFFFF"/>
+              <ellipse cx="128" cy="94" rx="11" ry="13" fill="#43A047"/>
+              <ellipse cx="128" cy="94" rx="5" ry="11" fill="#1B5E20"/>
+              <circle cx="131" cy="90" r="4" fill="#FFFFFF"/>
+            </g>
+            <!-- Whiskers -->
+            <line x1="30" y1="112" x2="68" y2="114" stroke="#795548" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="32" y1="124" x2="68" y2="120" stroke="#795548" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="170" y1="112" x2="132" y2="114" stroke="#795548" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="168" y1="124" x2="132" y2="120" stroke="#795548" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Pink Nose -->
+            <polygon points="95,110 105,110 100,116" fill="#FF4081"/>
+            <!-- Mouth: Closed (Cute W Smile) -->
+            <path class="anim-mouth-closed" d="M 100,116 Q 92,126 84,120 M 100,116 Q 108,126 116,120" fill="none" stroke="#E65100" stroke-width="3" stroke-linecap="round"/>
+            <!-- Mouth: Open Talking (Meow!) -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="126" rx="14" ry="12" fill="#D81B60"/>
+              <circle cx="100" cy="130" r="7" fill="#FF80AB"/>
+              <polygon points="92,118 95,123 98,118" fill="#FFFFFF"/>
+              <polygon points="102,118 105,123 108,118" fill="#FFFFFF"/>
+            </g>
+          </svg>`;
+      } else if (animalKey === 'rooster') {
+        svgContent = `
+          <!-- ROOSTER (मुर्गा) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Red Comb on Top -->
+            <path class="anim-comb" d="M 72,50 Q 75,20 90,32 Q 100,15 115,30 Q 128,22 125,52 Z" fill="#E53935" stroke="#B71C1C" stroke-width="3"/>
+            <!-- Head Body -->
+            <circle cx="100" cy="98" r="48" fill="#FFF8E1" stroke="#FF8F00" stroke-width="3.5"/>
+            <!-- Colorful Feathers Border -->
+            <path d="M 52,98 Q 42,120 60,140 Q 100,165 140,140 Q 158,120 148,98 Z" fill="#FF8F00"/>
+            <!-- Red Wattle Hanging Down -->
+            <path d="M 94,130 Q 88,162 100,160 Q 112,162 106,130 Z" fill="#E53935"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="80" cy="86" r="9" fill="#212121"/>
+              <circle cx="83" cy="83" r="3" fill="#FFFFFF"/>
+              <circle cx="120" cy="86" r="9" fill="#212121"/>
+              <circle cx="123" cy="83" r="3" fill="#FFFFFF"/>
+            </g>
+            <!-- Beak: Closed -->
+            <polygon class="anim-mouth-closed" points="88,102 112,102 100,124" fill="#FFC107" stroke="#FF6F00" stroke-width="2.5"/>
+            <!-- Beak: Open Crowing (Cock-a-doodle-doo!) -->
+            <g class="anim-mouth-open">
+              <polygon points="86,96 114,96 100,82" fill="#FFC107" stroke="#FF6F00" stroke-width="2"/>
+              <polygon points="86,108 114,108 100,132" fill="#FFA000" stroke="#FF6F00" stroke-width="2"/>
+              <ellipse cx="100" cy="102" rx="14" ry="8" fill="#B71C1C"/>
+              <polygon points="96,102 104,102 100,107" fill="#FFCDD2"/>
+            </g>
+          </svg>`;
+      } else if (animalKey === 'goat') {
+        svgContent = `
+          <!-- GOAT (बकरी) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Curved Horns -->
+            <path d="M 72,55 Q 52,15 36,25 Q 56,40 68,62 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+            <path d="M 128,55 Q 148,15 164,25 Q 144,40 132,62 Z" fill="#8D6E63" stroke="#5D4037" stroke-width="2"/>
+            <!-- Floppy Ears -->
+            <ellipse class="anim-ear-left" cx="44" cy="86" rx="28" ry="12" fill="#EFEBE9" stroke="#5D4037" stroke-width="2.5" transform="rotate(-30 44 86)"/>
+            <ellipse class="anim-ear-right" cx="156" cy="86" rx="28" ry="12" fill="#EFEBE9" stroke="#5D4037" stroke-width="2.5" transform="rotate(30 156 86)"/>
+            <!-- Head Body -->
+            <polygon points="100,50 148,85 130,138 70,138 52,85" fill="#EFEBE9" stroke="#5D4037" stroke-width="3"/>
+            <!-- Cute Goatee Beard -->
+            <path d="M 92,138 Q 100,168 108,138 Z" fill="#D7CCC8" stroke="#5D4037" stroke-width="2"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <ellipse cx="76" cy="88" rx="8" ry="10" fill="#212121"/>
+              <circle cx="78" cy="85" r="3" fill="#FFFFFF"/>
+              <ellipse cx="124" cy="88" rx="8" ry="10" fill="#212121"/>
+              <circle cx="126" cy="85" r="3" fill="#FFFFFF"/>
+            </g>
+            <!-- Muzzle -->
+            <ellipse cx="100" cy="120" rx="24" ry="15" fill="#D7CCC8"/>
+            <ellipse cx="94" cy="116" rx="4" ry="5" fill="#5D4037"/>
+            <ellipse cx="106" cy="116" rx="4" ry="5" fill="#5D4037"/>
+            <!-- Mouth: Closed (Smile) -->
+            <path class="anim-mouth-closed" d="M 92,126 Q 100,134 108,126" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+            <!-- Mouth: Open Bleating (Maa-Maa!) -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="130" rx="14" ry="10" fill="#880E4F"/>
+              <ellipse cx="100" cy="133" rx="8" ry="5" fill="#FF4081"/>
+            </g>
+          </svg>`;
+      } else if (animalKey === 'lion') {
+        svgContent = `
+          <!-- LION (शेर) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Fluffy Mane -->
+            <circle cx="100" cy="98" r="68" fill="#F57C00" stroke="#E65100" stroke-width="4"/>
+            <!-- Ears -->
+            <circle cx="56" cy="56" r="16" fill="#FFA726" stroke="#E65100" stroke-width="2.5"/>
+            <circle cx="56" cy="56" r="9" fill="#8D5B28"/>
+            <circle cx="144" cy="56" r="16" fill="#FFA726" stroke="#E65100" stroke-width="2.5"/>
+            <circle cx="144" cy="56" r="9" fill="#8D5B28"/>
+            <!-- Face -->
+            <circle cx="100" cy="104" r="48" fill="#FFCC80" stroke="#E65100" stroke-width="3"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="78" cy="92" r="9" fill="#212121"/>
+              <circle cx="81" cy="89" r="3" fill="#FFFFFF"/>
+              <circle cx="122" cy="92" r="9" fill="#212121"/>
+              <circle cx="125" cy="89" r="3" fill="#FFFFFF"/>
+            </g>
+            <!-- Nose -->
+            <polygon points="90,110 110,110 100,122" fill="#5D4037"/>
+            <!-- Mouth: Closed -->
+            <path class="anim-mouth-closed" d="M 100,122 L 100,128 Q 90,135 80,128 M 100,128 Q 110,135 120,128" fill="none" stroke="#5D4037" stroke-width="3"/>
+            <!-- Mouth: Roaring! -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="135" rx="18" ry="14" fill="#B71C1C"/>
+              <polygon points="90,124 94,130 98,124 102,124 106,130 110,124" fill="#FFFFFF"/>
+              <path d="M 92,138 Q 100,148 108,138 Z" fill="#FF80AB"/>
+            </g>
+          </svg>`;
+      } else if (animalKey === 'elephant') {
+        svgContent = `
+          <!-- ELEPHANT (हाथी) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Huge Ears -->
+            <ellipse class="anim-ear-left" cx="36" cy="92" rx="32" ry="44" fill="#B0BEC5" stroke="#546E7A" stroke-width="3"/>
+            <ellipse cx="38" cy="92" rx="20" ry="30" fill="#FFCDD2"/>
+            <ellipse class="anim-ear-right" cx="164" cy="92" rx="32" ry="44" fill="#B0BEC5" stroke="#546E7A" stroke-width="3"/>
+            <ellipse cx="162" cy="92" rx="20" ry="30" fill="#FFCDD2"/>
+            <!-- Head -->
+            <circle cx="100" cy="96" r="48" fill="#CFD8DC" stroke="#546E7A" stroke-width="3.5"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="74" cy="86" r="8" fill="#212121"/>
+              <circle cx="76" cy="84" r="2.5" fill="#FFFFFF"/>
+              <circle cx="126" cy="86" r="8" fill="#212121"/>
+              <circle cx="128" cy="84" r="2.5" fill="#FFFFFF"/>
+            </g>
+            <!-- White Tusks -->
+            <path d="M 78,122 Q 65,145 55,138 Q 70,128 80,122 Z" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.5"/>
+            <path d="M 122,122 Q 135,145 145,138 Q 130,128 120,122 Z" fill="#FFFFFF" stroke="#546E7A" stroke-width="1.5"/>
+            <!-- Swinging Trunk -->
+            <path class="anim-trunk" d="M 90,105 Q 86,145 100,165 Q 115,175 125,160 Q 110,145 106,105 Z" fill="#B0BEC5" stroke="#546E7A" stroke-width="3"/>
+          </svg>`;
+      } else if (animalKey === 'duck') {
+        svgContent = `
+          <!-- DUCK (बत्तख) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Head Body -->
+            <circle cx="100" cy="95" r="50" fill="#FFEB3B" stroke="#F57F17" stroke-width="3.5"/>
+            <!-- Fluffy Feathers on Top -->
+            <path d="M 94,46 Q 100,32 106,46" stroke="#F57F17" stroke-width="3" fill="none"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="76" cy="82" r="10" fill="#212121"/>
+              <circle cx="79" cy="79" r="3.5" fill="#FFFFFF"/>
+              <circle cx="124" cy="82" r="10" fill="#212121"/>
+              <circle cx="127" cy="79" r="3.5" fill="#FFFFFF"/>
+            </g>
+            <!-- Pink Cheeks -->
+            <ellipse cx="62" cy="100" rx="8" ry="5" fill="#FF8A80" opacity="0.6"/>
+            <ellipse cx="138" cy="100" rx="8" ry="5" fill="#FF8A80" opacity="0.6"/>
+            <!-- Bill: Closed -->
+            <ellipse class="anim-mouth-closed" cx="100" cy="116" rx="34" ry="16" fill="#FF9800" stroke="#E65100" stroke-width="2.5"/>
+            <!-- Bill: Open Quacking! -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="108" rx="32" ry="12" fill="#FF9800" stroke="#E65100" stroke-width="2"/>
+              <ellipse cx="100" cy="125" rx="28" ry="12" fill="#F57C00" stroke="#E65100" stroke-width="2"/>
+              <ellipse cx="100" cy="116" rx="18" ry="8" fill="#880E4F"/>
+            </g>
+          </svg>`;
+      } else {
+        // MONKEY OR FALLBACK
+        svgContent = `
+          <!-- MONKEY (बंदर) -->
+          <svg class="animal-svg" viewBox="0 0 200 200">
+            <!-- Big Round Ears -->
+            <circle class="anim-ear-left" cx="44" cy="92" r="22" fill="#8D6E63" stroke="#4E342E" stroke-width="3"/>
+            <circle cx="44" cy="92" r="13" fill="#D7CCC8"/>
+            <circle class="anim-ear-right" cx="156" cy="92" r="22" fill="#8D6E63" stroke="#4E342E" stroke-width="3"/>
+            <circle cx="156" cy="92" r="13" fill="#D7CCC8"/>
+            <!-- Head Body -->
+            <circle cx="100" cy="98" r="50" fill="#795548" stroke="#4E342E" stroke-width="3.5"/>
+            <!-- Face Mask -->
+            <path d="M 65,85 A 20,20 0 0,1 100,90 A 20,20 0 0,1 135,85 A 35,35 0 0,1 65,85 Z" fill="#FFE0B2"/>
+            <ellipse cx="100" cy="120" rx="34" ry="24" fill="#FFE0B2"/>
+            <!-- Eyes -->
+            <g class="anim-eye">
+              <circle cx="80" cy="88" r="8" fill="#212121"/>
+              <circle cx="82" cy="86" r="2.5" fill="#FFFFFF"/>
+              <circle cx="120" cy="88" r="8" fill="#212121"/>
+              <circle cx="122" cy="86" r="2.5" fill="#FFFFFF"/>
+            </g>
+            <!-- Nose -->
+            <circle cx="95" cy="112" r="3" fill="#4E342E"/>
+            <circle cx="105" cy="112" r="3" fill="#4E342E"/>
+            <!-- Mouth: Closed (Smile) -->
+            <path class="anim-mouth-closed" d="M 85,124 Q 100,138 115,124" fill="none" stroke="#4E342E" stroke-width="3" stroke-linecap="round"/>
+            <!-- Mouth: Open Laughing -->
+            <g class="anim-mouth-open">
+              <ellipse cx="100" cy="130" rx="16" ry="12" fill="#880E4F"/>
+              <path d="M 90,132 Q 100,142 110,132 Z" fill="#FF4081"/>
+            </g>
+          </svg>`;
+      }
+
+      return `
+        <div class="animal-stage" id="activeAnimalStage">
+          <div class="animal-stage-portal"></div>
+          <div class="animal-notes">
+            <span class="note-bubble note-1">🎵</span>
+            <span class="note-bubble note-2">🎶</span>
+            <span class="note-bubble note-3">⭐</span>
+          </div>
+          ${svgContent}
+        </div>
+        <div class="animal-talking-badge">
+          <div class="eq-wave"><span></span><span></span><span></span><span></span><span></span></div>
+          <span id="animalStageStatusText">बोल रहा है... 🔊</span>
+        </div>
+      `;
+    }
+
+    let animalTalkingTimeout = null;
+    function triggerAnimalTalkingAnimation(durationMs, statusMsg) {
+      const stage = document.getElementById('activeAnimalStage');
+      const statusText = document.getElementById('animalStageStatusText');
+      if (stage) stage.classList.add('talking');
+      if (statusText && statusMsg) statusText.innerText = statusMsg;
+
+      clearTimeout(animalTalkingTimeout);
+      animalTalkingTimeout = setTimeout(() => {
+        const s = document.getElementById('activeAnimalStage');
+        const st = document.getElementById('animalStageStatusText');
+        if (s) s.classList.remove('talking');
+        if (st) st.innerText = '👆 छूकर दोबारा आवाज़ सुनो 🔊';
+      }, durationMs || 3500);
+    }
+
+
     function renderAnimalsGrid() {
       const container = document.getElementById('dynamicContainer');
       const intro = document.createElement('div');
@@ -3362,19 +3933,22 @@
           };
           const grad = animalGrads[item.sound] || 'linear-gradient(135deg, #FF6B6B, #FF8E53)';
 
+          const animalDelay = (item.sound === 'rooster' ? 3400 : (item.sound === 'cow' ? 2200 : (item.sound === 'dog' ? 2000 : 1200)));
+          const totalTalkTime = animalDelay + 4500;
+
           openFullScreenKidsCard({
             letter: '',
-            icon: item.e,
+            icon: '',
+            customBodyHtml: getAnimalAnimatedStageHtml(item.sound, item.e),
             title: item.t,
-            subtitle: 'आवाज़ करती हुई 🔊',
+            subtitle: 'बोलता हुआ प्यारा जानवर 🔊',
             bgGradient: grad,
             soundFn: () => {
               playAnimalSound(item.sound);
-              // Wait for animal sound to play naturally before speaking
-              const delay = (item.sound === 'rooster' ? 3200 : (item.sound === 'cow' ? 2200 : (item.sound === 'dog' ? 2000 : 1200)));
+              triggerAnimalTalkingAnimation(totalTalkTime, item.t + ' बोल रहा है... 🔊');
               setTimeout(() => {
                 playLocalAudio(`animal_${idx}.mp3`, item.s, "hi-IN");
-              }, delay);
+              }, animalDelay);
             }
           });
         };
